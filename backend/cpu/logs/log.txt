@@ -1,0 +1,144 @@
+int stack_ctor_(stack *, size_t, var_info) at funcs.cpp(21):
+Stack 0x16b493480 (OK) "&stk1" at void test_stack() at test.cpp(7):
+{
+    size     = 0
+    capacity = 8
+    data [0x106c01f30]
+      {
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem) at funcs.cpp(78):
+Stack 0x16b493480 (OK) "&stk1" at void test_stack() at test.cpp(7):
+{
+    size     = 0
+    capacity = 8
+    data [0x106c01f30]
+      {
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem) at funcs.cpp(86):
+Stack 0x16b493480 (OK) "&stk1" at void test_stack() at test.cpp(7):
+{
+    size     = 1
+    capacity = 8
+    data [0x106c01f30]
+      {
+      *[i] = 1
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem) at funcs.cpp(78):
+Stack 0x16b493480 (OK) "&stk1" at void test_stack() at test.cpp(7):
+{
+    size     = 1
+    capacity = 8
+    data [0x106c01f30]
+      {
+      *[i] = 1
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem) at funcs.cpp(86):
+Stack 0x16b493480 (OK) "&stk1" at void test_stack() at test.cpp(7):
+{
+    size     = 2
+    capacity = 8
+    data [0x106c01f30]
+      {
+      *[i] = 1
+      *[i] = 2
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem) at funcs.cpp(78):
+Stack 0x16b493480 (OK) "&stk1" at void test_stack() at test.cpp(7):
+{
+    size     = 2
+    capacity = 8
+    data [0x106c01f30]
+      {
+      *[i] = 1
+      *[i] = 2
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem) at funcs.cpp(86):
+Stack 0x16b493480 (OK) "&stk1" at void test_stack() at test.cpp(7):
+{
+    size     = 3
+    capacity = 8
+    data [0x106c01f30]
+      {
+      *[i] = 1
+      *[i] = 2
+      *[i] = 3
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem) at funcs.cpp(78):
+Stack 0x16b493480 (ERROR) "&stk1" at void test_stack() at test.cpp(7):
+Data have NULL pointer
+Size bigger than capacity
+{
+    size     = 3
+    capacity = 1
+    data [0x0]
+}
+
+
