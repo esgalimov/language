@@ -81,23 +81,28 @@ void add_nodes(const tree_node_t * node, expr_t* expr)
 
     if (node->type == TYPE_NUM)
     {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {NUM} | {%lg} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->value, node->left, node->right, L_GREEN);
+        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {NUM} | {%lg} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
+                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->value, node->line+1, node->pos+1, node->left, node->right, L_GREEN);
     }
-    else if (node->type >= TYPE_ADD && node->type <= TYPE_DIV)
+    else if (node->type >= TYPE_ADD && node->type <= TYPE_ASSIG)
     {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {OP} | {%s} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->left, node->right, L_YELLOW);
+        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {OP} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
+                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, L_YELLOW);
     }
     else if (node->type == TYPE_VAR)
     {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {VAR} | {%s} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->left, node->right, L_BLUE);
+        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {VAR} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
+                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, L_BLUE);
+    }
+    else if (TYPE_FUNC <= node->type && node->type <= TYPE_SCANF)
+    {
+        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {FUNC} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
+                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, PINK);
     }
     else
     {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {FUNC} | {%s} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->left, node->right, PINK);
+        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {OTHER} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
+                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, ORANGE);
     }
     add_nodes(node->left, expr);
     add_nodes(node->right, expr);

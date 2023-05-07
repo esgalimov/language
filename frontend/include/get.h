@@ -6,26 +6,21 @@
 #include "expr.h"
 
 
-const int NO_VAR = -1;
-
 //! @brief Get funcs
-tree_node_t * getG(expr_t* expr);
-tree_node_t * getN(expr_t* expr);
-tree_node_t * getE(expr_t* expr);
-tree_node_t * getT(expr_t* expr);
-tree_node_t * getP(expr_t* expr);
-tree_node_t * getD(expr_t* expr);
+tree_node_t* getG(expr_t* expr);
+tree_node_t* getN(expr_t* expr);
+tree_node_t* getE(expr_t* expr);
+tree_node_t* getT(expr_t* expr);
+tree_node_t* getP(expr_t* expr);
+tree_node_t* getA(expr_t* expr);
+tree_node_t* getIf(expr_t* expr);
+tree_node_t* getOp(expr_t* expr);
+tree_node_t* getComp(expr_t* expr);
 //! @brief Get Func or variable (varibles are only one-letter)
-tree_node_t * getW(expr_t* expr);
+tree_node_t * getId(expr_t* expr);
 
-//! @brief Func to read name of function or variable
-//! @param [in] expr - ptr to expression struct
-//! @return ptr to name (must be freed after using)
-char * read_name(expr_t* expr);
-
-//! @brief Find var by its name
-int find_var(expr_t* expr, const char* name);
-
+//! @brief Func to write error message to log file
+void error_message(expr_t* expr, const char* func, const char* message);
 
 //! @brief Compare two nums with using EPS
 int is_equal(double num1, double num2);

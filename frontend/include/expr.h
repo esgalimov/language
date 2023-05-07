@@ -5,6 +5,7 @@
 #include "tree_debug.h"
 #include "text_funcs.h"
 #include "dsl.h"
+//#include "get.h"
 
 
 const int NAME_MAX_LEN = 32;
@@ -25,8 +26,8 @@ typedef struct
 typedef struct
 {
     text_t*       program;
-    size_t         pos;
-    size_t         line;
+    size_t        pos;
+    size_t        line;
 
     size_t        var_cnt;
     var_t**       vars;

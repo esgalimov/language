@@ -3,192 +3,237 @@
 #include "../include/dsl.h"
 #include "../include/get.h"
 
-tree_node_t * getG(expr_t * expr)
+tree_node_t* getG(expr_t * expr)
 {
-    tree_node_t * val = getE(expr);
+    expr->pos = 0;
 
-    if (expr->buffer[expr->pos] != '$' && val != NULL)
+    if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
     {
-        fprintf(log_file, "<pre>Func: getG; ERROR: must be \"$\" in the end; pos = %d, ch = %c\n</pre>",
-                           expr->pos, expr->buffer[expr->pos]);
-        return NULL;
+        SYNTAX_ERROR("prog must start with \"bashlau\""); return nullptr;
     }
-    return val;
+
+    expr->pos++;
+    tree_node_t* op = getComp(expr);
+
+    if (expr->tokens[expr->pos]->type != TYPE_END)
+    {
+        SYNTAX_ERROR("prog must end with \"tuktau\""); return nullptr;
+    }
+
+    return op;
 }
 
-tree_node_t * getE(expr_t * expr)
+tree_node_t* getE(expr_t* expr)
 {
-    tree_node_t * val = getT(expr);
-    while (expr->buffer[expr->pos] == '+' || expr->buffer[expr->pos] == '-')
+    tree_node_t* val1 = getT(expr);
+    while (expr->tokens[expr->pos]->type == TYPE_ADD || expr->tokens[expr->pos]->type == TYPE_SUB)
     {
-        char op = expr->buffer[expr->pos];
-        expr->pos++;
+        tree_node_t* oper = expr->tokens[expr->pos++];
         tree_node_t * val2 = getT(expr);
-        if (op == '+') val = ADD(val, val2);
-        else           val = SUB(val, val2);
+
+        oper->left = val1;
+        val1->parent = oper;
+
+        oper->right = val2;
+        val2->parent = oper;
+
+        val1 = oper;
     }
-    return val;
+    return val1;
 }
 
-tree_node_t * getT(expr_t * expr)
+tree_node_t* getT(expr_t* expr)
 {
-    tree_node_t * val = getD(expr);
-    while (expr->buffer[expr->pos] == '*'|| expr->buffer[expr->pos] == '/')
+    tree_node_t* val1 = getP(expr);
+    while (expr->tokens[expr->pos]->type == TYPE_MUL || expr->tokens[expr->pos]->type == TYPE_DIV)
     {
-        char op = expr->buffer[expr->pos];
-        expr->pos++;
-        tree_node_t * val2 = getD(expr);
-        if (op == '*') val = MUL(val, val2);
+        tree_node_t* oper = expr->tokens[expr->pos++];
+        tree_node_t* val2 = getP(expr);
+
+        if (oper->type == TYPE_DIV && val2->type == TYPE_NUM && is_equal(val2->value, 0))
+        {
+            SYNTAX_ERROR("division by zero"); return nullptr;
+        }
         else
         {
-            if (val2->type == TYPE_NUM && is_equal(val2->value, 0))
-            {
-                fprintf(log_file, "<pre>Func: getT; ERROR: division by zero; pos = %d\n</pre>", expr->pos);
-                return NULL;
-            }
-            val = DIV(val, val2);
+            oper->left = val1;
+            val1->parent = oper;
+
+            oper->right = val2;
+            val2->parent = oper;
+
+            val1 = oper;
         }
     }
-    return val;
+    return val1;
 }
 
-tree_node_t * getD(expr_t * expr)
+tree_node_t* getP(expr_t* expr)
 {
-    tree_node_t * val = getP(expr);
-
-    while (expr->buffer[expr->pos] == '^')
+    if (expr->tokens[expr->pos]->type == TYPE_L_BR)
     {
         expr->pos++;
-        tree_node_t * val2 = getP(expr);
-        val = POW(val, val2);
-    }
-    return val;
-}
-
-tree_node_t * getP(expr_t * expr)
-{
-    if (expr->buffer[expr->pos] == '(')
-    {
-        expr->pos++;
-        tree_node_t * val = getE(expr);
-        if (expr->buffer[expr->pos] != ')')
+        tree_node_t* val = getE(expr);
+        if (expr->tokens[expr->pos]->type != TYPE_R_BR)
         {
-            fprintf(log_file, "<pre>Func: getP; ERROR: no \")\", pos = %d, ch = %c\n</pre>",
-                               expr->pos, expr->buffer[expr->pos]);
-            return NULL;
+            SYNTAX_ERROR("expected \")\""); return nullptr;
         }
         expr->pos++;
         return val;
     }
-    else if (('0' <= expr->buffer[expr->pos] && expr->buffer[expr->pos] <= '9') || expr->buffer[expr->pos] == '-')
+    else if (expr->tokens[expr->pos]->type == TYPE_NUM || expr->tokens[expr->pos]->type == TYPE_SUB)
         return getN(expr);
     else
-        return getW(expr);
+        return getId(expr);
 }
 
-tree_node_t * getW(expr_t * expr)
+tree_node_t* getId(expr_t* expr)
 {
-    char * name = read_name(expr);
-
-    if (expr->buffer[expr->pos] == '(')
-    {
-        expr->pos++;
-        tree_node_t * func_arg = getE(expr);
-
-        if (expr->buffer[expr->pos] != ')')
-        {
-            fprintf(log_file, "<pre>Func: GetW; ERROR: no \")\", pos = %d, ch = %c</pre>\n",
-                    expr->pos, expr->buffer[expr->pos]);
-            return NULL;
-        }
-        expr->pos++;
-        if (!strcasecmp(name, "sin")) return SIN(func_arg);
-        if (!strcasecmp(name, "cos")) return COS(func_arg);
-        if (!strcasecmp(name, "ln"))  return LN(func_arg);
-        if (!strcasecmp(name, "exp")) return EXP(func_arg);
-    }
-
-    int var_id = find_var(expr, name);
-
-    if (var_id != NO_VAR) return VAR(var_id);
-
-    else if (expr->var_cnt <= VARS_MAX_CNT - 1)
-    {
-        expr->vars[expr->var_cnt] = (var_t*) calloc(1, sizeof(var_t));
-        expr->vars[expr->var_cnt]->value = NAN;
-        expr->vars[expr->var_cnt]->name = name;
-
-        return VAR(expr->var_cnt++);
-    }
-    else
-    {
-        fprintf(log_file, "<pre>Variables number is max - %d</pre>\n", VARS_MAX_CNT);
-        return NULL;
-    }
+    return expr->tokens[expr->pos++];
 }
 
-tree_node_t * getN(expr_t * expr)
+tree_node_t* getN(expr_t* expr)
 {
-    double val = 0;
-    int saved_p = expr->pos;
-    int is_neg = 0, d_after_dot = -1;
+    if (expr->tokens[expr->pos]->type == TYPE_SUB)
+        expr->tokens[expr->pos++]->value *= -1;
 
-    if (expr->buffer[expr->pos] == '-')
-    {
-        is_neg = 1;
-        expr->pos++;
-    }
-
-    while (('0' <= expr->buffer[expr->pos] && expr->buffer[expr->pos] <= '9') || expr->buffer[expr->pos] == '.')
-    {
-        if (d_after_dot >= 0)
-            d_after_dot++;
-
-        if (expr->buffer[expr->pos] == '.')
-        {
-            if (d_after_dot == -1)
-                d_after_dot++;
-            else
-            {
-                fprintf(log_file, "<pre>Func: getN; ERROR: second \".\" in number, pos = %d\n</pre>", expr->pos);
-                return NULL;
-            }
-        }
-        else
-            val = val * 10 + expr->buffer[expr->pos] - '0';
-
-        expr->pos++;
-    }
-    if (expr->pos == saved_p)
-    {
-        fprintf(log_file, "<pre>Func: getN; ERROR: digit didn't find; pos = %d, ch = %c\n</pre>",
-                           expr->pos, expr->buffer[expr->pos]);
-        return NULL;
-    }
-    double ret_val = (is_neg ? -1 : 1) * val / pow(10, (d_after_dot == -1) ? 0 : d_after_dot);
-    return NUM(ret_val);
+    return expr->tokens[expr->pos++];
 }
 
-char * read_name(expr_t * expr)
+tree_node_t* getA(expr_t* expr)
 {
-    char * name = (char *) calloc(NAME_MAX_LEN, sizeof(char));
-    int i = 0;
+    if (expr->tokens[expr->pos]->type != TYPE_VAR)
+    {
+        SYNTAX_ERROR("expected TYPE_VAR"); return nullptr;
+    }
+    tree_node_t* var = expr->tokens[expr->pos++];
 
-    while (('a' <= expr->buffer[expr->pos] && expr->buffer[expr->pos] <= 'z') ||
-           ('A' <= expr->buffer[expr->pos] && expr->buffer[expr->pos] <= 'Z'))
-        name[i++] = expr->buffer[expr->pos++];
+    if (expr->tokens[expr->pos]->type != TYPE_ASSIG)
+    {
+        SYNTAX_ERROR("expected TYPE_ASSIG"); return nullptr;
+    }
 
-    return name;
+    tree_node_t* assig = expr->tokens[expr->pos++];
+    tree_node_t* value = getE(expr);
+
+    if (value == nullptr) return nullptr;
+
+    assig->left = var;
+    assig->right = value;
+
+    var->parent = assig;
+    value->parent = assig;
+
+    return assig;
 }
 
-int find_var(expr_t* expr, const char* name)
+tree_node_t* getIf(expr_t* expr)
 {
-    for (int i = 0; i < expr->var_cnt; i++)
+    tree_node_t* cond = expr->tokens[expr->pos++];
+
+    if (expr->tokens[expr->pos]->type != TYPE_L_BR)
     {
-        if (!strcmp(expr->vars[i]->name, name))
-            return i;
+        SYNTAX_ERROR("expected \"(\""); return nullptr;
     }
-    return NO_VAR;
+
+    expr->pos++;
+    tree_node_t* value = getE(expr);
+
+    if (value == nullptr) return nullptr;
+
+    if (expr->tokens[expr->pos]->type != TYPE_R_BR)
+    {
+        SYNTAX_ERROR("expected \")\""); return nullptr;
+    }
+    expr->pos++;
+
+    if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
+    {
+        SYNTAX_ERROR("must be \"bashlau\" in start of if body"); return nullptr;
+    }
+
+    expr->pos++;
+    tree_node_t* comp = getComp(expr);
+
+    if (comp == nullptr) return nullptr;
+
+    if (expr->tokens[expr->pos]->type != TYPE_END)
+    {
+        SYNTAX_ERROR("must be \"tuktau\" in end of if body"); return nullptr;
+    }
+    expr->pos++;
+
+    cond->left = value;
+    value->parent = cond;
+
+    cond->right = comp;
+    comp->parent = cond;
+
+    return cond;
+}
+
+tree_node_t* getOp(expr_t* expr)
+{
+    if (expr->tokens[expr->pos]->type == TYPE_IF)
+        return getIf(expr);
+
+    return getA(expr);
+}
+
+// tree_node_t* getOp(expr_t* expr)
+// {
+//     tree_node_t* ret = nullptr;
+//
+//     if (expr->tokens[expr->pos]->type == TYPE_IF)
+//         ret = getIf(expr);
+//     else
+//         ret = getA(expr);
+//
+//     if (expr->tokens[expr->pos]->type != TYPE_AND)
+//     {
+//         SYNTAX_ERROR("Op must end with \";\"");
+//     }
+//     expr->pos++;
+//
+//     return ret;
+// }
+
+tree_node_t* getComp(expr_t* expr)
+{
+    tree_node_t* op1 = getOp(expr);
+
+    while (expr->tokens[expr->pos]->type == TYPE_AND)
+    {
+        tree_node_t* connect = expr->tokens[expr->pos++];
+        tree_node_t* op2 = getOp(expr);
+
+        if (op2 == nullptr) return nullptr;
+
+        connect->left = op1;
+        op1->parent = connect;
+
+        connect->right = op2;
+        op2->parent = connect;
+
+        op1 = connect;
+    }
+
+    // if (expr->tokens[expr->pos]->type != TYPE_AND)
+    // {
+    //     SYNTAX_ERROR("must be \";\" after comp"); return nullptr;
+    // }
+    // expr->pos++;
+
+    return op1;
+}
+
+void error_message(expr_t* expr, const char* func, const char* message)
+{
+    ASSERT(log_file);
+
+    fprintf(log_file, "<pre>Func: %s; ERROR: %s but found \"%s\", line = %lu, pos = %lu\n</pre>",
+                        func, message, expr->tokens[expr->pos]->name, expr->tokens[expr->pos]->line + 1,
+                        expr->tokens[expr->pos]->pos + 1);
 }
 
 int is_equal(double num1, double num2)

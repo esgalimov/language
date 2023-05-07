@@ -30,6 +30,7 @@
 #define L_YELLOW   "#FFFDC2"
 #define GREEN      "#98FB98"
 #define L_GREEN    "#E7F8BC"
+#define ORANGE     "#FFE4C4"
 
 #define OPERATIONS "+-*/"
 

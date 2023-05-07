@@ -3,6 +3,7 @@
 #include "../include/expr.h"
 #include "../include/text_funcs.h"
 #include "../include/dsl.h"
+#include "../include/get.h"
 
 expr_t* expr_ctor(const char* filename)
 {
@@ -27,12 +28,12 @@ expr_t* expr_ctor(const char* filename)
     text_ctor(expr->program, fp);
 
     create_tokens(expr);
-    //======================================//
-
-    for (size_t i = 0; i < expr->program->str_cnt; i++)
-        printf("%s\n", expr->program->strings[i]);
-
-    //======================================//
+//     //======================================//
+//
+//     for (size_t i = 0; i < expr->program->str_cnt; i++)
+//         printf("%s\n", expr->program->strings[i]);
+//
+//     //======================================//
 
     tree_t* tree = (tree_t*) calloc(1, sizeof(tree_t));
     tree_ctor(tree);
@@ -41,7 +42,7 @@ expr_t* expr_ctor(const char* filename)
 
     tokens_dump(expr);
 
-    //link_root(expr->tree, getG(expr));
+    link_root(expr->tree, getG(expr));
 
     tree_dump(expr->tree, expr);
 
@@ -93,13 +94,13 @@ int create_tokens(expr_t* expr)
                 case '/': NEW_CHAR_TOKEN(TYPE_DIV);    break;
                 case '(': NEW_CHAR_TOKEN(TYPE_L_BR);   break;
                 case ')': NEW_CHAR_TOKEN(TYPE_R_BR);   break;
-                case ';': NEW_CHAR_TOKEN(TYPE_EOL);    break;
+                case ';': NEW_CHAR_TOKEN(TYPE_AND);    break;
                 case '=': NEW_CHAR_TOKEN(TYPE_ASSIG);  break;
                 default:
                 {
                     if ('0' <= CURR_CH && CURR_CH <= '9')
                     {
-                        NEW_NUM(read_number(expr));
+                        expr->tokens[expr->toks_cnt++] = NEW_NUM(read_number(expr));
                         break;
                     }
                     char* name = read_name(expr);

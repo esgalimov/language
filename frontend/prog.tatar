@@ -1,13 +1,10 @@
+bashlau
+    x = 1 + 3;
 
-esh kutlau()
-    bashlau
-        kutak = -0.3;
-        bash  = 0;
-        ukyrga(kutak);
-        yozyrga(bash);
+    egyar (x)
+        bashlau
+            y = 0
+        tuktau;
 
-        bir (kutak + bash);
-    tuktau
-
-san = kutlau();
-yozyrga(san);
+    z = 3
+tuktau
