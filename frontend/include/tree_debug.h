@@ -24,13 +24,16 @@
 #define D_BLUE     "#0000CD"
 #define L_BLUE     "#AFEEEE"
 #define RED        "#FFD0D0"
+#define L_RED      "#FCCACA"
 #define D_RED      "#DC143C"
 #define PINK       "#E6E6FA"
+#define L_PINK     "#FFE3FF"
 #define YELLOW     "#F0E68C"
 #define L_YELLOW   "#FFFDC2"
 #define GREEN      "#98FB98"
 #define L_GREEN    "#E7F8BC"
 #define ORANGE     "#FFE4C4"
+
 
 #define OPERATIONS "+-*/"
 

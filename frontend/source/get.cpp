@@ -13,14 +13,14 @@ tree_node_t* getG(expr_t * expr)
     }
 
     expr->pos++;
-    tree_node_t* op = getComp(expr);
+    tree_node_t* comp = getComp(expr);
 
-    if (expr->tokens[expr->pos]->type != TYPE_END)
+    if (comp != nullptr && expr->tokens[expr->pos]->type != TYPE_END)
     {
         SYNTAX_ERROR("prog must end with \"tuktau\""); return nullptr;
     }
 
-    return op;
+    return comp;
 }
 
 tree_node_t* getE(expr_t* expr)
@@ -84,11 +84,43 @@ tree_node_t* getP(expr_t* expr)
     else if (expr->tokens[expr->pos]->type == TYPE_NUM || expr->tokens[expr->pos]->type == TYPE_SUB)
         return getN(expr);
     else
-        return getId(expr);
+    {
+        tree_node_t* id = getId(expr);
+
+//         if (id == nullptr) return nullptr;
+//
+//         if (expr->tokens[expr->pos]->type == TYPE_L_BR)
+//         {
+//             expr->pos++;
+//             tree_node_t* expression = getE(expr);
+//
+//             if (expression == nullptr) return nullptr;
+//
+//             if (expr->tokens[expr->pos]->type != TYPE_R_BR)
+//             {
+//                 SYNTAX_ERROR("expected \")\" after func"); return nullptr;
+//             }
+//             expr->pos++;
+//
+//             id->type = TYPE_FUNC;
+//
+//             id->left = expression;
+//             expression->parent = id;
+//
+//             return id;
+//         }
+
+        id->type = TYPE_VAR;
+        return id;
+    }
 }
 
 tree_node_t* getId(expr_t* expr)
 {
+    if (expr->tokens[expr->pos]->type != TYPE_ID)
+    {
+        SYNTAX_ERROR("expected TYPE_ID"); return nullptr;
+    }
     return expr->tokens[expr->pos++];
 }
 
@@ -102,9 +134,9 @@ tree_node_t* getN(expr_t* expr)
 
 tree_node_t* getA(expr_t* expr)
 {
-    if (expr->tokens[expr->pos]->type != TYPE_VAR)
+    if (expr->tokens[expr->pos]->type != TYPE_ID)
     {
-        SYNTAX_ERROR("expected TYPE_VAR"); return nullptr;
+        SYNTAX_ERROR("expected TYPE_ID"); return nullptr;
     }
     tree_node_t* var = expr->tokens[expr->pos++];
 
@@ -118,11 +150,14 @@ tree_node_t* getA(expr_t* expr)
 
     if (value == nullptr) return nullptr;
 
+    var->type = TYPE_VAR;
     assig->left = var;
     assig->right = value;
 
     var->parent = assig;
     value->parent = assig;
+
+    expr->ids[(int) var->value]->type = TYPE_VAR;
 
     return assig;
 }
@@ -172,31 +207,133 @@ tree_node_t* getIf(expr_t* expr)
     return cond;
 }
 
+tree_node_t* getFunc(expr_t* expr)
+{
+    tree_node_t* def = expr->tokens[expr->pos];
+
+    if (def->type == TYPE_PRINTF || def->type == TYPE_SCANF)
+    {
+        expr->pos++;
+        if (expr->tokens[expr->pos]->type != TYPE_L_BR)
+        {
+            SYNTAX_ERROR("must be \"(\" aftre printf or scanf"); return nullptr;
+        }
+        expr->pos++;
+
+        tree_node_t* id = getId(expr);//---------------
+
+        if (id == nullptr) return nullptr;
+
+        if (expr->tokens[expr->pos]->type != TYPE_R_BR)
+        {
+            SYNTAX_ERROR("must be \")\" aftre printf or scanf"); return nullptr;
+        }
+        expr->pos++;
+
+        def->left = id;
+        id->parent = def;
+
+        return def;
+    }
+    else if (def->type == TYPE_DEF)
+    {
+        expr->pos++;
+        tree_node_t* func = getId(expr);
+
+        if (expr->tokens[expr->pos]->type != TYPE_L_BR)
+        {
+            SYNTAX_ERROR("must be \"(\" aftre printf or scanf"); return nullptr;
+        }
+        expr->pos++;
+
+        tree_node_t* id = getId(expr);
+
+        if (id == nullptr) return nullptr;
+
+        if (expr->tokens[expr->pos]->type != TYPE_R_BR)
+        {
+            SYNTAX_ERROR("must be \")\" aftre printf or scanf"); return nullptr;
+        }
+        expr->pos++;
+        if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
+        {
+            SYNTAX_ERROR("must be \"bashlau\" in start of if body"); return nullptr;
+        }
+        expr->pos++;
+
+        tree_node_t* comp = getComp(expr);
+
+        if (comp == nullptr) return nullptr;
+
+        if (expr->tokens[expr->pos]->type != TYPE_END)
+        {
+            SYNTAX_ERROR("must be \"tuktau\" in end of if body"); return nullptr;
+        }
+        expr->pos++;
+
+        func->type = TYPE_DEF;
+
+        func->left = id;
+        id->parent = func;
+
+        func->right = comp;
+        comp->parent = func;
+
+        expr->ids[(int) func->value]->type = TYPE_FUNC;
+
+        return func;
+    }
+    else if (def->type == TYPE_ID)
+    {
+        if (expr->ids[(int) def->value]->type != TYPE_FUNC)
+        {
+            SYNTAX_ERROR("expected existing func"); return nullptr;
+        }
+        expr->pos++;
+
+        if (expr->tokens[expr->pos]->type != TYPE_L_BR)
+        {
+            SYNTAX_ERROR("expected \"(\" after func"); return nullptr;
+        }
+        expr->pos++;
+        tree_node_t* expression = getE(expr);
+
+        if (expression == nullptr) return nullptr;
+
+        if (expr->tokens[expr->pos]->type != TYPE_R_BR)
+        {
+            SYNTAX_ERROR("expected \")\" after func"); return nullptr;
+        }
+        expr->pos++;
+
+        def->type = TYPE_FUNC;
+
+        def->left = expression;
+        expression->parent = def;
+
+        return def;
+    }
+    else
+    {
+        SYNTAX_ERROR("expected func"); return nullptr;
+    }
+}
+
 tree_node_t* getOp(expr_t* expr)
 {
     if (expr->tokens[expr->pos]->type == TYPE_IF)
         return getIf(expr);
 
+    if (expr->tokens[expr->pos]->type == TYPE_DEF || expr->tokens[expr->pos]->type == TYPE_SCANF ||
+        expr->tokens[expr->pos]->type == TYPE_PRINTF)
+        return getFunc(expr);
+
+    if (expr->pos < expr->toks_cnt - 1 && expr->tokens[expr->pos]->type == TYPE_ID &&
+        expr->tokens[expr->pos + 1]->type == TYPE_L_BR)
+        return getFunc(expr);
+
     return getA(expr);
 }
-
-// tree_node_t* getOp(expr_t* expr)
-// {
-//     tree_node_t* ret = nullptr;
-//
-//     if (expr->tokens[expr->pos]->type == TYPE_IF)
-//         ret = getIf(expr);
-//     else
-//         ret = getA(expr);
-//
-//     if (expr->tokens[expr->pos]->type != TYPE_AND)
-//     {
-//         SYNTAX_ERROR("Op must end with \";\"");
-//     }
-//     expr->pos++;
-//
-//     return ret;
-// }
 
 tree_node_t* getComp(expr_t* expr)
 {
@@ -217,12 +354,6 @@ tree_node_t* getComp(expr_t* expr)
 
         op1 = connect;
     }
-
-    // if (expr->tokens[expr->pos]->type != TYPE_AND)
-    // {
-    //     SYNTAX_ERROR("must be \";\" after comp"); return nullptr;
-    // }
-    // expr->pos++;
 
     return op1;
 }

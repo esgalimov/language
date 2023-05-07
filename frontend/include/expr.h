@@ -9,18 +9,19 @@
 
 
 const int NAME_MAX_LEN = 32;
-const int VARS_MAX_CNT = 32;
+const int IDS_MAX_CNT  = 32;
 const int TOKS_MAX_CNT = 128;
-const int NO_VAR       = -1;
+const int NO_ID        = -1;
 const size_t POISON = 0xDEADBEEF;
 
 
-//! @brief var_t
+//! @brief id_t
 typedef struct
 {
     char * name;
     elem_t value;
-} var_t;
+    node_type type;
+} id_item_t;
 
 //! @brief Struct to read expression
 typedef struct
@@ -29,8 +30,8 @@ typedef struct
     size_t        pos;
     size_t        line;
 
-    size_t        var_cnt;
-    var_t**       vars;
+    size_t        id_cnt;
+    id_item_t**   ids;
 
     size_t        toks_cnt;
     tree_node_t** tokens;
@@ -53,7 +54,7 @@ int create_tokens(expr_t* expr);
 char* read_name(expr_t* expr);
 
 //! @brief Find var by its name
-int find_var(expr_t* expr, const char* name);
+int find_id(expr_t* expr, const char* name);
 
 //! @brief ...
 double read_number(expr_t* expr);

@@ -16,6 +16,7 @@ tree_node_t* getA(expr_t* expr);
 tree_node_t* getIf(expr_t* expr);
 tree_node_t* getOp(expr_t* expr);
 tree_node_t* getComp(expr_t* expr);
+tree_node_t* getOp(expr_t* expr);
 //! @brief Get Func or variable (varibles are only one-letter)
 tree_node_t * getId(expr_t* expr);
 

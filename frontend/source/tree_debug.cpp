@@ -89,15 +89,25 @@ void add_nodes(const tree_node_t * node, expr_t* expr)
         fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {OP} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
                 style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, L_YELLOW);
     }
-    else if (node->type == TYPE_VAR)
+    else if (node->type >= TYPE_ID && node->type <= TYPE_VAR)
     {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {VAR} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
+        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {VAR or ID} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
                 style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, L_BLUE);
+    }
+    else if (node->type == TYPE_DEF)
+    {
+        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {DEF} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
+                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, L_RED);
     }
     else if (TYPE_FUNC <= node->type && node->type <= TYPE_SCANF)
     {
         fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {FUNC} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
                 style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, PINK);
+    }
+    else if (node->type == TYPE_AND)
+    {
+        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {AND} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
+                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, L_PINK);
     }
     else
     {

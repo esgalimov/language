@@ -21,8 +21,8 @@ expr_t* expr_ctor(const char* filename)
 
     expr->pos = 0;
     expr->line = 0;
-    expr->var_cnt = 0;
-    expr->vars = (var_t**) calloc(VARS_MAX_CNT, sizeof(var_t*));
+    expr->id_cnt = 0;
+    expr->ids = (id_item_t**) calloc(IDS_MAX_CNT, sizeof(id_item_t*));
 
     expr->program = (text_t*) calloc(1, sizeof(text_t));
     text_ctor(expr->program, fp);
@@ -53,15 +53,15 @@ int expr_dtor(expr_t* expr)
 {
     ASSERT(expr);
 
-    for (size_t i = 0; i < expr->var_cnt; i++)
+    for (size_t i = 0; i < expr->id_cnt; i++)
     {
-        free(expr->vars[i]->name);
-        free(expr->vars[i]);
+        free(expr->ids[i]->name);
+        free(expr->ids[i]);
     }
 
-    expr->var_cnt = POISON;
+    expr->id_cnt = POISON;
     expr->pos = POISON;
-    free(expr->vars);
+    free(expr->ids);
 
     tree_dtor(expr->tree);
     text_dtor(expr->program);
@@ -105,7 +105,7 @@ int create_tokens(expr_t* expr)
                     }
                     char* name = read_name(expr);
 
-                    if      (!strcasecmp(name, "esh"))       NEW_WORD_TOKEN(TYPE_FUNC);
+                    if      (!strcasecmp(name, "esh"))       NEW_WORD_TOKEN(TYPE_DEF);
                     else if (!strcasecmp(name, "bir"))       NEW_WORD_TOKEN(TYPE_RET);
                     else if (!strcasecmp(name, "tugyaryak")) NEW_WORD_TOKEN(TYPE_WHILE);
                     else if (!strcasecmp(name, "egyar"))     NEW_WORD_TOKEN(TYPE_IF);
@@ -117,23 +117,24 @@ int create_tokens(expr_t* expr)
 
                     else
                     {
-                        int var_id = find_var(expr, name);
+                        int id = find_id(expr, name);
 
-                        if (var_id != NO_VAR)
-                            expr->tokens[expr->toks_cnt] = create_node(TYPE_VAR, expr->line, expr->pos, elem_t (var_id));
+                        if (id != NO_ID)
+                            expr->tokens[expr->toks_cnt] = create_node(TYPE_ID, expr->line, expr->pos, elem_t (id));
 
-                        else if (expr->var_cnt <= VARS_MAX_CNT - 1)
+                        else if (expr->id_cnt <= IDS_MAX_CNT - 1)
                         {
-                            expr->vars[expr->var_cnt] = (var_t*) calloc(1, sizeof(var_t));
-                            expr->vars[expr->var_cnt]->value = NAN;
-                            expr->vars[expr->var_cnt]->name = name;
+                            expr->ids[expr->id_cnt] = (id_item_t*) calloc(1, sizeof(id_item_t));
+                            expr->ids[expr->id_cnt]->value = NAN;
+                            expr->ids[expr->id_cnt]->name = name;
+                            expr->ids[expr->id_cnt]->type = TYPE_ID;
 
-                            expr->tokens[expr->toks_cnt] = create_node(TYPE_VAR, expr->line, expr->pos, elem_t (expr->var_cnt));
+                            expr->tokens[expr->toks_cnt] = create_node(TYPE_ID, expr->line, expr->pos, (elem_t) expr->id_cnt++);
                             expr->tokens[expr->toks_cnt]->name = name;
                         }
                         else
                         {
-                            fprintf(log_file, "<pre>Variables number is max - %d</pre>\n", VARS_MAX_CNT);
+                            fprintf(log_file, "<pre>Variables number is max - %d</pre>\n", IDS_MAX_CNT);
                         }
                         expr->toks_cnt++;
                     }
@@ -142,7 +143,6 @@ int create_tokens(expr_t* expr)
             }
         }
     }
-
     return 0;
 }
 
@@ -190,16 +190,16 @@ double read_number(expr_t* expr)
     return ret_val;
 }
 
-int find_var(expr_t* expr, const char* name)
+int find_id(expr_t* expr, const char* name)
 {
     ASSERT(expr);
 
-    for (int i = 0; i < (int) expr->var_cnt; i++)
+    for (int i = 0; i < (int) expr->id_cnt; i++)
     {
-        if (!strcmp(expr->vars[i]->name, name))
+        if (!strcmp(expr->ids[i]->name, name))
             return i;
     }
-    return NO_VAR;
+    return NO_ID;
 }
 
 int tokens_dump(expr_t* expr)

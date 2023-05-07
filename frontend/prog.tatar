@@ -1,10 +1,24 @@
 bashlau
-    x = 1 + 3;
+    x = 0;
+    ukyrga(x);
+    yozyrga(x);
 
-    egyar (x)
+    esh salavat(var)
         bashlau
-            y = 0
+            e = var;
+
+            egyar(e)
+                bashlau
+                    ukyrga(e);
+
+                    egyar(e)
+                        bashlau
+                            ukyrga(e)
+                        tuktau
+                tuktau;
+
+            yozyrga(e)
         tuktau;
 
-    z = 3
+    salavat(3)
 tuktau
