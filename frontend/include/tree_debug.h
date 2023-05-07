@@ -35,10 +35,9 @@
 #define ORANGE     "#FFE4C4"
 #define TURQ       "#E1FCF9"
 
-#define OPERATIONS "+-*/"
+#define PRINT_NODE(NAME, COLOR) fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {%s} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
+                                        style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, NAME, node->name, node->line+1, node->pos+1, node->left, node->right, COLOR)
 
-//#define FUNCS "SIN", "COS", "LN", "POW", "LOG", "EXP"
-const char FUNCS[6][10] = {"SIN", "COS", "LN", "^", "LOG", "EXP"};
 
 //! @brief Errors that can be with tree
 enum STATUS

@@ -84,41 +84,15 @@ void add_nodes(const tree_node_t * node, expr_t* expr)
         fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {NUM} | {%lg} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
                 style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->value, node->line+1, node->pos+1, node->left, node->right, L_GREEN);
     }
-    else if (node->type >= TYPE_ADD && node->type <= TYPE_ASSIG)
-    {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {OP} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, L_YELLOW);
-    }
-    else if (node->type == TYPE_ID)
-    {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {ID} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, TURQ);
-    }
-    else if (node->type == TYPE_VAR)
-    {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {VAR} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, L_BLUE);
-    }
-    else if (node->type == TYPE_DEF)
-    {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {DEF} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, L_RED);
-    }
-    else if (TYPE_FUNC <= node->type && node->type <= TYPE_SCANF)
-    {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {FUNC} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, PINK);
-    }
-    else if (node->type == TYPE_AND)
-    {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {AND} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, L_PINK);
-    }
-    else
-    {
-        fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {OTHER} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
-                style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->name, node->line+1, node->pos+1, node->left, node->right, ORANGE);
-    }
+    else if (node->type >= TYPE_ADD && node->type <= TYPE_ASSIG)  PRINT_NODE("OP",    L_YELLOW);
+    else if (node->type == TYPE_ID || node->type == TYPE_VAR)     PRINT_NODE("ID",    L_BLUE);
+    else if (node->type == TYPE_DEF)                              PRINT_NODE("DEF",   L_RED);
+    else if (node->type == TYPE_IF)                               PRINT_NODE("IF",    TURQ);
+    else if (node->type == TYPE_WHILE)                            PRINT_NODE("WHILE", TURQ);
+    else if (TYPE_FUNC <= node->type && node->type <= TYPE_SCANF) PRINT_NODE("FUNC",  PINK);
+    else if (node->type == TYPE_AND)                              PRINT_NODE("AND",   L_PINK);
+    else                                                          PRINT_NODE("OTHER", ORANGE);
+
     add_nodes(node->left, expr);
     add_nodes(node->right, expr);
 }

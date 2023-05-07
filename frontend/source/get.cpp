@@ -318,7 +318,7 @@ tree_node_t* getFunc(expr_t* expr)
 
 tree_node_t* getOp(expr_t* expr)
 {
-    if (expr->tokens[expr->pos]->type == TYPE_IF)
+    if (expr->tokens[expr->pos]->type == TYPE_IF || expr->tokens[expr->pos]->type == TYPE_WHILE)
         return getIf(expr);
 
     if (expr->tokens[expr->pos]->type == TYPE_DEF || expr->tokens[expr->pos]->type == TYPE_SCANF ||
