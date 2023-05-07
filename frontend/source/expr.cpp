@@ -82,7 +82,7 @@ int create_tokens(expr_t* expr)
 
         for (expr->pos = 0; expr->pos < len_str; expr->pos++)
         {
-            printf("line: %lu pos: %lu ch: %d - %c\n", expr->line, expr->pos, CURR_CH, CURR_CH);
+            //printf("line: %lu pos: %lu ch: %d - %c\n", expr->line, expr->pos, CURR_CH, CURR_CH);
 
             if (isblank(CURR_CH) || CURR_CH == '\0' || CURR_CH == '\n') continue;
 
@@ -119,9 +119,13 @@ int create_tokens(expr_t* expr)
                     {
                         int id = find_id(expr, name);
 
-                        if (id != NO_ID)
-                            expr->tokens[expr->toks_cnt] = create_node(TYPE_ID, expr->line, expr->pos, elem_t (id));
+                        printf("%s - %d\n", name, id);
 
+                        if (id != NO_ID)
+                        {
+                            expr->tokens[expr->toks_cnt] = create_node(TYPE_ID, expr->line, expr->pos, elem_t (id));
+                            expr->tokens[expr->toks_cnt]->name = name;
+                        }
                         else if (expr->id_cnt <= IDS_MAX_CNT - 1)
                         {
                             expr->ids[expr->id_cnt] = (id_item_t*) calloc(1, sizeof(id_item_t));
@@ -155,6 +159,7 @@ char* read_name(expr_t* expr)
 
     while ((('a' <= CURR_CH && CURR_CH <= 'z') || ('A' <= CURR_CH && CURR_CH <= 'Z')) && i < NAME_MAX_LEN)
         name[i++] = expr->program->strings[expr->line][expr->pos++];
+
     expr->pos--;
     return name;
 }

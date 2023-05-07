@@ -3,6 +3,8 @@ bashlau
     ukyrga(x);
     yozyrga(x);
 
+    y = x + 1;
+
     esh salavat(var)
         bashlau
             e = var;
@@ -20,5 +22,5 @@ bashlau
             yozyrga(e)
         tuktau;
 
-    salavat(3)
+    salavat(x)
 tuktau

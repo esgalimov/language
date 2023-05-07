@@ -33,7 +33,7 @@
 #define GREEN      "#98FB98"
 #define L_GREEN    "#E7F8BC"
 #define ORANGE     "#FFE4C4"
-
+#define TURQ       "#E1FCF9"
 
 #define OPERATIONS "+-*/"
 

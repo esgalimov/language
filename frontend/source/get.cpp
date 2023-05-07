@@ -86,42 +86,28 @@ tree_node_t* getP(expr_t* expr)
     else
     {
         tree_node_t* id = getId(expr);
-
-//         if (id == nullptr) return nullptr;
-//
-//         if (expr->tokens[expr->pos]->type == TYPE_L_BR)
-//         {
-//             expr->pos++;
-//             tree_node_t* expression = getE(expr);
-//
-//             if (expression == nullptr) return nullptr;
-//
-//             if (expr->tokens[expr->pos]->type != TYPE_R_BR)
-//             {
-//                 SYNTAX_ERROR("expected \")\" after func"); return nullptr;
-//             }
-//             expr->pos++;
-//
-//             id->type = TYPE_FUNC;
-//
-//             id->left = expression;
-//             expression->parent = id;
-//
-//             return id;
-//         }
-
+        if (expr->ids[(int) id->value]->type != TYPE_VAR)
+        {
+            SYNTAX_ERROR("expected existing var"); return nullptr;
+        }
         id->type = TYPE_VAR;
+
         return id;
     }
 }
 
 tree_node_t* getId(expr_t* expr)
 {
-    if (expr->tokens[expr->pos]->type != TYPE_ID)
+    if (expr->tokens[expr->pos]->type == TYPE_ID  ||
+        expr->tokens[expr->pos]->type == TYPE_VAR ||
+        expr->tokens[expr->pos]->type == TYPE_FUNC)
     {
-        SYNTAX_ERROR("expected TYPE_ID"); return nullptr;
+        return expr->tokens[expr->pos++];
     }
-    return expr->tokens[expr->pos++];
+    else
+    {
+        SYNTAX_ERROR("expected TYPE_ID, TYPE_VAR or TYPE_FUNC"); return nullptr;
+    }
 }
 
 tree_node_t* getN(expr_t* expr)
@@ -216,7 +202,7 @@ tree_node_t* getFunc(expr_t* expr)
         expr->pos++;
         if (expr->tokens[expr->pos]->type != TYPE_L_BR)
         {
-            SYNTAX_ERROR("must be \"(\" aftre printf or scanf"); return nullptr;
+            SYNTAX_ERROR("must be \"(\" aftre yozyrga/ukyrga"); return nullptr;
         }
         expr->pos++;
 
@@ -224,6 +210,14 @@ tree_node_t* getFunc(expr_t* expr)
 
         if (id == nullptr) return nullptr;
 
+        if (expr->ids[(int) id->value]->type == TYPE_VAR)
+        {
+            id->type = TYPE_VAR;
+        }
+        else
+        {
+            SYNTAX_ERROR("expected existing var in yozyrga/ukyrga"); return nullptr;
+        }
         if (expr->tokens[expr->pos]->type != TYPE_R_BR)
         {
             SYNTAX_ERROR("must be \")\" aftre printf or scanf"); return nullptr;
@@ -249,6 +243,9 @@ tree_node_t* getFunc(expr_t* expr)
         tree_node_t* id = getId(expr);
 
         if (id == nullptr) return nullptr;
+
+        expr->ids[(int) id->value]->type = TYPE_VAR;
+        id->type = TYPE_VAR;
 
         if (expr->tokens[expr->pos]->type != TYPE_R_BR)
         {
