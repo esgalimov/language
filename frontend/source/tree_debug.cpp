@@ -85,7 +85,8 @@ void add_nodes(const tree_node_t * node, expr_t* expr)
                 style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, node->value, node->line+1, node->pos+1, node->left, node->right, L_GREEN);
     }
     else if (node->type >= TYPE_ADD && node->type <= TYPE_ASSIG)  PRINT_NODE("OP",    L_YELLOW);
-    else if (node->type == TYPE_ID || node->type == TYPE_VAR)     PRINT_NODE("ID",    L_BLUE);
+    else if (node->type == TYPE_ID)                               PRINT_NODE("ID",    L_BLUE);
+    else if (node->type == TYPE_VAR)                              PRINT_NODE("VAR",   L_BLUE);
     else if (node->type == TYPE_DEF)                              PRINT_NODE("DEF",   L_RED);
     else if (node->type == TYPE_IF)                               PRINT_NODE("IF",    TURQ);
     else if (node->type == TYPE_WHILE)                            PRINT_NODE("WHILE", TURQ);

@@ -68,4 +68,10 @@ void new_word_token(expr_t* expr, node_type type, char* name);
 //! @brief ...
 void new_char_token(expr_t* expr, node_type type, char ch);
 
+//! @brief ...
+int make_ast_tree(const char* filename);
+
+//! @brief ...
+void tree_print_preorder(tree_node_t* node, FILE* stream);
+
 #endif

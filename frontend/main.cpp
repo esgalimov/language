@@ -6,7 +6,7 @@ int main(void)
 {
     open_log_file();
 
-    expr_ctor("prog.tatar");
+    make_ast_tree("prog.tatar");
 
     close_log_file();
     return 0;

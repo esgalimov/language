@@ -28,12 +28,6 @@ expr_t* expr_ctor(const char* filename)
     text_ctor(expr->program, fp);
 
     create_tokens(expr);
-//     //======================================//
-//
-//     for (size_t i = 0; i < expr->program->str_cnt; i++)
-//         printf("%s\n", expr->program->strings[i]);
-//
-//     //======================================//
 
     tree_t* tree = (tree_t*) calloc(1, sizeof(tree_t));
     tree_ctor(tree);
