@@ -48,14 +48,13 @@ int expr_dtor(expr_t* expr)
     ASSERT(expr);
 
     for (size_t i = 0; i < expr->id_cnt; i++)
-    {
-        free(expr->ids[i]->name);
         free(expr->ids[i]);
-    }
-
-    expr->id_cnt = POISON;
-    expr->pos = POISON;
     free(expr->ids);
+
+    expr->id_cnt   = POISON;
+    expr->pos      = POISON;
+    expr->line     = POISON;
+    expr->toks_cnt = POISON;
 
     tree_dtor(expr->tree);
     text_dtor(expr->program);
@@ -112,8 +111,6 @@ int create_tokens(expr_t* expr)
                     else
                     {
                         int id = find_id(expr, name);
-
-                        printf("%s - %d\n", name, id);
 
                         if (id != NO_ID)
                         {

@@ -3,24 +3,11 @@ bashlau
     ukyrga(x);
     yozyrga(x);
 
-    y = x + 1;
-
-    esh salavat(var)
+    esh kal(y)
         bashlau
-            e = var;
-
-            egyar(e)
-                bashlau
-                    ukyrga(e);
-
-                    tugyaryak(e)
-                        bashlau
-                            ukyrga(e)
-                        tuktau
-                tuktau;
-
-            yozyrga(e)
+            y = x + 1;
+            yozyrga(y)
         tuktau;
 
-    salavat(x)
+    kal(3)
 tuktau

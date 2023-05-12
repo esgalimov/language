@@ -2,10 +2,20 @@
 <img src="./images/tree_dump1.png">
 <pre>
 expr_t *expr_ctor(const char *) at ./source/expr.cpp(41):
-Tree 0x105500c50 (<span style="color: green">OK</span>) "tree" at expr_t *expr_ctor(const char *) at ./source/expr.cpp(33):
-{root = 0x105202d20}</pre>
+Tree 0x106800c50 (<span style="color: green">OK</span>) "tree" at expr_t *expr_ctor(const char *) at ./source/expr.cpp(33):
+{root = 0x106500860}</pre>
 <img src="./images/tree_dump2.png">
 <pre>
-Tree 0x105500c50 "tree" at expr_t *expr_ctor(const char *) at ./source/expr.cpp(33): DESTRUCTED
+Tree 0x106800c50 "tree" at expr_t *expr_ctor(const char *) at ./source/expr.cpp(33): DESTRUCTED
+</pre>
+<pre>
+int read_ast_tree() at ./source/make_ast.cpp(86):
+Tree 0x106800bd0 (<span style="color: red">ERROR</span>) "prog.tree" at int read_ast_tree() at ./source/make_ast.cpp(72):
+{root = 0x106502c60}
+Node that is not root has NULL parent
+</pre>
+<img src="./images/tree_dump3.png">
+<pre>
+Tree 0x106800bd0 "prog.tree" at int read_ast_tree() at ./source/make_ast.cpp(72): DESTRUCTED
 </pre>
 </html>

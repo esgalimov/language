@@ -3,7 +3,7 @@
 #include "../include/text_funcs.h"
 #include "../include/expr.h"
 
-char** import_text(text_t* book, FILE * stream)
+char** import_text(text_t* book, FILE* stream)
 {
     ASSERT(stream != NULL);
     ASSERT(book != NULL);
@@ -12,11 +12,11 @@ char** import_text(text_t* book, FILE * stream)
     book->buffsize = (size_t) ftell(stream);
     rewind(stream);
 
-    book->buffer = (char*) calloc(book->buffsize + 2, sizeof(char));
+    book->buffer = (char*) calloc(book->buffsize + 1, sizeof(char));
     fread(book->buffer, sizeof(char), book->buffsize, stream);
-    *(book->buffer + book->buffsize) = L'\0';
+    *(book->buffer + book->buffsize) = '\0';
 
-    book->str_cnt = count_symbol(u'\n', book->buffer, book->buffsize);
+    book->str_cnt = count_symbol('\n', book->buffer, book->buffsize);
 
     return get_ptrs(book->buffer, book->str_cnt, book->buffsize);
 }

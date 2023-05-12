@@ -74,4 +74,17 @@ int make_ast_tree(const char* filename);
 //! @brief ...
 void tree_print_preorder(tree_node_t* node, FILE* stream);
 
+//-------------------------------------------------
+//--------this part must be in other part----------
+typedef struct
+{
+    tree_t*     tree;
+    id_item_t** ids;
+    char*       buffer;
+    size_t      pos;
+} prog_tree_t;
+
+tree_node_t* read_tree_preorder(prog_tree_t* prog);
+int read_ast_tree(void);
+
 #endif

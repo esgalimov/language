@@ -41,6 +41,7 @@ void nodes_dtor(tree_node_t * node)
     if (node != node->right)
         nodes_dtor(node->right);
 
+    free(node->name);
     free(node);
 }
 

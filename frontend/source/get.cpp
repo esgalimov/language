@@ -31,6 +31,8 @@ tree_node_t* getE(expr_t* expr)
         tree_node_t* oper = expr->tokens[expr->pos++];
         tree_node_t * val2 = getT(expr);
 
+        if (val1 == nullptr || val2 == nullptr) return nullptr;
+
         oper->left = val1;
         val1->parent = oper;
 
@@ -341,7 +343,7 @@ tree_node_t* getComp(expr_t* expr)
         tree_node_t* connect = expr->tokens[expr->pos++];
         tree_node_t* op2 = getOp(expr);
 
-        if (op2 == nullptr) return nullptr;
+        if (op2 == nullptr || op1 == nullptr) return nullptr;
 
         connect->left = op1;
         op1->parent = connect;
