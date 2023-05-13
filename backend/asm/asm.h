@@ -9,6 +9,7 @@
 #include <string.h>
 
 #include "text_funcs.h"
+#include "DSL_check_code.h"
 
 #define LOG_MODE
 
@@ -56,44 +57,56 @@ typedef struct
 
 enum command_type
 {
-    UNDEFIND = -4,
-    LABEL_JMP = -3,
-    LABEL = -2,
-    NUM = -1,
-    CMD0 = 0,
-    CMD1 = 1,
-    REG = 2,
+    UNDEFIND  = -5,
+    LABEL_JMP = -4,
+    LABEL     = -3,
+    NUM_RAM   = -2,
+    NUM       = -1,
+    CMD0      =  0,
+    CMD1      =  1,
+    REG       =  2,
+    REG_RAM   =  3,
 };
 
 enum commands
 {
-    HLT = 0,
-    PUSH = 1,
-    ADD = 2,
-    SUB = 3,
-    DIV = 4,
-    MUL = 5,
-    POP = 6,
-    OUT = 7,
-    JMP = 8,
-    JB = 9,
-    JBE = 10,
-    JA = 11,
-    JAE = 12,
-    JE = 13,
-    JNE = 14,
-    CALL = 15,
-    RET = 16,
-    AX = 17,
-    BX = 18,
-    CX = 19,
-    DX = 20,
+    HLT      =  0,
+    PUSH     =  1,
+    ADD      =  2,
+    SUB      =  3,
+    DIV      =  4,
+    MUL      =  5,
+    POP      =  6,
+    OUT      =  7,
+    JMP      =  8,
+    JB       =  9,
+    JBE      = 10,
+    JA       = 11,
+    JAE      = 12,
+    JE       = 13,
+    JNE      = 14,
+    CALL     = 15,
+    RET      = 16,
+    AX       = 17,
+    BX       = 18,
+    CX       = 19,
+    DX       = 20,
     PUSH_REG = 21,
-    POP_REG = 22,
-    IN = 23,
-    SQRT = 24,
-    NOROOTS = 25,
-    ALLNUM = 26,
+    POP_REG  = 22,
+    PUSH_RAM = 23,
+    POP_RAM  = 24,
+    IN       = 25,
+    SQRT     = 26,
+    NOROOTS  = 27,
+    ALLNUM   = 28,
+};
+
+enum ram_cmd_types
+{
+    TYPE_NOT_RAM     = 0,
+    TYPE_REG_RAM     = 1,
+    TYPE_NUM_RAM     = 2,
+    TYPE_NUM_REG_RAM = 3,
 };
 
 const int N_LABELS = 100;
@@ -144,5 +157,12 @@ void labels_init(asm_t * asem, size_t n_toks);
 //! @param [in] name - ptr to name to find
 //! @return value - if exist, -1 - else
 int find_label(asm_t* asem, const char* name);
+
+//! @brief Check if command is connected with ram (like [35], [ax] or [27+ax])
+//! @param [in] cmd - ptr to command string
+//! @return 0 - if not ram, 1 - if like [35], 2 - if like [ax], 3 - if like [27+ax]
+int is_ram(const char* cmd);
+
+void print_error_message(int* is_ok, size_t i, asm_t* asem, const char* message);
 
 #endif

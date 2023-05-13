@@ -22,7 +22,7 @@ void run_comp(FILE * stream)
 
         while (asem.len_cmd > 0)
         {
-            asem.toks[i_code].name = (char *) calloc(20, sizeof(char));
+            asem.toks[i_code].name = (char *) calloc(MAX_CMD_LEN, sizeof(char));
 
             if (strcmp(cmd, "push") == 0)
             {
@@ -121,7 +121,7 @@ void run_comp(FILE * stream)
                 sscanf(cmd, "%lf", &value);
 
                 asem.toks[i_code].type = NUM;
-                asem.toks[i_code].value = int (value * ACCURACY);
+                asem.toks[i_code].value = (int) (value * ACCURACY);
             }
             else if (is_label(cmd))
             {
@@ -137,6 +137,54 @@ void run_comp(FILE * stream)
                 else
                 {
                     asem.toks[i_code].value = i_label;
+                }
+            }
+            else if (cmd[0] == '[')
+            {
+                int ram_type = is_ram(cmd);
+
+                switch (ram_type)
+                {
+                    case TYPE_NOT_RAM: asem.toks[i_code].type = UNDEFIND; break;
+                    case TYPE_REG_RAM:
+                    {
+                        asem.toks[i_code].type = REG_RAM;
+
+                        switch (cmd[1])
+                        {
+                            case 'a': asem.toks[i_code].value = AX; break;
+                            case 'b': asem.toks[i_code].value = BX; break;
+                            case 'c': asem.toks[i_code].value = CX; break;
+                            case 'd': asem.toks[i_code].value = DX; break;
+                        }
+                        break;
+                    }
+                    case TYPE_NUM_RAM: case TYPE_NUM_REG_RAM:
+                    {
+                        int num_ram = 0, len_num = 0;
+                        sscanf(cmd + 1, "%d%n", &num_ram, &len_num);
+
+                        asem.toks[i_code].type = NUM_RAM;
+                        asem.toks[i_code].value = num_ram;
+
+                        if (ram_type == TYPE_NUM_RAM) break;
+
+                        strcpy(asem.toks[i_code].name, cmd);
+                        asem.toks[i_code].line = (int) (i + 1);
+                        i_code++;
+
+                        asem.toks[i_code].name = (char *) calloc(MAX_CMD_LEN, sizeof(char));
+                        asem.toks[i_code].type = REG_RAM;
+
+                        switch (cmd[len_num + 2])
+                        {
+                            case 'a': asem.toks[i_code].value = AX; break;
+                            case 'b': asem.toks[i_code].value = BX; break;
+                            case 'c': asem.toks[i_code].value = CX; break;
+                            case 'd': asem.toks[i_code].value = DX; break;
+                        }
+                        break;
+                    }
                 }
             }
             else if (strcmp(cmd, "ax") == 0)
@@ -252,76 +300,63 @@ int check_code(asm_t * asem, size_t n_cmd)
 
     for (size_t i = 0; i < n_cmd; i++)
     {
-        if (asem->toks[i].type == UNDEFIND)
+        if (IS_UNDEFIND(i))
+            ERROR_MESSAGE("not found at line");
+
+        else if (IS_CMD1(i) && IS_PUSH(i))
         {
-            printf("Error: command %s not found at line %d\n", asem->toks[i].name, asem->toks[i].line);
-            is_ok = 0;
-        }
+            if ((i + 1 < n_cmd && (!IS_NUM(i+1) && !IS_REG(i+1) && !IS_NUM_RAM(i+1) && !IS_REG_RAM(i+1))) || (i + 1 == n_cmd))
+                ERROR_MESSAGE("has not given an argument, but it must have 1 argument");
 
-        else if (asem->toks[i].type == CMD1 && asem->toks[i].value == PUSH)
-        {
-            if ((i + 1 < n_cmd && (asem->toks[i + 1].type != NUM && asem->toks[i + 1].type != REG)) || (i + 1 == n_cmd))
+            else if (i+2 < n_cmd)
             {
-                printf("Error: invalid syntax at line %d: %s has not given an argument, but it must have 1 argument\n",
-                        asem->toks[i].line, asem->toks[i].name);
-                is_ok = 0;
-            }
-
-            else if (i + 2 < n_cmd && ((asem->toks[i + 1].type == NUM && asem->toks[i + 2].type == NUM) || (asem->toks[i + 1].type == REG && asem->toks[i + 2].type == REG)))
-            {
-                printf("Error: invalid syntax at line %d: %s has given more than 1 argument, but it must have 1 argument\n",
-                        asem->toks[i].line, asem->toks[i].name);
-                is_ok = 0;
-            }
-        }
-
-        else if (asem->toks[i].type == CMD1 && check_for_jump(asem->toks[i].value))
-        {
-            if ((i + 1 < n_cmd && asem->toks[i + 1].type != LABEL) || (i + 1) == n_cmd)
-            {
-                printf("Error: invalid syntax at line %d: %s has not given an argument, but it must have 1 argument\n",
-                        asem->toks[i].line, asem->toks[i].name);
-                is_ok = 0;
-            }
-
-            else
-            {
-                if (asem->labels[asem->toks[i + 1].value].value == -1)
-                {
-                    printf("Error: label doesn't exist at line %d\n", asem->toks[i].line);
-                    is_ok = 0;
-                }
+                if ((IS_NUM(i+1) || IS_REG(i+1)) && (IS_NUM(i+2) || IS_REG(i+2)))
+                    ERROR_MESSAGE("has given more than 1 register or number argument, but it must have 1 such argument");
+                else if (IS_NUM_RAM(i+1) && (IS_NUM(i+2) || IS_REG(i+2)))
+                    ERROR_MESSAGE("has given NUM_RAM and register or number after it, but it must have 1 such argument or have REG_RAM after");
+                else if (i+3 < n_cmd && (IS_NUM_RAM(i+1) && IS_REG_RAM(i+2) && (IS_NUM(i+3) || IS_REG(i+3) || IS_REG_RAM(i+3) || IS_NUM_RAM(i+3))))
+                    ERROR_MESSAGE("has given sth after NUM_RAM + REG_RAM");
+                else if ((IS_REG_RAM(i+1) && (IS_NUM(i+2) || IS_REG(i+2) || IS_REG_RAM(i+2) || IS_NUM_RAM(i+2))))
+                    ERROR_MESSAGE("has given REG_RAM and sth after, but it must have 1 argument");
             }
         }
 
-        else if (asem->toks[i].type == LABEL)
+        else if (IS_CMD1(i) && check_for_jump(asem->toks[i].value))
+        {
+            if ((i + 1 < n_cmd && !IS_LABEL(i+1)) || (i + 1) == n_cmd)
+                ERROR_MESSAGE("has not given an argument, but it must have 1 argument");
+
+            else if (asem->labels[asem->toks[i + 1].value].value == -1)
+                    ERROR_MESSAGE("label doesn't exist");
+        }
+
+        else if (IS_LABEL(i))
         {
             if (asem->labels[asem->toks[i].value].cnt > 1)
-            {
-                printf("Error: there are more than one label to jump at line %d\n", asem->toks[i].line);
-                is_ok = 0;
-            }
+                ERROR_MESSAGE("there are more than one label to jump");
         }
 
-        else if (asem->toks[i].type == CMD0)
+        else if (IS_CMD0(i))
         {
-            if (i + 1 < n_cmd && asem->toks[i + 1].type == NUM)
+            if (i + 1 < n_cmd && IS_NUM(i+1))
+                ERROR_MESSAGE("must not have arguments");
+            else if (i + 2 < n_cmd && IS_POP(i))
             {
-                printf("Error: invalid syntax at line %d: %s must not have arguments \n",
-                        asem->toks[i].line, asem->toks[i].name);
-                is_ok = 0;
+                if (IS_REG(i+1) && IS_REG(i+2))
+                    ERROR_MESSAGE("can not have more than one register as argument");
+                else if (IS_REG(i+1) && (IS_REG_RAM(i+2) || IS_NUM_RAM(i+2)))
+                    ERROR_MESSAGE("can not have register and REG_RAM or NUM_RAM");
+                else if (IS_REG_RAM(i+1) && (IS_NUM_RAM(i+2) || IS_REG_RAM(i+2)))
+                    ERROR_MESSAGE("can not have sth after REG_RAM");
+                else if (IS_NUM_RAM(i+1) && IS_NUM_RAM(i+2))
+                    ERROR_MESSAGE("can not have NUM_RAM after NUM_RAM");
+                else if ((IS_REG(i+1) || IS_REG_RAM(i+1) || IS_NUM_RAM(i+1)) && IS_NUM(i+2))
+                    ERROR_MESSAGE("can not have num in args");
+                else if (i + 3 < n_cmd && IS_NUM_RAM(i+1) && IS_REG_RAM(i+2) && (IS_NUM_RAM(i+3) || IS_REG_RAM(i+3) || IS_REG(i+3)))
+                    ERROR_MESSAGE("can not have sth after NUM_RAM + REG_RAM");
             }
 
-            else if (i + 2 < n_cmd && asem->toks[i].value == POP && asem->toks[i + 1].type == REG && asem->toks[i + 2].type == REG)
-            {
-                printf("Error: invalid syntax at line %d: %s can not have more than one register as argument \n",
-                    asem->toks[i].line, asem->toks[i].name);
-            }
-
-            else if (asem->toks[i].value == HLT)
-            {
-                is_hlt = 1;
-            }
+            else if (IS_HLT(i)) is_hlt = 1;
         }
     }
 
@@ -332,6 +367,12 @@ int check_code(asm_t * asem, size_t n_cmd)
     }
 
     return is_ok;
+}
+
+void print_error_message(int* is_ok, size_t i, asm_t* asem, const char* message)
+{
+    printf("Error: invalid syntax at line %d: %s %s \n", asem->toks[i].line + 1, asem->toks[i].name, message);
+    *is_ok = 0;
 }
 
 
@@ -370,6 +411,35 @@ int is_label(const char * cmd)
         }
         return 1;
     }
+}
+
+int is_ram(const char* cmd)
+{
+    if (cmd[0] != '[') return TYPE_NOT_RAM;
+
+    size_t len_cmd = strlen(cmd),
+           i = 1;
+
+    if ('a' <= cmd[i] && cmd[i] <= 'd' && !strcmp(cmd + 2, "x]")) return TYPE_REG_RAM;  // like [ax]
+
+    if (cmd[1] == '-') i++;
+
+    for (; i < len_cmd; i++)
+    {
+        if (isdigit(cmd[i])) continue;
+
+        else if (cmd[i] == '+') break;
+
+        else if (cmd[i] == ']') return TYPE_NUM_RAM;
+
+        else return TYPE_NOT_RAM;
+    }
+
+    if (cmd[++i] == ']') return TYPE_NUM_RAM;                                             // like [35]
+
+    if ('a' <= cmd[i] && cmd[i] <= 'd' && !strcmp(cmd + i + 1, "x]")) return TYPE_NUM_REG_RAM; // like [27+ax]
+
+    return TYPE_NOT_RAM;
 }
 
 int find_label(asm_t* asem, const char* name)
@@ -460,21 +530,36 @@ void make_label_jmp_push_reg(asm_t * asem, size_t n_toks)
 {
     for (size_t i = 0; i < n_toks; i++)
     {
-        if (asem->toks[i].type == CMD1 && check_for_jump(asem->toks[i].value))
+        if (IS_CMD1(i) && check_for_jump(asem->toks[i].value))
         {
             asem->toks[i + 1].type = LABEL_JMP;
             asem->toks[i + 1].value = asem->labels[asem->toks[i + 1].value].value;
         }
 
-        if (asem->toks[i].type == CMD1 && asem->toks[i].value == PUSH && asem->toks[i + 1].type == REG)
+        if (IS_CMD1(i) && IS_PUSH(i))
         {
-            asem->toks[i].value = PUSH_REG;
+            if (IS_REG(i+1))
+            {
+                asem->toks[i].value = PUSH_REG;
+            }
+            else if (IS_REG_RAM(i+1) || IS_NUM_RAM(i+1))
+            {
+                asem->toks[i].value = PUSH_RAM;
+            }
         }
 
-        if (asem->toks[i].type == CMD0 && asem->toks[i].value == POP && asem->toks[i + 1].type == REG)
+        if (IS_CMD0(i) && IS_POP(i))
         {
-            asem->toks[i].value = POP_REG;
-            asem->toks[i].type = CMD1;
+            if (IS_REG(i+1))
+            {
+                asem->toks[i].value = POP_REG;
+                asem->toks[i].type = CMD1;
+            }
+            else if (IS_REG_RAM(i+1) || IS_NUM_RAM(i+1))
+            {
+                asem->toks[i].value = POP_RAM;
+                asem->toks[i].type = CMD1;
+            }
         }
     }
 }
