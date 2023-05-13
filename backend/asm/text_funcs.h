@@ -1,15 +1,14 @@
 #ifndef TEXT_FUNCS
 #define TEXT_FUNCS
 
-#include "tree.h"
-#include "expr.h"
+#include "asm.h"
 
 typedef struct
 {
     char** strings;
     char*  buffer;
-    size_t    str_cnt;
-    size_t    buffsize;
+    size_t str_cnt;
+    size_t buffsize;
 } text_t;
 
 //! @brief Function that import text from file and write it into the buffer
@@ -51,5 +50,11 @@ void text_ctor(text_t* book, FILE* strem);
 //! @brief Destruct for Text
 //! @param [out] book - pointer to struct with variables for text processing
 void text_dtor(text_t* book);
+
+//! @brief Function for checking if string consists of blank symbol only
+//! @param [in] str - pointer to string for checking
+//! @return 1 - if only blank symbols, else - 0
+
+int is_without_text(const char* str);
 
 #endif

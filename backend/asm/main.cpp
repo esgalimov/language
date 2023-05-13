@@ -1,4 +1,5 @@
-#include "asm_header.h"
+#include "asm.h"
+#include "text_funcs.h"
 
 int main(void)
 {

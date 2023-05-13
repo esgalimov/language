@@ -9,7 +9,7 @@ pop ax
 push 0
 push ax
 
-je :0
+je :label1
 
 push bx
 push bx
@@ -27,25 +27,25 @@ pop dx
 push 0
 push dx
 
-je :1
+je :label2
 
 push 0
 push dx
 
-ja :2
+ja :label3
 
 push 0
 push dx
 
-jb :3
+jb :label4
 
 hlt
 
-    :0
+    :label1
     push 0
     push bx
 
-    je :4
+    je :label5
 
     push -1
     push cx
@@ -58,20 +58,20 @@ hlt
     out
     hlt
 
-    :4
+    :label5
     push 0
     push cx
 
-    je :5
+    je :label6
 
     noroots
     hlt
 
-    :5
+    :label6
     allnum
     hlt
 
-    :1
+    :label2
     push -1
     push bx
     mul
@@ -85,11 +85,11 @@ hlt
     out
     hlt
 
-    :2
+    :label3
     noroots
     hlt
 
-    :3
+    :label4
     push -1
     push bx
     mul

@@ -2,14 +2,14 @@
 
 void run_comp(FILE * stream)
 {
-    s_asm asem = {};
+    asm_t asem = {};
     asm_ctor(&asem, stream);
 
     size_t i = 0, i_code = 0;
 
-    while (i < asem.commands.len)
+    while (i < asem.commands.str_cnt)
     {
-        char cmd[20] = "";
+        char cmd[MAX_CMD_LEN] = "";
         asem.len_cmd = 0;
         asem.len_cmd_gap = 0;
         sscanf(asem.commands.strings[i], "%s%n", cmd, &asem.len_cmd);
@@ -125,11 +125,19 @@ void run_comp(FILE * stream)
             }
             else if (is_label(cmd))
             {
-                int label = 0;
-                sscanf(cmd + 1, "%d", &label);
-
                 asem.toks[i_code].type = LABEL;
-                asem.toks[i_code].value = label;
+                asem.label_toks[asem.labels_cnt] = &asem.toks[i_code];
+
+                int i_label = find_label(&asem, cmd);
+
+                if (i_label == -1)
+                {
+                    asem.toks[i_code].value = asem.labels_cnt++;
+                }
+                else
+                {
+                    asem.toks[i_code].value = i_label;
+                }
             }
             else if (strcmp(cmd, "ax") == 0)
             {
@@ -198,7 +206,7 @@ void run_comp(FILE * stream)
     asm_dtor(&asem);
 }
 
-void write_code_to_file(token * toks, size_t n_cmd)
+void write_code_to_file(token_t * toks, size_t n_cmd)
 {
     assert(toks != NULL);
 
@@ -211,7 +219,7 @@ void write_code_to_file(token * toks, size_t n_cmd)
         abort();
     }
 
-    elem * code = (elem *) calloc(n_cmd, sizeof(elem));
+    elem_t * code = (elem_t *) calloc(n_cmd, sizeof(elem_t));
     size_t label_found = 0;
 
     for (size_t i = 0; i < n_cmd; i++)
@@ -228,7 +236,7 @@ void write_code_to_file(token * toks, size_t n_cmd)
 
     }
 
-    fwrite(code, sizeof(elem), n_cmd, fp_bin);
+    fwrite(code, sizeof(elem_t), n_cmd, fp_bin);
 
     fclose(fp);
     fclose(fp_bin);
@@ -236,7 +244,7 @@ void write_code_to_file(token * toks, size_t n_cmd)
     free(code);
 }
 
-int check_code(s_asm * asem, size_t n_cmd)
+int check_code(asm_t * asem, size_t n_cmd)
 {
     assert(asem != NULL);
 
@@ -329,13 +337,13 @@ int check_code(s_asm * asem, size_t n_cmd)
 
 int str_of_digits(const char * cmd)
 {
-    size_t len_of_cmd = strlen(cmd);
+    size_t len_cmd = strlen(cmd);
     size_t i = 0;
 
     if (cmd[0] == '-')
         i = 1;
 
-    for (; i < len_of_cmd; i++)
+    for (; i < len_cmd; i++)
     {
         if (isdigit(cmd[i]) == 0)
         {
@@ -353,51 +361,66 @@ int is_label(const char * cmd)
     }
     else
     {
-        if (str_of_digits(cmd + 1))
+        size_t len_cmd = strlen(cmd);
+
+        for (size_t i = 1; i < len_cmd; i++)
         {
-            return 1;
+            char ch = cmd[i];
+            if (isdigit(ch) == 0 && isalpha(ch) == 0) return 0;
         }
-        return 0;
+        return 1;
     }
 }
 
-void check_toks_for_size(s_asm * asem, size_t i_code)
+int find_label(asm_t* asem, const char* name)
 {
-    if (asem->size_toks <= i_code)
+    for (int i = 0; i < asem->labels_cnt; i++)
     {
-        asem->size_toks *= 2;
-        asem->toks = (token *) realloc(asem->toks, asem->size_toks * sizeof(elem));
+        if (!strcmp(asem->label_toks[i]->name, name))
+            return asem->label_toks[i]->value;
+    }
+    return -1;
+}
+
+void check_toks_for_size(asm_t * asem, size_t i_code)
+{
+    if (asem->toks_cnt <= i_code)
+    {
+        asem->toks_cnt *= 2;
+        asem->toks = (token_t*) realloc(asem->toks, asem->toks_cnt * sizeof(elem_t));
     }
 }
 
-void asm_ctor(s_asm * asem, FILE * stream)
+void asm_ctor(asm_t* asem, FILE* stream)
 {
     asem->commands = {};
 
-    construct(&asem->commands, stream);
+    text_ctor(&asem->commands, stream);
 
-    asem->toks = (token *) calloc(asem->commands.len * 2, sizeof(token));
+    asem->toks = (token_t*) calloc(asem->commands.str_cnt * 2, sizeof(token_t));
 
-    asem->labels = (label *) calloc(N_LABELS, sizeof(label));
+    asem->labels = (label_t*) calloc(N_LABELS, sizeof(label_t));
+
+    asem->label_toks = (token_t**) calloc(N_LABELS, sizeof(token_t*)); //?????
 
     for (int i = 0; i < N_LABELS; i++)
         asem->labels[i].value = -1;
 
-    asem->size_toks = asem->commands.len * 2;
+    asem->toks_cnt = asem->commands.str_cnt * 2;
 
     asem->len_cmd = 0;
     asem->len_cmd_gap = 0;
 }
 
-void asm_dtor(s_asm * asem)
+void asm_dtor(asm_t * asem)
 {
     assert(asem != NULL);
 
-    destruct(&asem->commands);
+    text_dtor(&asem->commands);
 
     asem->len_cmd = 0;
     asem->len_cmd_gap = 0;
-    asem->size_toks = 0;
+    asem->toks_cnt = 0;
 
     free(asem->labels);
     free(asem->toks);
@@ -406,7 +429,7 @@ void asm_dtor(s_asm * asem)
 
 }
 
-void labels_init(s_asm * asem, size_t n_toks)
+void labels_init(asm_t * asem, size_t n_toks)
 {
     size_t label_found = 0;
 
@@ -433,7 +456,7 @@ void labels_init(s_asm * asem, size_t n_toks)
     }
 }
 
-void make_label_jmp_push_reg(s_asm * asem, size_t n_toks)
+void make_label_jmp_push_reg(asm_t * asem, size_t n_toks)
 {
     for (size_t i = 0; i < n_toks; i++)
     {

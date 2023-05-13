@@ -11,7 +11,7 @@ int main(void)
         return 1;
     }
 
-    test_stack();
+    //test_stack();
 
     FILE * fp_bin = fopen("../code/test.bin", "rb");
     if (fp_bin == NULL)
@@ -20,7 +20,7 @@ int main(void)
         return 1;
     }
 
-    //run_cpu(fp_bin);
+    run_cpu(fp_bin);
 
     fclose(fp_bin);
     fclose(log_file);

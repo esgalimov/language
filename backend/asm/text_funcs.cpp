@@ -1,62 +1,67 @@
 #include "asm.h"
+#include "text_funcs.h"
 
-char ** import_text(struct Text * book, FILE * stream)
+char** import_text(text_t* book, FILE* stream)
 {
-    assert(stream != NULL);
-    assert(book != NULL);
+    ASSERT(stream != NULL);
+    ASSERT(book != NULL);
 
     fseek(stream, 0L, SEEK_END);
-    book->filesize = (size_t) ftell(stream);
+    book->buffsize = (size_t) ftell(stream);
     rewind(stream);
 
-    book->buffer = (char *) calloc(book->filesize + 1, sizeof(char));
-    fread(book->buffer, sizeof(char), book->filesize, stream);
-    *(book->buffer + book->filesize) = '\0';
+    book->buffer = (char*) calloc(book->buffsize + 1, sizeof(char));
+    fread(book->buffer, sizeof(char), book->buffsize, stream);
+    *(book->buffer + book->buffsize) = '\0';
 
-    book->len = count_symbol('\n', book->buffer, book->filesize);
+    book->str_cnt = count_symbol('\n', book->buffer, book->buffsize);
 
-    return get_ptrs(book->buffer, book->len, book->filesize);
+    return get_ptrs(book->buffer, book->str_cnt, book->buffsize);
 }
 
 
-size_t count_symbol(char ch, char * string, size_t filesize)
+size_t count_symbol(char ch, char* string, size_t strsize)
 {
-    assert(string != NULL);
+    ASSERT(string != NULL);
 
-    size_t cnt_strings = 0;
-    for (size_t i = 0; i < filesize; i++)
+    size_t str_cnt = 0;
+
+    for (size_t i = 0; i < strsize; i++)
+    {
         if (string[i] == ch)
-            cnt_strings++;
-    return cnt_strings;
+            str_cnt++;
+    }
+
+    return str_cnt;
 }
 
 
-char ** get_ptrs(char * strings, size_t n_strings, size_t filesize)
+char** get_ptrs(char* buffer, size_t str_cnt, size_t buffsize)
 {
-    assert(strings != NULL);
-    char ** strptr = (char **) calloc((size_t) (n_strings + 1), sizeof(char *));
+    ASSERT(buffer != NULL);
 
-    if (strptr == NULL)
-        return NULL;
+    char** strptr = (char**) calloc((size_t) (str_cnt + 1), sizeof(char*));
 
-    strptr[0] = &strings[0];
-    size_t index = 1;
-    for (size_t i = 1; i < filesize; i++)
-        if (strings[i] == '\n')
+    if (strptr == NULL) return NULL;
+
+    strptr[0] = &buffer[0];
+    size_t str_i = 1;
+    for (size_t ch_i = 1; ch_i < buffsize; ch_i++)
+        if (buffer[ch_i] == '\n')
         {
-            if (index < n_strings)
+            if (str_i < str_cnt)
             {
-                strings[i] = '\0';
-                strptr[index] = &strings[i + 1];
-                index++;
+                buffer[ch_i] = '\0';
+                strptr[str_i] = &buffer[ch_i + 1];
+                str_i++;
             }
         }
-    strptr[index] = NULL;
+    strptr[str_i] = NULL;
 
     return strptr;
 }
 
-int is_without_text(const char * str)
+int is_without_text(const char* str)
 {
     assert(str != NULL);
     int flag = 1;
@@ -70,28 +75,30 @@ int is_without_text(const char * str)
     return flag;
 }
 
-void construct(struct Text * book, FILE * stream)
+void text_ctor(text_t* book, FILE* stream)
 {
-    assert(book != NULL);
-    assert(stream != NULL);
+    ASSERT(book != NULL);
+    ASSERT(stream != NULL);
 
-    book->strings = NULL;
-    book->buffer = NULL;
-    book->len = 0;
-    book->filesize = 0;
+    book->strings  = NULL;
+    book->buffer   = NULL;
+    book->str_cnt  = 0;
+    book->buffsize = 0;
 
     book->strings = import_text(book, stream);
     fclose(stream);
 }
 
-void destruct(struct Text * book)
+void text_dtor(text_t* book)
 {
-    assert(book != NULL);
+    ASSERT(book != NULL);
 
-    book->len = 0;
-    book->filesize = 0;
+    book->str_cnt = 0;
+    book->buffsize = 0;
+
     free(book->buffer);
     free(book->strings);
+
     book->strings = NULL;
     book->buffer = NULL;
 }
