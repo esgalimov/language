@@ -21,7 +21,6 @@
                     #condition, __LINE__, __PRETTY_FUNCTION__, __FILE__);                   \
             abort();                                                                        \
         }
-    #define tree_dump(tree, expr) tree_dump_((tree), (expr), __PRETTY_FUNCTION__, __FILE__, __LINE__)
 #else
     #define ASSERT(condition)
 #endif
@@ -104,9 +103,8 @@ enum commands
 enum ram_cmd_types
 {
     TYPE_NOT_RAM     = 0,
-    TYPE_REG_RAM     = 1,
-    TYPE_NUM_RAM     = 2,
-    TYPE_NUM_REG_RAM = 3,
+    TYPE_NUM_RAM     = 1,
+    TYPE_NUM_REG_RAM = 2,
 };
 
 const int N_LABELS = 100;
@@ -158,9 +156,9 @@ void labels_init(asm_t * asem, size_t n_toks);
 //! @return value - if exist, -1 - else
 int find_label(asm_t* asem, const char* name);
 
-//! @brief Check if command is connected with ram (like [35], [ax] or [27+ax])
+//! @brief Check if command is connected with ram (like [35] or [27+ax])
 //! @param [in] cmd - ptr to command string
-//! @return 0 - if not ram, 1 - if like [35], 2 - if like [ax], 3 - if like [27+ax]
+//! @return 0 - if not ram, 1 - if like [35], 2 - if like [27+ax]
 int is_ram(const char* cmd);
 
 void print_error_message(int* is_ok, size_t i, asm_t* asem, const char* message);

@@ -1,6 +1,6 @@
 #include "cpu.h"
 
-int stack_ctor_(stack * stk, size_t capacity, var_info info)
+int stack_ctor_(stack* stk, size_t capacity, var_info info)
 {
     if (stk == NULL || capacity < 1)
         return 1;
@@ -9,7 +9,7 @@ int stack_ctor_(stack * stk, size_t capacity, var_info info)
     if (capacity < MIN_CAPACITY)
         capacity = MIN_CAPACITY;
 
-    stk->data = (elem *) calloc(capacity, sizeof(elem));
+    stk->data = (elem_t*) calloc(capacity, sizeof(elem_t));
     stk->capacity = capacity;
     stk->size = 0;
 
@@ -23,7 +23,7 @@ int stack_ctor_(stack * stk, size_t capacity, var_info info)
     return 0;
 }
 
-int stack_verify(stack * stk)
+int stack_verify(stack* stk)
 {
     assert(stk != NULL);
     int error_number = 0;
@@ -71,7 +71,7 @@ void error_number_translate(int error_number)
     }
 }
 
-void stack_push(stack * stk, elem value)
+void stack_push(stack* stk, elem_t value)
 {
     assert(stk != NULL);
     int error_number = stack_verify(stk);
@@ -86,7 +86,7 @@ void stack_push(stack * stk, elem value)
     stack_dump(stk, stack_verify(stk));
 }
 
-void stack_pop(stack * stk, elem * value)
+void stack_pop(stack* stk, elem_t* value)
 {
     assert(stk != NULL);
     int error_number = stack_verify(stk);
@@ -109,7 +109,7 @@ void stack_pop(stack * stk, elem * value)
     stack_dump(stk, stack_verify(stk) + error_number);
 }
 
-void stack_resize(stack * stk, size_t new_size)
+void stack_resize(stack* stk, size_t new_size)
 {
     assert(stk != NULL);
 
@@ -119,7 +119,7 @@ void stack_resize(stack * stk, size_t new_size)
 
     if (!error_number)
     {
-        stk->data = (elem *) realloc(stk->data, new_size * sizeof(elem));
+        stk->data = (elem_t*) realloc(stk->data, new_size * sizeof(elem_t));
         stk->capacity = new_size;
 
         write_zeros_to_data(stk, stk->size, stk->capacity);
@@ -127,7 +127,7 @@ void stack_resize(stack * stk, size_t new_size)
     stack_dump(stk, stack_verify(stk));
 }
 
-void write_zeros_to_data(stack * stk, size_t i_start, size_t i_end)
+void write_zeros_to_data(stack* stk, size_t i_start, size_t i_end)
 {
     for (size_t i = i_start; i < i_end; i++)
     {
@@ -135,7 +135,7 @@ void write_zeros_to_data(stack * stk, size_t i_start, size_t i_end)
     }
 }
 
-void stack_dump_(stack * stk, int error_number, const char * func, const char * file, int line)
+void stack_dump_(stack* stk, int error_number, const char* func, const char* file, int line)
 {
     fprintf(log_file, "%s at %s(%d):\n", func, file, line);
     if (!error_number)
@@ -166,7 +166,7 @@ void stack_dump_(stack * stk, int error_number, const char * func, const char * 
     }
 }
 
-void write_stack_elems(stack * stk)
+void write_stack_elems(stack* stk)
 {
     assert(stk != NULL);
     for (size_t i = 0; i < stk->capacity; i++)
@@ -179,7 +179,7 @@ void write_stack_elems(stack * stk)
 
 }
 
-void stack_dtor(stack * stk)
+void stack_dtor(stack* stk)
 {
     write_zeros_to_data(stk, 0, stk->capacity);
 

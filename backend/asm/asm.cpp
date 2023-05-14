@@ -146,19 +146,7 @@ void run_comp(FILE * stream)
                 switch (ram_type)
                 {
                     case TYPE_NOT_RAM: asem.toks[i_code].type = UNDEFIND; break;
-                    case TYPE_REG_RAM:
-                    {
-                        asem.toks[i_code].type = REG_RAM;
 
-                        switch (cmd[1])
-                        {
-                            case 'a': asem.toks[i_code].value = AX; break;
-                            case 'b': asem.toks[i_code].value = BX; break;
-                            case 'c': asem.toks[i_code].value = CX; break;
-                            case 'd': asem.toks[i_code].value = DX; break;
-                        }
-                        break;
-                    }
                     case TYPE_NUM_RAM: case TYPE_NUM_REG_RAM:
                     {
                         int num_ram = 0, len_num = 0;
@@ -305,7 +293,7 @@ int check_code(asm_t * asem, size_t n_cmd)
 
         else if (IS_CMD1(i) && IS_PUSH(i))
         {
-            if ((i + 1 < n_cmd && (!IS_NUM(i+1) && !IS_REG(i+1) && !IS_NUM_RAM(i+1) && !IS_REG_RAM(i+1))) || (i + 1 == n_cmd))
+            if ((i + 1 < n_cmd && (!IS_NUM(i+1) && !IS_REG(i+1) && !IS_NUM_RAM(i+1))) || (i + 1 == n_cmd))
                 ERROR_MESSAGE("has not given an argument, but it must have 1 argument");
 
             else if (i+2 < n_cmd)
@@ -316,8 +304,8 @@ int check_code(asm_t * asem, size_t n_cmd)
                     ERROR_MESSAGE("has given NUM_RAM and register or number after it, but it must have 1 such argument or have REG_RAM after");
                 else if (i+3 < n_cmd && (IS_NUM_RAM(i+1) && IS_REG_RAM(i+2) && (IS_NUM(i+3) || IS_REG(i+3) || IS_REG_RAM(i+3) || IS_NUM_RAM(i+3))))
                     ERROR_MESSAGE("has given sth after NUM_RAM + REG_RAM");
-                else if ((IS_REG_RAM(i+1) && (IS_NUM(i+2) || IS_REG(i+2) || IS_REG_RAM(i+2) || IS_NUM_RAM(i+2))))
-                    ERROR_MESSAGE("has given REG_RAM and sth after, but it must have 1 argument");
+                else if (IS_REG_RAM(i+1))
+                    ERROR_MESSAGE("has given only REG_RAM");
             }
         }
 
@@ -346,8 +334,8 @@ int check_code(asm_t * asem, size_t n_cmd)
                     ERROR_MESSAGE("can not have more than one register as argument");
                 else if (IS_REG(i+1) && (IS_REG_RAM(i+2) || IS_NUM_RAM(i+2)))
                     ERROR_MESSAGE("can not have register and REG_RAM or NUM_RAM");
-                else if (IS_REG_RAM(i+1) && (IS_NUM_RAM(i+2) || IS_REG_RAM(i+2)))
-                    ERROR_MESSAGE("can not have sth after REG_RAM");
+                else if (IS_REG_RAM(i+1))
+                    ERROR_MESSAGE("can not have only REG_RAM");
                 else if (IS_NUM_RAM(i+1) && IS_NUM_RAM(i+2))
                     ERROR_MESSAGE("can not have NUM_RAM after NUM_RAM");
                 else if ((IS_REG(i+1) || IS_REG_RAM(i+1) || IS_NUM_RAM(i+1)) && IS_NUM(i+2))
@@ -419,8 +407,6 @@ int is_ram(const char* cmd)
 
     size_t len_cmd = strlen(cmd),
            i = 1;
-
-    if ('a' <= cmd[i] && cmd[i] <= 'd' && !strcmp(cmd + 2, "x]")) return TYPE_REG_RAM;  // like [ax]
 
     if (cmd[1] == '-') i++;
 

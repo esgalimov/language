@@ -1,8 +1,9 @@
 call :bye
 
-push 1
+push [0+bx]
 push 2
 push 3
+pop [0+ax]
 out
 out
 out

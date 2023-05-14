@@ -4,11 +4,11 @@ int run_cpu(FILE * stream)
 {
     assert(stream != NULL);
 
-    s_cpu cpu = {};
+    cpu_t cpu = {};
     size_t n_cmd = cpu_ctor(&cpu, stream);
 
     double num = NAN;
-    elem num1 = 0, num2 = 0;
+    elem_t num1 = 0, num2 = 0;
 
     //double d_num1 = NAN, d_num2 = NAN;
 
@@ -36,7 +36,7 @@ int run_cpu(FILE * stream)
         case DIV:
             stack_pop(&cpu.stk, &num1);
             stack_pop(&cpu.stk, &num2);
-            stack_push(&cpu.stk, (elem) (((double) num2 / (double) num1) * ACCURACY));
+            stack_push(&cpu.stk, (elem_t) (((double) num2 / (double) num1) * ACCURACY));
             break;
 
         case MUL:
@@ -131,7 +131,7 @@ int run_cpu(FILE * stream)
             break;
 
         case CALL:
-            stack_push(&cpu.stk, (elem) (i + 1));
+            stack_push(&cpu.stk, (elem_t) (i + 1));
             i = (size_t) (cpu.cmd_buffer[i + 1] - 1);
 
             break;
@@ -143,44 +143,53 @@ int run_cpu(FILE * stream)
 
         case IN:
             scanf("%lf", &num);
-            stack_push(&cpu.stk, (elem) (num * ACCURACY));
+            stack_push(&cpu.stk, (elem_t) (num * ACCURACY));
             break;
 
         case PUSH_REG:
             switch (cpu.cmd_buffer[++i])
             {
-                case AX:
-                    stack_push(&cpu.stk, cpu.ax);
-                    break;
-                case BX:
-                    stack_push(&cpu.stk, cpu.bx);
-                    break;
-                case CX:
-                    stack_push(&cpu.stk, cpu.cx);
-                    break;
-                case DX:
-                    stack_push(&cpu.stk, cpu.dx);
-                    break;
+                case AX: stack_push(&cpu.stk, cpu.ax); break;
+                case BX: stack_push(&cpu.stk, cpu.bx); break;
+                case CX: stack_push(&cpu.stk, cpu.cx); break;
+                case DX: stack_push(&cpu.stk, cpu.dx); break;
             }
             break;
 
         case POP_REG:
             switch (cpu.cmd_buffer[++i])
             {
-                case AX:
-                    stack_pop(&cpu.stk, &cpu.ax);
-                    break;
-                case BX:
-                    stack_pop(&cpu.stk, &cpu.bx);
-                    break;
-                case CX:
-                    stack_pop(&cpu.stk, &cpu.cx);
-                    break;
-                case DX:
-                    stack_pop(&cpu.stk, &cpu.dx);
-                    break;
+                case AX: stack_pop(&cpu.stk, &cpu.ax); break;
+                case BX: stack_pop(&cpu.stk, &cpu.bx); break;
+                case CX: stack_pop(&cpu.stk, &cpu.cx); break;
+                case DX: stack_pop(&cpu.stk, &cpu.dx); break;
             }
             break;
+
+        case PUSH_RAM:
+        {
+            i++;
+            if (AX <= cpu.cmd_buffer[i + 1] && cpu.cmd_buffer[i + 1] <= DX)
+            {
+                elem_t reg_val = 0;
+
+                switch (cpu.cmd_buffer[i + 1])
+                {
+                    case AX: reg_val = cpu.ax; break;
+                    case BX: reg_val = cpu.bx; break;
+                    case CX: reg_val = cpu.cx; break;
+                    case DX: reg_val = cpu.dx; break;
+                }
+                stack_push(&cpu.stk, cpu.cpu_ram[(int) reg_val + cpu.cmd_buffer[i]]);
+            }
+            else if (AX <= cpu.cmd_buffer[i] && cpu.cmd_buffer[i] <= DX)//===================
+            {
+
+            }
+
+            i++;
+            break;
+        }
 
         case SQRT:
             stack_pop(&cpu.stk, &num1);
@@ -192,7 +201,7 @@ int run_cpu(FILE * stream)
 
                 return 2;
             }
-            stack_push(&cpu.stk, (elem) (sqrt(num1) * sqrt(ACCURACY)));
+            stack_push(&cpu.stk, (elem_t) (sqrt(num1) * sqrt(ACCURACY)));
 
             break;
 
@@ -219,10 +228,10 @@ int run_cpu(FILE * stream)
     return 0;
 }
 
-size_t cpu_ctor(s_cpu * cpu, FILE * stream)
+size_t cpu_ctor(cpu_t * cpu, FILE * stream)
 {
-    assert(cpu != NULL);
-    assert(stream != NULL);
+    ASSERT(cpu != NULL);
+    ASSERT(stream != NULL);
 
     stack_ctor(&cpu->stk, 5);
 
@@ -230,19 +239,21 @@ size_t cpu_ctor(s_cpu * cpu, FILE * stream)
     size_t filesize = (size_t) ftell(stream);
     rewind(stream);
 
-    size_t n_cmd = filesize / sizeof(elem);
+    size_t n_cmd = filesize / sizeof(elem_t);
 
-    cpu->cmd_buffer = (elem *) calloc(n_cmd, sizeof(elem));
-    fread(cpu->cmd_buffer, sizeof(elem), n_cmd, stream);
+    cpu->cmd_buffer = (elem_t*) calloc(n_cmd, sizeof(elem_t));
+    fread(cpu->cmd_buffer, sizeof(elem_t), n_cmd, stream);
+
+    cpu->cpu_ram = (elem_t*) calloc(RAM_SIZE, sizeof(elem_t));
 
     return n_cmd;
 }
 
-void cpu_dtor(s_cpu * cpu)
+void cpu_dtor(cpu_t * cpu)
 {
     stack_dtor(&cpu->stk);
     free(cpu->cmd_buffer);
-    //free(cpu->cpu_ram);
+    free(cpu->cpu_ram);
 
     cpu->cmd_buffer = NULL;
     cpu->cpu_ram = NULL;

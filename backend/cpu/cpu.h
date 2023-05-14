@@ -12,34 +12,48 @@
 #define stack_ctor(stk, size) stack_ctor_((stk), (size), var_info {#stk, LOCATION})
 #define stack_dump(stk, error_number) stack_dump_((stk), (error_number), __PRETTY_FUNCTION__, __FILE__, __LINE__)
 
-typedef int elem;
+#define LOG_MODE
 
-struct var_info
+#ifdef LOG_MODE
+    #define ASSERT(condition)                                                               \
+        if (!(condition))                                                                   \
+        {                                                                                   \
+            printf("\nError in \"%s\" in %d line in function %s in file %s\n",              \
+                    #condition, __LINE__, __PRETTY_FUNCTION__, __FILE__);                   \
+            abort();                                                                        \
+        }
+#else
+    #define ASSERT(condition)
+#endif
+
+typedef int elem_t;
+
+typedef struct
 {
     const char * name;
     const char * func;
     const char * file;
-    int line;
-};
+    int          line;
+} var_info;
 
-struct stack
+typedef struct
 {
-    elem * data;
-    size_t size;
-    size_t capacity;
+    elem_t*  data;
+    size_t   size;
+    size_t   capacity;
     var_info info;
-};
+} stack;
 
-struct s_cpu
+typedef struct
 {
-    stack stk;
-    elem * cmd_buffer;
-    elem ax;
-    elem bx;
-    elem cx;
-    elem dx;
-    elem * cpu_ram;
-};
+    stack  stk;
+    elem_t*  cmd_buffer;
+    elem_t   ax;
+    elem_t   bx;
+    elem_t   cx;
+    elem_t   dx;
+    elem_t*  cpu_ram;
+} cpu_t;
 
 enum Errors
 {
@@ -87,35 +101,36 @@ enum commands
 
 const int MIN_CAPACITY = 8;
 const int ACCURACY = 100;
+const int RAM_SIZE = 256;
 
-extern FILE * log_file;
+extern FILE* log_file;
 
-int stack_ctor_(stack * stk, size_t capacity, var_info info);
+int stack_ctor_(stack* stk, size_t capacity, var_info info);
 
-int stack_verify(stack * stk);
+int stack_verify(stack* stk);
 
-void stack_push(stack * stk, elem value);
+void stack_push(stack* stk, elem_t value);
 
-void stack_pop(stack * stk, elem * value);
+void stack_pop(stack* stk, elem_t* value);
 
-void stack_resize(stack * stk, size_t new_size);
+void stack_resize(stack* stk, size_t new_size);
 
 void error_num_translate(int error_number);
 
-void stack_dump_(stack * stk, int error_number, const char * func, const char * file, int line);
+void stack_dump_(stack* stk, int error_number, const char* func, const char* file, int line);
 
-void write_stack_elems(stack * stk);
+void write_stack_elems(stack* stk);
 
-void write_zeros_to_data(stack * stk, size_t i_start, size_t i_end);
+void write_zeros_to_data(stack* stk, size_t i_start, size_t i_end);
 
-void stack_dtor(stack * stk);
+void stack_dtor(stack* stk);
 
 void test_stack(void);
 
-int run_cpu(FILE * stream);
+int run_cpu(FILE* stream);
 
-size_t cpu_ctor(s_cpu * cpu, FILE * stream);
+size_t cpu_ctor(cpu_t* cpu, FILE* stream);
 
-void cpu_dtor(s_cpu * cpu);
+void cpu_dtor(cpu_t* cpu);
 
 #endif

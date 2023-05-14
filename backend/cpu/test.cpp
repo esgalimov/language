@@ -3,7 +3,7 @@
 void test_stack(void)
 {
     stack stk1 = {};
-    elem x = 0;
+    elem_t x = 0;
     stack_ctor(&stk1, 5);
 
     stack_push(&stk1, 1);
