@@ -2,19 +2,26 @@
 
 FILE * log_file = NULL;
 
-int main(void)
+int main(int argc, char** argv)
 {
-    log_file = fopen("../cpu/logs/log.txt", "w");
-    if (log_file == NULL)
+    if (argc <= 1)
     {
-        printf("Can't open log file!");
+        printf("file name not given\n");
         return 1;
     }
 
-    FILE * fp_bin = fopen("../code/test.bin", "rb");
-    if (fp_bin == NULL)
+    log_file = fopen("./backend/cpu/logs/log.txt", "w");
+    if (log_file == NULL)
     {
-        printf("Can not open file\n");
+        printf("Can't open log file (cpu)");
+        return 1;
+    }
+
+    FILE * fp_bin = fopen(argv[1], "rb");
+
+    if (fp_bin == nullptr)
+    {
+        printf("Can not open file %s\n", argv[1]);
         return 1;
     }
 

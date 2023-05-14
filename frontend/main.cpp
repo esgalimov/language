@@ -3,13 +3,16 @@
 #include "./include/dsl.h"
 #include "./include/expr.h"
 
-int main(void)
+int main(int argc, char** argv)
 {
-    open_log_file();
+    if (argc <= 1)
+    {
+        printf("file name not given\n");
+        return 1;
+    }
+    if (open_log_file()) return 1;
 
-    make_ast_tree("prog.tatar");
-
-    read_ast_tree();
+    make_ast_tree(argv[1]);
 
     close_log_file();
     return 0;

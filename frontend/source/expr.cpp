@@ -203,7 +203,7 @@ int tokens_dump(expr_t* expr)
     ASSERT(expr);
 
     dump_cnt++;
-    char graphviz_cmd[200] = "dot ./tmp/graphviz.dot -Tpng -o ./logs/images/tree_dump";
+    char graphviz_cmd[200] = "dot ./frontend/tmp/graphviz.dot -Tpng -o ./frontend/logs/images/tree_dump";
     snprintf(graphviz_cmd + strlen(graphviz_cmd), 30, "%d.png", dump_cnt);
 
 

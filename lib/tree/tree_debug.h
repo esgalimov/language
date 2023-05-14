@@ -7,7 +7,7 @@
     #define ASSERT(condition)                                                               \
         if (!(condition))                                                                   \
         {                                                                                   \
-            fprintf(log_file, "\nError in \"%s\" in %d line in function %s in file %s\n",   \
+            printf("\nError in \"%s\" in %d line in function %s in file %s\n",              \
                     #condition, __LINE__, __PRETTY_FUNCTION__, __FILE__);                   \
             abort();                                                                        \
         }
@@ -118,11 +118,7 @@ void error_number_translate(tree_t * tree);
 //! @brief Dump subtree (part of tree from particular node)
 int subtree_dump(const tree_node_t* node);
 
-// //! @brief Check access to pointer
-// //! use fwrite to try write one byte from pointer
-// //! @param [in] ptr - pointer to check
-// //! @return 1 - if OK, else - if error
-// int check_ptr_access(const void * ptr);
+
 
 
 #endif

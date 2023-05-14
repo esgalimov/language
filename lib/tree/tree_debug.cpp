@@ -7,7 +7,7 @@ int dump_cnt = 0;
 
 int open_graphviz_file(void)
 {
-    graphviz_file = fopen("./tmp/graphviz.dot", "w");
+    graphviz_file = fopen("./frontend/tmp/graphviz.dot", "w");
 
     if (graphviz_file == NULL)
     {
@@ -32,11 +32,11 @@ int close_graphviz_file(void)
 #ifdef LOG_MODE
     int open_log_file(void)
     {
-        log_file = fopen("./logs/log.html", "w");
+        log_file = fopen("./frontend/logs/log.html", "w");
 
         if (log_file == NULL)
         {
-            printf("Can't open log file\n");
+            printf("Can't open log file (tree_debug.cpp)\n");
             return 1;
         }
 
@@ -119,7 +119,7 @@ int tree_dump_(tree_t* tree, const char* func, const char* file, int line)
     ASSERT(log_file != NULL);
 
     dump_cnt++;
-    char graphviz_cmd[200] = "dot ./tmp/graphviz.dot -Tpng -o ./logs/images/tree_dump";
+    char graphviz_cmd[200] = "dot ./frontend/tmp/graphviz.dot -Tpng -o ./frontend/logs/images/tree_dump";
     snprintf(graphviz_cmd + strlen(graphviz_cmd), 30, "%d.png", dump_cnt);
 
     fprintf(log_file, "<pre>\n%s at %s(%d):\n", func, file, line);
@@ -158,7 +158,7 @@ int subtree_dump(const tree_node_t * node)
     fprintf(log_file, "<pre>Subtree dump: root = %p</pre>\n", node);
 
     dump_cnt++;
-    char graphviz_cmd[200] = "dot ./tmp/graphviz.dot -Tpng -o ./logs/images/tree_dump";
+    char graphviz_cmd[200] = "dot ./frontend/tmp/graphviz.dot -Tpng -o ./logs/images/tree_dump";
     snprintf(graphviz_cmd + strlen(graphviz_cmd), 30, "%d.png", dump_cnt);
 
     open_graphviz_file();

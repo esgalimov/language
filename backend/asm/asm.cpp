@@ -248,12 +248,12 @@ void write_code_to_file(token_t * toks, size_t n_cmd)
 {
     assert(toks != NULL);
 
-    FILE * fp = fopen("../code/test.code", "w");
-    FILE * fp_bin = fopen("../code/test.bin", "wb");
+    FILE * fp = fopen("./prog.code", "w");
+    FILE * fp_bin = fopen("./prog.bin", "wb");
 
     if (fp == NULL || fp_bin == NULL)
     {
-        printf("Can't open file");
+        printf("Can't open file (asm)\n");
         abort();
     }
 
