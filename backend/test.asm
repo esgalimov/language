@@ -1,16 +1,20 @@
-call :bye
+    push 23
+    push 35
+    push 47
 
-push [0+bx]
-push 2
-push 3
-pop [0+ax]
-out
-out
-out
+    push 5
+    pop ax
 
-:bye
+    pop [0+ax]
+    pop [1+ax]
+    pop [2+ax]
 
-push 7
-out
+    push [2+ax]
+    push [1+ax]
+    push [0+ax]
 
-hlt
+    out
+    out
+    out
+
+    hlt

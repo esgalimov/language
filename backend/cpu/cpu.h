@@ -129,6 +129,8 @@ void test_stack(void);
 
 int run_cpu(FILE* stream);
 
+elem_t* get_reg_ptr(cpu_t* cpu, size_t i);
+
 size_t cpu_ctor(cpu_t* cpu, FILE* stream);
 
 void cpu_dtor(cpu_t* cpu);

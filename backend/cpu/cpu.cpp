@@ -147,23 +147,11 @@ int run_cpu(FILE * stream)
             break;
 
         case PUSH_REG:
-            switch (cpu.cmd_buffer[++i])
-            {
-                case AX: stack_push(&cpu.stk, cpu.ax); break;
-                case BX: stack_push(&cpu.stk, cpu.bx); break;
-                case CX: stack_push(&cpu.stk, cpu.cx); break;
-                case DX: stack_push(&cpu.stk, cpu.dx); break;
-            }
+            stack_push(&cpu.stk, *get_reg_ptr(&cpu, ++i) * ACCURACY);
             break;
 
         case POP_REG:
-            switch (cpu.cmd_buffer[++i])
-            {
-                case AX: stack_pop(&cpu.stk, &cpu.ax); break;
-                case BX: stack_pop(&cpu.stk, &cpu.bx); break;
-                case CX: stack_pop(&cpu.stk, &cpu.cx); break;
-                case DX: stack_pop(&cpu.stk, &cpu.dx); break;
-            }
+            stack_pop(&cpu.stk, get_reg_ptr(&cpu, ++i));
             break;
 
         case PUSH_RAM:
@@ -171,23 +159,34 @@ int run_cpu(FILE * stream)
             i++;
             if (AX <= cpu.cmd_buffer[i + 1] && cpu.cmd_buffer[i + 1] <= DX)
             {
-                elem_t reg_val = 0;
+                elem_t reg_val = *(get_reg_ptr(&cpu, i + 1));
 
-                switch (cpu.cmd_buffer[i + 1])
-                {
-                    case AX: reg_val = cpu.ax; break;
-                    case BX: reg_val = cpu.bx; break;
-                    case CX: reg_val = cpu.cx; break;
-                    case DX: reg_val = cpu.dx; break;
-                }
                 stack_push(&cpu.stk, cpu.cpu_ram[(int) reg_val + cpu.cmd_buffer[i]]);
+                i++;
             }
-            else if (AX <= cpu.cmd_buffer[i] && cpu.cmd_buffer[i] <= DX)//===================
+            else
             {
-
+                stack_push(&cpu.stk, cpu.cpu_ram[cpu.cmd_buffer[i]]);
             }
+            break;
+        }
 
+        case POP_RAM:
+        {
             i++;
+            if (AX <= cpu.cmd_buffer[i + 1] && cpu.cmd_buffer[i + 1] <= DX)
+            {
+                elem_t reg_val = *(get_reg_ptr(&cpu, i + 1));
+
+                printf("%d\n", (int) reg_val + cpu.cmd_buffer[i]);
+
+                stack_pop(&cpu.stk, &cpu.cpu_ram[(int) reg_val + cpu.cmd_buffer[i]]);
+                i++;
+            }
+            else
+            {
+                stack_pop(&cpu.stk, &cpu.cpu_ram[cpu.cmd_buffer[i]]);
+            }
             break;
         }
 
@@ -228,7 +227,19 @@ int run_cpu(FILE * stream)
     return 0;
 }
 
-size_t cpu_ctor(cpu_t * cpu, FILE * stream)
+elem_t* get_reg_ptr(cpu_t* cpu, size_t i)
+{
+    switch (cpu->cmd_buffer[i])
+    {
+        case AX: return &cpu->ax;
+        case BX: return &cpu->bx;
+        case CX: return &cpu->cx;
+        case DX: return &cpu->dx;
+        default: return nullptr;
+    }
+}
+
+size_t cpu_ctor(cpu_t* cpu, FILE* stream)
 {
     ASSERT(cpu != NULL);
     ASSERT(stream != NULL);
