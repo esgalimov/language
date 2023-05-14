@@ -61,6 +61,20 @@ char** get_ptrs(char* buffer, size_t str_cnt, size_t buffsize)
     return strptr;
 }
 
+int is_without_text(const char* str)
+{
+    assert(str != NULL);
+    int flag = 1;
+    int len = (int) strlen(str);
+    for (int i = 0; i < len; i++)
+        if (!isblank(str[i]))
+        {
+            flag = 0;
+            break;
+        }
+    return flag;
+}
+
 void text_ctor(text_t* book, FILE* stream)
 {
     assert(book != NULL);

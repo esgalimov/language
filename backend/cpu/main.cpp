@@ -11,8 +11,6 @@ int main(void)
         return 1;
     }
 
-    //test_stack();
-
     FILE * fp_bin = fopen("../code/test.bin", "rb");
     if (fp_bin == NULL)
     {

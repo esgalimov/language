@@ -1,5 +1,5 @@
 #include "asm.h"
-#include "text_funcs.h"
+#include "../../lib/text_funcs/text_funcs.h"
 
 int main(void)
 {

@@ -8,7 +8,7 @@
 #include <math.h>
 #include <string.h>
 
-#include "text_funcs.h"
+#include "../../lib/text_funcs/text_funcs.h"
 #include "DSL_check_code.h"
 
 #define LOG_MODE

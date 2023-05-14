@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <assert.h>
 
 #define LOG_MODE
@@ -55,5 +56,11 @@ void text_ctor(text_t* book, FILE* strem);
 //! @brief Destruct for Text
 //! @param [out] book - pointer to struct with variables for text processing
 void text_dtor(text_t* book);
+
+//! @brief Function for checking if string consists of blank symbol only
+//! @param [in] str - pointer to string for checking
+//! @return 1 - if only blank symbols, else - 0
+
+int is_without_text(const char* str);
 
 #endif
