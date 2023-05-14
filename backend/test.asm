@@ -1,3 +1,11 @@
+    in
+    push 0
+    je :cock
+
+    hlt
+
+
+    :cock
     push 23
     push 35
     push 47

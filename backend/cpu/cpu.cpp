@@ -151,7 +151,8 @@ int run_cpu(FILE * stream)
             break;
 
         case POP_REG:
-            stack_pop(&cpu.stk, get_reg_ptr(&cpu, ++i));
+            stack_pop(&cpu.stk, &num1);
+            *get_reg_ptr(&cpu, ++i) = num1 / ACCURACY;
             break;
 
         case PUSH_RAM:
@@ -160,6 +161,11 @@ int run_cpu(FILE * stream)
             if (AX <= cpu.cmd_buffer[i + 1] && cpu.cmd_buffer[i + 1] <= DX)
             {
                 elem_t reg_val = *(get_reg_ptr(&cpu, i + 1));
+
+                if ((int) reg_val + cpu.cmd_buffer[i] > RAM_SIZE)
+                {
+                    printf("Out of RAM\n"); return 1;
+                }
 
                 stack_push(&cpu.stk, cpu.cpu_ram[(int) reg_val + cpu.cmd_buffer[i]]);
                 i++;
@@ -178,7 +184,10 @@ int run_cpu(FILE * stream)
             {
                 elem_t reg_val = *(get_reg_ptr(&cpu, i + 1));
 
-                printf("%d\n", (int) reg_val + cpu.cmd_buffer[i]);
+                if ((int) reg_val + cpu.cmd_buffer[i] > RAM_SIZE)
+                {
+                    printf("Out of RAM\n"); return 1;
+                }
 
                 stack_pop(&cpu.stk, &cpu.cpu_ram[(int) reg_val + cpu.cmd_buffer[i]]);
                 i++;
