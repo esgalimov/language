@@ -366,17 +366,22 @@ void print_error_message(int* is_ok, size_t i, asm_t* asem, const char* message)
 }
 
 
-int str_of_digits(const char * cmd)
+int str_of_digits(const char* cmd)
 {
     size_t len_cmd = strlen(cmd);
     size_t i = 0;
+    int is_dotted = 0;
 
     if (cmd[0] == '-')
         i = 1;
 
     for (; i < len_cmd; i++)
     {
-        if (isdigit(cmd[i]) == 0)
+        if (!is_dotted && cmd[i] == '.')
+        {
+            is_dotted = 1;
+        }
+        else if (isdigit(cmd[i]) == 0)
         {
             return 0;
         }
@@ -397,7 +402,7 @@ int is_label(const char * cmd)
         for (size_t i = 1; i < len_cmd; i++)
         {
             char ch = cmd[i];
-            if (isdigit(ch) == 0 && isalpha(ch) == 0) return 0;
+            if (isdigit(ch) == 0 && isalpha(ch) == 0 && ch != '_') return 0;
         }
         return 1;
     }

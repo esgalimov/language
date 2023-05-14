@@ -1,13 +1,13 @@
 bashlau
     x = 0;
-    ukyrga(x);
-    yozyrga(x);
+    y = 1;
+    z = 2;
+    t = x + y + z;
 
-    esh kal(y)
+    egyar (t)
         bashlau
-            y = x + 1;
-            yozyrga(y)
-        tuktau;
+            yozyrga(t)
+        tuktau
 
-    kal(3)
+
 tuktau
