@@ -4,8 +4,9 @@ bashlau
     z = 2;
     t = x + y + z;
 
-    egyar (t)
+    tugyaryak (t)
         bashlau
+            t = t - 1;
             yozyrga(t)
         tuktau
 

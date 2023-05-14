@@ -82,7 +82,7 @@ int create_tokens(expr_t* expr)
             switch (CURR_CH)
             {
                 case '+': NEW_CHAR_TOKEN(TYPE_ADD);    break;
-                case '-': NEW_CHAR_TOKEN(TYPE_ADD);    break;
+                case '-': NEW_CHAR_TOKEN(TYPE_SUB);    break;
                 case '*': NEW_CHAR_TOKEN(TYPE_MUL);    break;
                 case '/': NEW_CHAR_TOKEN(TYPE_DIV);    break;
                 case '(': NEW_CHAR_TOKEN(TYPE_L_BR);   break;

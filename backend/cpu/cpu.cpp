@@ -51,7 +51,7 @@ int run_cpu(FILE * stream)
 
         case OUT:
             stack_pop(&cpu.stk, &num1);
-            printf("OUT: %.2lf\n", (double) num1 / ACCURACY);
+            printf("OUT: %.lg\n", (double) num1 / ACCURACY);
             break;
 
         case JMP:

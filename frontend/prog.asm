@@ -22,12 +22,18 @@
     push [2]
     add
     pop [3]
+    :while_0
     push [3]
     push 0
-    je :if_0
+    je :while_1
+    push [3]
+    push 1
+    sub
+    pop [3]
     push [3]
     out
 
-    :if_0
+    jmp :while_0
+    :while_1
 
     hlt

@@ -28,7 +28,7 @@ enum node_type
     TYPE_DEF    = 8, //
     TYPE_FUNC   = 9, //
     TYPE_RET    = 10, /**/
-    TYPE_WHILE  = 11, /**/
+    TYPE_WHILE  = 11, //
     TYPE_IF     = 12, //
     TYPE_ELSE   = 13, /**/
     TYPE_PRINTF = 14, //

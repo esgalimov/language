@@ -230,7 +230,8 @@ int translate_asm(prog_tree_t* prog)
 
 void tree_print_asm(tree_node_t* node, FILE* stream)
 {
-    static int if_cnt = 0;
+    static int    if_cnt = 0;
+    static int while_cnt = 0;
 
     if (node == nullptr) return;
 
@@ -297,6 +298,20 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
             if_cnt++;
             return;
 
+        case TYPE_WHILE:
+            fprintf(stream, "    :while_%d\n", while_cnt);
+            tree_print_asm(node->left, stream);
+
+            fprintf(stream, "    push 0\n");
+            fprintf(stream, "    je :while_%d\n", while_cnt + 1);
+
+            tree_print_asm(node->right, stream);
+            fprintf(stream, "    jmp :while_%d\n", while_cnt);
+            fprintf(stream, "    :while_%d\n\n", while_cnt + 1);
+
+            while_cnt += 2;
+
+            return;
         default: return;
     }
 }
