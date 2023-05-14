@@ -1,5 +1,5 @@
-#include "../include/tree.h"
-#include "../include/tree_debug.h"
+#include "../../lib/tree/tree.h"
+#include "../../lib/tree/tree_debug.h"
 #include "../include/dsl.h"
 #include "../include/get.h"
 

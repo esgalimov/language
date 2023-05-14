@@ -1,6 +1,5 @@
-#include "../include/tree.h"
-#include "../include/tree_debug.h"
-#include "../include/expr.h"
+#include "tree.h"
+#include "tree_debug.h"
 
 FILE * graphviz_file = NULL;
 FILE * log_file = NULL;
@@ -75,7 +74,7 @@ int graphviz_init(tree_t * tree)
     return STATUS_OK;
 }
 
-void add_nodes(const tree_node_t * node, expr_t* expr)
+void add_nodes(const tree_node_t * node)
 {
     if (node == NULL) return;
 
@@ -94,8 +93,8 @@ void add_nodes(const tree_node_t * node, expr_t* expr)
     else if (node->type == TYPE_AND)                              PRINT_NODE("AND",   L_PINK);
     else                                                          PRINT_NODE("OTHER", ORANGE);
 
-    add_nodes(node->left, expr);
-    add_nodes(node->right, expr);
+    add_nodes(node->left);
+    add_nodes(node->right);
 }
 
 void link_nodes_gr(const tree_node_t * node)
@@ -114,7 +113,7 @@ void link_nodes_gr(const tree_node_t * node)
     }
 }
 
-int tree_dump_(tree_t* tree, expr_t* expr, const char* func, const char* file, int line)
+int tree_dump_(tree_t* tree, const char* func, const char* file, int line)
 {
     ASSERT(tree != NULL);
     ASSERT(log_file != NULL);
@@ -133,7 +132,7 @@ int tree_dump_(tree_t* tree, expr_t* expr, const char* func, const char* file, i
                 tree, tree->info.name, tree->info.func, tree->info.file, tree->info.line, tree->root);
         open_graphviz_file();
         graphviz_init(tree);
-        add_nodes(tree->root, expr);
+        add_nodes(tree->root);
         link_nodes_gr(tree->root);
         close_graphviz_file();
     }
@@ -164,7 +163,7 @@ int subtree_dump(const tree_node_t * node)
 
     open_graphviz_file();
     fprintf(graphviz_file, "digraph\n{\n");
-    add_nodes(node, NULL);
+    add_nodes(node);
     link_nodes_gr(node);
     close_graphviz_file();
 

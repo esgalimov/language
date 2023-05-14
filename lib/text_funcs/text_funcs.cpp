@@ -1,12 +1,10 @@
-#include "../include/tree.h"
-#include "../include/tree_debug.h"
-#include "../include/text_funcs.h"
-#include "../include/expr.h"
+#include "text_funcs.h"
+
 
 char** import_text(text_t* book, FILE* stream)
 {
-    ASSERT(stream != NULL);
-    ASSERT(book != NULL);
+    assert(stream != NULL);
+    assert(book != NULL);
 
     fseek(stream, 0L, SEEK_END);
     book->buffsize = (size_t) ftell(stream);
@@ -24,7 +22,7 @@ char** import_text(text_t* book, FILE* stream)
 
 size_t count_symbol(char ch, char* string, size_t strsize)
 {
-    ASSERT(string != NULL);
+    assert(string != NULL);
 
     size_t str_cnt = 0;
 
@@ -40,7 +38,7 @@ size_t count_symbol(char ch, char* string, size_t strsize)
 
 char** get_ptrs(char* buffer, size_t str_cnt, size_t buffsize)
 {
-    ASSERT(buffer != NULL);
+    assert(buffer != NULL);
 
     char** strptr = (char**) calloc((size_t) (str_cnt + 1), sizeof(char*));
 
@@ -65,8 +63,8 @@ char** get_ptrs(char* buffer, size_t str_cnt, size_t buffsize)
 
 void text_ctor(text_t* book, FILE* stream)
 {
-    ASSERT(book != NULL);
-    ASSERT(stream != NULL);
+    assert(book != NULL);
+    assert(stream != NULL);
 
     book->strings  = NULL;
     book->buffer   = NULL;
@@ -79,7 +77,7 @@ void text_ctor(text_t* book, FILE* stream)
 
 void text_dtor(text_t* book)
 {
-    ASSERT(book != NULL);
+    assert(book != NULL);
 
     book->str_cnt = 0;
     book->buffsize = 0;

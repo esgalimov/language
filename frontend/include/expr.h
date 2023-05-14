@@ -1,11 +1,10 @@
 #ifndef EXPR
 #define EXPR
 
-#include "tree.h"
-#include "tree_debug.h"
-#include "text_funcs.h"
+#include "../../lib/tree/tree.h"
+#include "../../lib/tree/tree_debug.h"
+#include "../../lib/text_funcs/text_funcs.h"
 #include "dsl.h"
-//#include "get.h"
 
 
 const int NAME_MAX_LEN = 32;

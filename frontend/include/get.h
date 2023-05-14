@@ -1,8 +1,8 @@
 #ifndef GET
 #define GET
 
-#include "tree.h"
-#include "tree_debug.h"
+#include "../../lib/tree/tree.h"
+#include "../../lib/tree/tree_debug.h"
 #include "expr.h"
 
 

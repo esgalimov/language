@@ -1,8 +1,12 @@
 #ifndef TEXT_FUNCS
 #define TEXT_FUNCS
 
-#include "tree.h"
-#include "expr.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+
+#define LOG_MODE
 
 typedef struct
 {

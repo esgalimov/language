@@ -1,6 +1,5 @@
-#include "../include/tree.h"
-#include "../include/tree_debug.h"
-#include "../include/expr.h"
+#include "tree.h"
+#include "tree_debug.h"
 
 int tree_ctor_(tree_t * tree, var_info info)
 {
@@ -82,26 +81,6 @@ tree_node_t* create_node(node_type type, size_t line, size_t pos, elem_t value, 
     return node;
 }
 
-// tree_node_t * create_num(elem_t value)
-// {
-//     return create_node(TYPE_NUM, value);
-// }
-//
-// tree_node_t * create_op(node_type oper, tree_node_t * left, tree_node_t * right)
-// {
-//     return create_node(oper, NAN, left, right);
-// }
-//
-// tree_node_t * create_var(int value)
-// {
-//     return create_node(TYPE_VAR, (elem_t) value);
-// }
-//
-// tree_node_t * create_func(node_type func, tree_node_t * left, tree_node_t * right)
-// {
-//     return create_node(func, NAN, right, left);
-// }
-
 int link_node(tree_node_t * parent, tree_node_t * child, link_mode mode)
 {
     if (parent == NULL || child == NULL) return NODE_LINK_ERROR;
@@ -116,22 +95,3 @@ int link_node(tree_node_t * parent, tree_node_t * child, link_mode mode)
 
     return STATUS_OK;
 }
-
-// tree_node_t * copy_subtree(tree_node_t * node)
-// {
-//     if (node == NULL) return NULL;
-//
-//     if (node->type == TYPE_NUM) return create_num(node->value);
-//
-//     else if (node->type == TYPE_VAR) return create_var((int) node->value);
-//
-//     else if (node->type >= TYPE_ADD && node->type <= TYPE_DIV)
-//         return create_op((node_type) node->type, copy_subtree(node->left), copy_subtree(node->right));
-//     else
-//     {
-//         if (node->type == TYPE_LOG || node->type == TYPE_POW)
-//             return create_func((node_type) node->type, copy_subtree(node->left), copy_subtree(node->right));
-//
-//         return create_func((node_type) node->type, copy_subtree(node->right), copy_subtree(node->left));
-//     }
-// }

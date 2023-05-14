@@ -1,9 +1,6 @@
 #ifndef DEBUG_TREE
 #define DEBUG_TREE
 
-#include "tree.h"
-#include "expr.h"
-
 #define LOG_MODE
 
 #ifdef LOG_MODE
@@ -14,10 +11,10 @@
                     #condition, __LINE__, __PRETTY_FUNCTION__, __FILE__);                   \
             abort();                                                                        \
         }
-    #define tree_dump(tree, expr) tree_dump_((tree), (expr), __PRETTY_FUNCTION__, __FILE__, __LINE__)
+    #define tree_dump(tree) tree_dump_((tree), __PRETTY_FUNCTION__, __FILE__, __LINE__)
 #else
     #define ASSERT(condition)
-    #define tree_dump(tree, expr)
+    #define tree_dump(tree)
 #endif
 
 #define BLUE       "#87CEEB"
@@ -88,7 +85,7 @@ int graphviz_init(tree_t* tree);
 
 //! @brief Add nodes into .dot file to use graphiz
 //! @param [in] node - ptr to node
-void add_nodes(const tree_node_t* node, expr_t* expr);
+void add_nodes(const tree_node_t* node);
 
 //! @brief Link nodes in .dot file
 //! @param [in] node - ptr to node
@@ -101,7 +98,7 @@ void link_nodes_gr(const tree_node_t* node);
 //! @param [in] file - ptr to file name
 //! @param [in] line - line where was dump
 //! @return 0
-int tree_dump_(tree_t* tree, expr_t* expr, const char* func, const char* file, int line);
+int tree_dump_(tree_t* tree, const char* func, const char* file, int line);
 
 //! @brief Verify tree, create number
 //! Summarize codes of mistakes to make number where each bit is concrete mistake

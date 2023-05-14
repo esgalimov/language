@@ -1,7 +1,7 @@
-#include "../include/tree.h"
-#include "../include/tree_debug.h"
+#include "../../lib/tree/tree.h"
+#include "../../lib/tree/tree_debug.h"
 #include "../include/expr.h"
-#include "../include/text_funcs.h"
+#include "../../lib/text_funcs/text_funcs.h"
 #include "../include/dsl.h"
 #include "../include/get.h"
 
@@ -38,7 +38,7 @@ expr_t* expr_ctor(const char* filename)
 
     link_root(expr->tree, getG(expr));
 
-    tree_dump(expr->tree, expr);
+    tree_dump(expr->tree);
 
     return expr;
 }
@@ -213,7 +213,7 @@ int tokens_dump(expr_t* expr)
     printf("%lu", expr->toks_cnt);
 
     for (size_t i = 0; i < expr->toks_cnt; i++)
-        add_nodes(expr->tokens[i], expr);
+        add_nodes(expr->tokens[i]);
 
     close_graphviz_file();
 
