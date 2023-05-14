@@ -1,12 +1,13 @@
     in
     push 0
-    je :cock
+    je :cock ;hello world
 
     hlt
 
 
     :cock
     push 23
+    ;penis
     push 35
     push 47
 

@@ -24,7 +24,9 @@ void run_comp(FILE * stream)
         {
             asem.toks[i_code].name = (char *) calloc(MAX_CMD_LEN, sizeof(char));
 
-            if (strcmp(cmd, "push") == 0)
+            if (cmd[0] == ';') break;
+
+            else if (strcmp(cmd, "push") == 0)
             {
                 asem.toks[i_code].type = CMD1;
                 asem.toks[i_code].value = PUSH;
