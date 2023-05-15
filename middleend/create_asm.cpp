@@ -223,6 +223,7 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
         case TYPE_FUNC:
             tree_print_asm(node->left, stream);
             fprintf(stream, "    call :%s\n\n", node->name);
+            fprintf(stream, "    push ax\n");
             return;
 
         case TYPE_DEF:
@@ -255,8 +256,14 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
             fprintf(stream, "    :while_%d\n\n", while_cnt + 1);
 
             while_cnt += 2;
-
             return;
+
+        case TYPE_RET:
+            tree_print_asm(node->left, stream);
+            fprintf(stream, "    pop ax\n");
+            fprintf(stream, "    ret\n");
+            return;
+
         default: return;
     }
 }

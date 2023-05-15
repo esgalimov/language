@@ -13,9 +13,12 @@ bashlau
                     i = i + 1;
                     ans = ans * i;
                     yozyrga(ans)
-                tuktau
+                tuktau;
+            bir ans
         tuktau;
 
-    fact(6)
+    d = fact(6);
+
+    yozyrga(d)
 
 tuktau

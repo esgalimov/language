@@ -88,13 +88,23 @@ tree_node_t* getP(expr_t* expr)
     else
     {
         tree_node_t* id = getId(expr);
-        if (expr->ids[(int) id->value]->type != TYPE_VAR)
+
+        if (id == nullptr) return nullptr;
+
+        if (expr->ids[(int) id->value]->type == TYPE_VAR)
+        {
+            id->type = TYPE_VAR;
+            return id;
+        }
+        else if (expr->ids[(int) id->value]->type == TYPE_FUNC)
+        {
+            expr->pos--;
+            return getFuncCall(expr);
+        }
+        else
         {
             SYNTAX_ERROR("expected existing var"); return nullptr;
         }
-        id->type = TYPE_VAR;
-
-        return id;
     }
 }
 
@@ -304,6 +314,22 @@ tree_node_t* getDef(expr_t* expr)
     return func;
 }
 
+tree_node_t* getReturn(expr_t* expr)
+{
+    tree_node_t* tok = expr->tokens[expr->pos];
+
+    if (tok->type != TYPE_RET) return nullptr;
+
+    expr->pos++;
+
+    tree_node_t* ret_value = getE(expr);
+
+    tok->left = ret_value;
+    ret_value->parent = tok;
+
+    return tok;
+}
+
 tree_node_t* getFuncCall(expr_t* expr)
 {
     tree_node_t* tok = expr->tokens[expr->pos];
@@ -349,6 +375,9 @@ tree_node_t* getOp(expr_t* expr)
     if (expr->pos < expr->toks_cnt - 1 && expr->tokens[expr->pos]->type == TYPE_ID &&
         expr->tokens[expr->pos + 1]->type == TYPE_L_BR)
         return getFunc(expr);
+
+    if (expr->tokens[expr->pos]->type == TYPE_RET)
+        return getReturn(expr);
 
     return getA(expr);
 }

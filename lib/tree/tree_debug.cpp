@@ -103,6 +103,7 @@ void add_nodes(const tree_node_t * node)
     else if (node->type == TYPE_DEF)                              PRINT_NODE("DEF",   L_RED);
     else if (node->type == TYPE_IF)                               PRINT_NODE("IF",    TURQ);
     else if (node->type == TYPE_WHILE)                            PRINT_NODE("WHILE", TURQ);
+    else if (node->type == TYPE_RET)                              PRINT_NODE("RET",  PINK);
     else if (TYPE_FUNC <= node->type && node->type <= TYPE_SCANF) PRINT_NODE("FUNC",  PINK);
     else if (node->type == TYPE_AND)                              PRINT_NODE("AND",   L_PINK);
     else                                                          PRINT_NODE("OTHER", ORANGE);
