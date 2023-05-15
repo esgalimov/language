@@ -14,7 +14,10 @@ tree_node_t* getT(expr_t* expr);
 tree_node_t* getP(expr_t* expr);
 tree_node_t* getA(expr_t* expr);
 tree_node_t* getIf(expr_t* expr);
-tree_node_t* getOp(expr_t* expr);
+tree_node_t* getPrintfScanf(expr_t* expr);
+tree_node_t* getDef(expr_t* expr);
+tree_node_t* getFuncCall(expr_t* expr);
+tree_node_t* getFunc(expr_t* expr);
 tree_node_t* getComp(expr_t* expr);
 tree_node_t* getOp(expr_t* expr);
 //! @brief Get Func or variable (varibles are only one-letter)

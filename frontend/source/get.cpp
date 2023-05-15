@@ -197,125 +197,144 @@ tree_node_t* getIf(expr_t* expr)
 
 tree_node_t* getFunc(expr_t* expr)
 {
-    tree_node_t* def = expr->tokens[expr->pos];
+    tree_node_t* tok = expr->tokens[expr->pos];
 
-    if (def->type == TYPE_PRINTF || def->type == TYPE_SCANF)
+    if (tok->type == TYPE_PRINTF || tok->type == TYPE_SCANF)
     {
-        expr->pos++;
-        if (expr->tokens[expr->pos]->type != TYPE_L_BR)
-        {
-            SYNTAX_ERROR("must be \"(\" aftre yozyrga/ukyrga"); return nullptr;
-        }
-        expr->pos++;
-
-        tree_node_t* id = getId(expr);//---------------
-
-        if (id == nullptr) return nullptr;
-
-        if (expr->ids[(int) id->value]->type == TYPE_VAR)
-        {
-            id->type = TYPE_VAR;
-        }
-        else
-        {
-            SYNTAX_ERROR("expected existing var in yozyrga/ukyrga"); return nullptr;
-        }
-        if (expr->tokens[expr->pos]->type != TYPE_R_BR)
-        {
-            SYNTAX_ERROR("must be \")\" aftre printf or scanf"); return nullptr;
-        }
-        expr->pos++;
-
-        def->left = id;
-        id->parent = def;
-
-        return def;
+        return getPrintfScanf(expr);
     }
-    else if (def->type == TYPE_DEF)
+    else if (tok->type == TYPE_DEF)
     {
-        expr->pos++;
-        tree_node_t* func = getId(expr);
-
-        if (expr->tokens[expr->pos]->type != TYPE_L_BR)
-        {
-            SYNTAX_ERROR("must be \"(\" aftre printf or scanf"); return nullptr;
-        }
-        expr->pos++;
-
-        tree_node_t* id = getId(expr);
-
-        if (id == nullptr) return nullptr;
-
-        expr->ids[(int) id->value]->type = TYPE_VAR;
-        id->type = TYPE_VAR;
-
-        if (expr->tokens[expr->pos]->type != TYPE_R_BR)
-        {
-            SYNTAX_ERROR("must be \")\" aftre printf or scanf"); return nullptr;
-        }
-        expr->pos++;
-        if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
-        {
-            SYNTAX_ERROR("must be \"bashlau\" in start of if body"); return nullptr;
-        }
-        expr->pos++;
-
-        tree_node_t* comp = getComp(expr);
-
-        if (comp == nullptr) return nullptr;
-
-        if (expr->tokens[expr->pos]->type != TYPE_END)
-        {
-            SYNTAX_ERROR("must be \"tuktau\" in end of if body"); return nullptr;
-        }
-        expr->pos++;
-
-        func->type = TYPE_DEF;
-
-        func->left = id;
-        id->parent = func;
-
-        func->right = comp;
-        comp->parent = func;
-
-        expr->ids[(int) func->value]->type = TYPE_FUNC;
-
-        return func;
+        return getDef(expr);
     }
-    else if (def->type == TYPE_ID)
+    else if (tok->type == TYPE_ID)
     {
-        if (expr->ids[(int) def->value]->type != TYPE_FUNC)
-        {
-            SYNTAX_ERROR("expected existing func"); return nullptr;
-        }
-        expr->pos++;
-
-        if (expr->tokens[expr->pos]->type != TYPE_L_BR)
-        {
-            SYNTAX_ERROR("expected \"(\" after func"); return nullptr;
-        }
-        expr->pos++;
-        tree_node_t* expression = getE(expr);
-
-        if (expression == nullptr) return nullptr;
-
-        if (expr->tokens[expr->pos]->type != TYPE_R_BR)
-        {
-            SYNTAX_ERROR("expected \")\" after func"); return nullptr;
-        }
-        expr->pos++;
-
-        def->type = TYPE_FUNC;
-
-        def->left = expression;
-        expression->parent = def;
-
-        return def;
+        return getFuncCall(expr);
     }
     else
     {
         SYNTAX_ERROR("expected func"); return nullptr;
     }
+}
+
+tree_node_t* getPrintfScanf(expr_t* expr)
+{
+    tree_node_t* tok = expr->tokens[expr->pos];
+
+    expr->pos++;
+    if (expr->tokens[expr->pos]->type != TYPE_L_BR)
+    {
+        SYNTAX_ERROR("must be \"(\" aftre yozyrga/ukyrga"); return nullptr;
+    }
+    expr->pos++;
+
+    tree_node_t* id = getId(expr);//---------------
+
+    if (id == nullptr) return nullptr;
+
+    if (expr->ids[(int) id->value]->type == TYPE_VAR)
+    {
+        id->type = TYPE_VAR;
+    }
+    else
+    {
+        SYNTAX_ERROR("expected existing var in yozyrga/ukyrga"); return nullptr;
+    }
+    if (expr->tokens[expr->pos]->type != TYPE_R_BR)
+    {
+        SYNTAX_ERROR("must be \")\" aftre printf or scanf"); return nullptr;
+    }
+    expr->pos++;
+
+    tok->left = id;
+    id->parent = tok;
+
+    return tok;
+}
+
+tree_node_t* getDef(expr_t* expr)
+{
+    expr->pos++;
+    tree_node_t* func = getId(expr);
+
+    if (expr->tokens[expr->pos]->type != TYPE_L_BR)
+    {
+        SYNTAX_ERROR("must be \"(\" aftre printf or scanf"); return nullptr;
+    }
+    expr->pos++;
+
+    tree_node_t* id = getId(expr);
+
+    if (id == nullptr) return nullptr;
+
+    expr->ids[(int) id->value]->type = TYPE_VAR;
+    id->type = TYPE_VAR;
+
+    if (expr->tokens[expr->pos]->type != TYPE_R_BR)
+    {
+        SYNTAX_ERROR("must be \")\" aftre printf or scanf"); return nullptr;
+    }
+    expr->pos++;
+    if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
+    {
+        SYNTAX_ERROR("must be \"bashlau\" in start of if body"); return nullptr;
+    }
+    expr->pos++;
+
+    tree_node_t* comp = getComp(expr);
+
+    if (comp == nullptr) return nullptr;
+
+    if (expr->tokens[expr->pos]->type != TYPE_END)
+    {
+        SYNTAX_ERROR("must be \"tuktau\" in end of if body"); return nullptr;
+    }
+    expr->pos++;
+
+    func->type = TYPE_DEF;
+
+    func->left = id;
+    id->parent = func;
+
+    func->right = comp;
+    comp->parent = func;
+
+    expr->ids[(int) func->value]->type = TYPE_FUNC;
+
+    return func;
+}
+
+tree_node_t* getFuncCall(expr_t* expr)
+{
+    tree_node_t* tok = expr->tokens[expr->pos];
+
+    if (expr->ids[(int) tok->value]->type != TYPE_FUNC)
+    {
+        SYNTAX_ERROR("expected existing func"); return nullptr;
+    }
+    expr->pos++;
+
+    if (expr->tokens[expr->pos]->type != TYPE_L_BR)
+    {
+        SYNTAX_ERROR("expected \"(\" after func"); return nullptr;
+    }
+    expr->pos++;
+    tree_node_t* expression = getE(expr);
+
+    if (expression == nullptr) return nullptr;
+
+    if (expr->tokens[expr->pos]->type != TYPE_R_BR)
+    {
+        SYNTAX_ERROR("expected \")\" after func"); return nullptr;
+    }
+    expr->pos++;
+
+    tok->type = TYPE_FUNC;
+
+    tok->left = expression;
+    expression->parent = tok;
+
+    return tok;
 }
 
 tree_node_t* getOp(expr_t* expr)
