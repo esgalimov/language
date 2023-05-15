@@ -238,7 +238,7 @@ void run_comp(FILE * stream)
         make_label_jmp_push_reg(&asem, i_code);
 
         write_code_to_file(asem.toks, i_code);
-        printf("Compiled OK\n");
+        //printf("Compiled OK\n");
     }
 
     asm_dtor(&asem);

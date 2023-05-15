@@ -10,6 +10,10 @@ int main(int argc, char** argv)
         return 1;
     }
 
+    system("rm ./system_files/prog.asm");
+    system("rm ./system_files/prog.bin");
+    system("rm ./system_files/ast.tatar");
+
     char start_cmd[100] = "./objects/front";
     snprintf(start_cmd + strlen(start_cmd), 30, " %s", argv[1]);
 

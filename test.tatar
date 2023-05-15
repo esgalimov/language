@@ -2,17 +2,18 @@
 
 bashlau
     x = 0;
-    y = 12;
-    z = 47;
 
-    ukyrga(x);
-
-    egyar (x)
+    esh one(x)
         bashlau
-            yozyrga(y)
+            bir 1
         tuktau;
-    bylmasa
+
+    esh two(x)
         bashlau
-            yozyrga(z)
-        tuktau
+            bir 2
+        tuktau;
+
+    x = one(1) + two(2);
+
+    yozyrga(x)
 tuktau
