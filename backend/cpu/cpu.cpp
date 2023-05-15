@@ -129,7 +129,6 @@ int run_cpu(FILE * stream)
 
         case CALL:
             stack_push(&cpu.stk_ret, (elem_t) i + 1);
-            //cpu.dx = (elem_t) (i + 1);
             i = (size_t) (cpu.cmd_buffer[i + 1] - 1);
 
             break;
@@ -137,7 +136,6 @@ int run_cpu(FILE * stream)
         case RET:
             stack_pop(&cpu.stk_ret, &num1);
             i = (size_t) num1;
-            //i = (size_t) cpu.dx;
             break;
 
         case IN:

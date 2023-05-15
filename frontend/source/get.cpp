@@ -141,6 +141,10 @@ tree_node_t* getId(expr_t* expr)
     {
         return expr->tokens[expr->pos++];
     }
+    else if (expr->tokens[expr->pos]->type == TYPE_R_BR)
+    {
+        return nullptr;
+    }
     else
     {
         SYNTAX_ERROR("expected TYPE_ID, TYPE_VAR or TYPE_FUNC"); return nullptr;
@@ -349,7 +353,7 @@ tree_node_t* getPrintfScanf(expr_t* expr)
     }
     expr->pos++;
 
-    tree_node_t* id = getId(expr);//---------------
+    tree_node_t* id = getId(expr);
 
     if (id == nullptr) return nullptr;
 
@@ -386,8 +390,6 @@ tree_node_t* getDef(expr_t* expr)
 
     tree_node_t* id = getIds(expr);
 
-    if (id == nullptr) return nullptr;
-
     if (expr->tokens[expr->pos]->type != TYPE_R_BR)
     {
         SYNTAX_ERROR("must be \")\" aftre printf or scanf"); return nullptr;
@@ -412,7 +414,9 @@ tree_node_t* getDef(expr_t* expr)
     func->type = TYPE_DEF;
 
     func->left = id;
-    id->parent = func;
+
+    if (id != nullptr)
+        id->parent = func;
 
     func->right = comp;
     comp->parent = func;
@@ -431,6 +435,8 @@ tree_node_t* getReturn(expr_t* expr)
     expr->pos++;
 
     tree_node_t* ret_value = getE(expr);
+
+    if (ret_value == nullptr) return nullptr;
 
     tok->left = ret_value;
     ret_value->parent = tok;
@@ -455,8 +461,6 @@ tree_node_t* getFuncCall(expr_t* expr)
     expr->pos++;
     tree_node_t* expression = getEs(expr);
 
-    if (expression == nullptr) return nullptr;
-
     if (expr->tokens[expr->pos]->type != TYPE_R_BR)
     {
         SYNTAX_ERROR("expected \")\" after func"); return nullptr;
@@ -466,7 +470,9 @@ tree_node_t* getFuncCall(expr_t* expr)
     tok->type = TYPE_FUNC;
 
     tok->left = expression;
-    expression->parent = tok;
+
+    if (expression != nullptr)
+        expression->parent = tok;
 
     return tok;
 }

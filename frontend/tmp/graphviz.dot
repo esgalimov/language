@@ -1,107 +1,32 @@
 digraph
 {
-    node_info[shape = record, label = "{root = 0x102c00860}"];
+    node_info[shape = record, label = "{root = 0x104f011c0}"];
 
-    node_info->node_0x102c00860 [color = "#98FB98"];
-    node_0x102c00860[shape = Mrecord, label = "{{0x102c00860} | {parent =  0x0} | {AND} | {(null)} | {line = 1} | {pos = 1} | {0x102c00980 | 0x102c008c0}}",
+    node_info->node_0x104f011c0 [color = "#98FB98"];
+    node_0x104f011c0[shape = Mrecord, label = "{{0x104f011c0} | {parent =  0x0} | {AND} | {(null)} | {line = 1} | {pos = 1} | {0x104f01280 | 0x104f01220}}",
                                         style="filled", fillcolor="#FFE3FF"];
-    node_0x102c00980[shape = Mrecord, label = "{{0x102c00980} | {parent =  0x102c00860} | {AND} | {(null)} | {line = 1} | {pos = 1} | {0x102c00b60 | 0x102c009e0}}",
-                                        style="filled", fillcolor="#FFE3FF"];
-    node_0x102c00b60[shape = Mrecord, label = "{{0x102c00b60} | {parent =  0x102c00980} | {AND} | {(null)} | {line = 1} | {pos = 1} | {0x102c00fe0 | 0x102c00bc0}}",
-                                        style="filled", fillcolor="#FFE3FF"];
-    node_0x102c00fe0[shape = Mrecord, label = "{{0x102c00fe0} | {parent =  0x102c00b60} | {DEF} | {one} | {line = 1} | {pos = 1} | {0x102c01340 | 0x102c01040}}",
+    node_0x104f01280[shape = Mrecord, label = "{{0x104f01280} | {parent =  0x104f011c0} | {DEF} | {one} | {line = 1} | {pos = 1} | {0x0 | 0x104f012e0}}",
                                         style="filled", fillcolor="#FCCACA"];
-    node_0x102c01340[shape = Mrecord, label = "{{0x102c01340} | {parent =  0x102c00fe0} | {AND} | {(null)} | {line = 1} | {pos = 1} | {0x102c01400 | 0x102c013a0}}",
+    node_0x104f012e0[shape = Mrecord, label = "{{0x104f012e0} | {parent =  0x0} | {AND} | {(null)} | {line = 1} | {pos = 1} | {0x104f01400 | 0x104f01340}}",
                                         style="filled", fillcolor="#FFE3FF"];
-    node_0x102c01400[shape = Mrecord, label = "{{0x102c01400} | {parent =  0x102c01340} | {AND} | {(null)} | {line = 1} | {pos = 1} | {0x102c014c0 | 0x102c01460}}",
-                                        style="filled", fillcolor="#FFE3FF"];
-    node_0x102c014c0[shape = Mrecord, label = "{{0x102c014c0} | {parent =  0x102c01400} | {VAR} | {x} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                                        style="filled", fillcolor="#AFEEEE"];
-    node_0x102c01460[shape = Mrecord, label = "{{0x102c01460} | {parent =  0x102c01400} | {VAR} | {y} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                                        style="filled", fillcolor="#AFEEEE"];
-    node_0x102c013a0[shape = Mrecord, label = "{{0x102c013a0} | {parent =  0x102c01340} | {VAR} | {z} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                                        style="filled", fillcolor="#AFEEEE"];
-    node_0x102c01040[shape = Mrecord, label = "{{0x102c01040} | {parent =  0x102c00fe0} | {RET} | {(null)} | {line = 1} | {pos = 1} | {0x102c010a0 | 0x0}}",
-                                        style="filled", fillcolor="#E6E6FA"];
-    node_0x102c010a0[shape = Mrecord, label = "{{0x102c010a0} | {parent =  0x102c01040} | {OP} | {(null)} | {line = 1} | {pos = 1} | {0x102c01160 | 0x102c01100}}",
+    node_0x104f01400[shape = Mrecord, label = "{{0x104f01400} | {parent =  0x104f012e0} | {OP} | {(null)} | {line = 1} | {pos = 1} | {0x104f014c0 | 0x104f01460}}",
                                         style="filled", fillcolor="#FFFDC2"];
-    node_0x102c01160[shape = Mrecord, label = "{{0x102c01160} | {parent =  0x102c010a0} | {OP} | {(null)} | {line = 1} | {pos = 1} | {0x102c01220 | 0x102c011c0}}",
-                                        style="filled", fillcolor="#FFFDC2"];
-    node_0x102c01220[shape = Mrecord, label = "{{0x102c01220} | {parent =  0x102c01160} | {OP} | {(null)} | {line = 1} | {pos = 1} | {0x102c012e0 | 0x102c01280}}",
-                                        style="filled", fillcolor="#FFFDC2"];
-    node_0x102c012e0[shape = Mrecord, label = "{{0x102c012e0} | {parent =  0x102c01220} | {VAR} | {x} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
+    node_0x104f014c0[shape = Mrecord, label = "{{0x104f014c0} | {parent =  0x104f01400} | {VAR} | {x} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
                                         style="filled", fillcolor="#AFEEEE"];
-    node_0x102c01280[shape = Mrecord, label = "{{0x102c01280} | {parent =  0x102c01220} | {VAR} | {y} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                                        style="filled", fillcolor="#AFEEEE"];
-    node_0x102c011c0[shape = Mrecord, label = "{{0x102c011c0} | {parent =  0x102c01160} | {VAR} | {z} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                                        style="filled", fillcolor="#AFEEEE"];
-    node_0x102c01100[shape = Mrecord, label = "{{0x102c01100} | {parent =  0x102c010a0} | {NUM} | {5} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
+    node_0x104f01460[shape = Mrecord, label = "{{0x104f01460} | {parent =  0x104f01400} | {NUM} | {0} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
                 style="filled", fillcolor="#E7F8BC"];
-    node_0x102c00bc0[shape = Mrecord, label = "{{0x102c00bc0} | {parent =  0x102c00b60} | {DEF} | {two} | {line = 1} | {pos = 1} | {0x102c00f80 | 0x102c00c20}}",
-                                        style="filled", fillcolor="#FCCACA"];
-    node_0x102c00f80[shape = Mrecord, label = "{{0x102c00f80} | {parent =  0x102c00bc0} | {VAR} | {s} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                                        style="filled", fillcolor="#AFEEEE"];
-    node_0x102c00c20[shape = Mrecord, label = "{{0x102c00c20} | {parent =  0x102c00bc0} | {RET} | {(null)} | {line = 1} | {pos = 1} | {0x102c00c80 | 0x0}}",
+    node_0x104f01340[shape = Mrecord, label = "{{0x104f01340} | {parent =  0x104f012e0} | {FUNC} | {(null)} | {line = 1} | {pos = 1} | {0x104f013a0 | 0x0}}",
                                         style="filled", fillcolor="#E6E6FA"];
-    node_0x102c00c80[shape = Mrecord, label = "{{0x102c00c80} | {parent =  0x102c00c20} | {OP} | {(null)} | {line = 1} | {pos = 1} | {0x102c00f20 | 0x102c00ec0}}",
-                                        style="filled", fillcolor="#FFFDC2"];
-    node_0x102c00f20[shape = Mrecord, label = "{{0x102c00f20} | {parent =  0x102c00c80} | {VAR} | {s} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
+    node_0x104f013a0[shape = Mrecord, label = "{{0x104f013a0} | {parent =  0x104f01340} | {VAR} | {x} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
                                         style="filled", fillcolor="#AFEEEE"];
-    node_0x102c00ec0[shape = Mrecord, label = "{{0x102c00ec0} | {parent =  0x102c00c80} | {FUNC} | {one} | {line = 1} | {pos = 1} | {0x102c00ce0 | 0x0}}",
+    node_0x104f01220[shape = Mrecord, label = "{{0x104f01220} | {parent =  0x104f011c0} | {FUNC} | {one} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
                                         style="filled", fillcolor="#E6E6FA"];
-    node_0x102c00ce0[shape = Mrecord, label = "{{0x102c00ce0} | {parent =  0x0} | {AND} | {(null)} | {line = 1} | {pos = 1} | {0x102c00da0 | 0x102c00d40}}",
-                                        style="filled", fillcolor="#FFE3FF"];
-    node_0x102c00da0[shape = Mrecord, label = "{{0x102c00da0} | {parent =  0x102c00ce0} | {AND} | {(null)} | {line = 1} | {pos = 1} | {0x102c00e60 | 0x102c00e00}}",
-                                        style="filled", fillcolor="#FFE3FF"];
-    node_0x102c00e60[shape = Mrecord, label = "{{0x102c00e60} | {parent =  0x102c00da0} | {NUM} | {1} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                style="filled", fillcolor="#E7F8BC"];
-    node_0x102c00e00[shape = Mrecord, label = "{{0x102c00e00} | {parent =  0x102c00da0} | {NUM} | {2} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                style="filled", fillcolor="#E7F8BC"];
-    node_0x102c00d40[shape = Mrecord, label = "{{0x102c00d40} | {parent =  0x102c00ce0} | {NUM} | {5} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                style="filled", fillcolor="#E7F8BC"];
-    node_0x102c009e0[shape = Mrecord, label = "{{0x102c009e0} | {parent =  0x102c00980} | {OP} | {(null)} | {line = 1} | {pos = 1} | {0x102c00b00 | 0x102c00aa0}}",
-                                        style="filled", fillcolor="#FFFDC2"];
-    node_0x102c00b00[shape = Mrecord, label = "{{0x102c00b00} | {parent =  0x102c009e0} | {VAR} | {z} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                                        style="filled", fillcolor="#AFEEEE"];
-    node_0x102c00aa0[shape = Mrecord, label = "{{0x102c00aa0} | {parent =  0x102c009e0} | {FUNC} | {two} | {line = 1} | {pos = 1} | {0x102c00a40 | 0x0}}",
-                                        style="filled", fillcolor="#E6E6FA"];
-    node_0x102c00a40[shape = Mrecord, label = "{{0x102c00a40} | {parent =  0x0} | {NUM} | {1} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                style="filled", fillcolor="#E7F8BC"];
-    node_0x102c008c0[shape = Mrecord, label = "{{0x102c008c0} | {parent =  0x102c00860} | {FUNC} | {(null)} | {line = 1} | {pos = 1} | {0x102c00920 | 0x0}}",
-                                        style="filled", fillcolor="#E6E6FA"];
-    node_0x102c00920[shape = Mrecord, label = "{{0x102c00920} | {parent =  0x102c008c0} | {VAR} | {z} | {line = 1} | {pos = 1} | {0x0 | 0x0}}",
-                                        style="filled", fillcolor="#AFEEEE"];
-    node_0x102c00860->node_0x102c00980 [color = "#98FB98"];
-    node_0x102c00980->node_0x102c00b60 [color = "#98FB98"];
-    node_0x102c00b60->node_0x102c00fe0 [color = "#98FB98"];
-    node_0x102c00fe0->node_0x102c01340 [color = "#98FB98"];
-    node_0x102c01340->node_0x102c01400 [color = "#98FB98"];
-    node_0x102c01400->node_0x102c014c0 [color = "#98FB98"];
-    node_0x102c01400->node_0x102c01460 [color = "#F0E68C"];
-    node_0x102c01340->node_0x102c013a0 [color = "#F0E68C"];
-    node_0x102c00fe0->node_0x102c01040 [color = "#F0E68C"];
-    node_0x102c01040->node_0x102c010a0 [color = "#98FB98"];
-    node_0x102c010a0->node_0x102c01160 [color = "#98FB98"];
-    node_0x102c01160->node_0x102c01220 [color = "#98FB98"];
-    node_0x102c01220->node_0x102c012e0 [color = "#98FB98"];
-    node_0x102c01220->node_0x102c01280 [color = "#F0E68C"];
-    node_0x102c01160->node_0x102c011c0 [color = "#F0E68C"];
-    node_0x102c010a0->node_0x102c01100 [color = "#F0E68C"];
-    node_0x102c00b60->node_0x102c00bc0 [color = "#F0E68C"];
-    node_0x102c00bc0->node_0x102c00f80 [color = "#98FB98"];
-    node_0x102c00bc0->node_0x102c00c20 [color = "#F0E68C"];
-    node_0x102c00c20->node_0x102c00c80 [color = "#98FB98"];
-    node_0x102c00c80->node_0x102c00f20 [color = "#98FB98"];
-    node_0x102c00c80->node_0x102c00ec0 [color = "#F0E68C"];
-    node_0x102c00ec0->node_0x102c00ce0 [color = "#98FB98"];
-    node_0x102c00ce0->node_0x102c00da0 [color = "#98FB98"];
-    node_0x102c00da0->node_0x102c00e60 [color = "#98FB98"];
-    node_0x102c00da0->node_0x102c00e00 [color = "#F0E68C"];
-    node_0x102c00ce0->node_0x102c00d40 [color = "#F0E68C"];
-    node_0x102c00980->node_0x102c009e0 [color = "#F0E68C"];
-    node_0x102c009e0->node_0x102c00b00 [color = "#98FB98"];
-    node_0x102c009e0->node_0x102c00aa0 [color = "#F0E68C"];
-    node_0x102c00aa0->node_0x102c00a40 [color = "#98FB98"];
-    node_0x102c00860->node_0x102c008c0 [color = "#F0E68C"];
-    node_0x102c008c0->node_0x102c00920 [color = "#98FB98"];
+    node_0x104f011c0->node_0x104f01280 [color = "#98FB98"];
+    node_0x104f01280->node_0x104f012e0 [color = "#F0E68C"];
+    node_0x104f012e0->node_0x104f01400 [color = "#98FB98"];
+    node_0x104f01400->node_0x104f014c0 [color = "#98FB98"];
+    node_0x104f01400->node_0x104f01460 [color = "#F0E68C"];
+    node_0x104f012e0->node_0x104f01340 [color = "#F0E68C"];
+    node_0x104f01340->node_0x104f013a0 [color = "#98FB98"];
+    node_0x104f011c0->node_0x104f01220 [color = "#F0E68C"];
 }

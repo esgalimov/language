@@ -110,12 +110,21 @@ tree_node_t* read_tree_preorder(prog_tree_t* prog)
                 sscanf(prog->buffer + prog->pos, "%[a-zA-Z]%n", name, &cnt);
                 prog->pos += (size_t) cnt;
 
-                tree_node_t* var  = read_tree_preorder(prog);
-                tree_node_t* body = read_tree_preorder(prog);
+                tree_node_t* child1  = read_tree_preorder(prog);
+                tree_node_t* child2 = read_tree_preorder(prog);
 
-                tree_node_t* def = create_node(TYPE_DEF, 0, 0, NAN, var, body);
+                tree_node_t* def = create_node(TYPE_DEF, 0, 0);
                 def->name = name;
 
+                if (child2 == nullptr)
+                {
+                    def->right = child1;
+                }
+                else
+                {
+                    def->left = child1;
+                    def->right = child2;
+                }
                 prog->pos++;
 
                 return def;
