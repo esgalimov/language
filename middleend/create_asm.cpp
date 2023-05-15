@@ -175,6 +175,7 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
 {
     static int    if_cnt = 0;
     static int while_cnt = 0;
+    static int  else_cnt = 0;
 
     if (node == nullptr) return;
 
@@ -212,17 +213,17 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
 
         case TYPE_PRINTF:
             tree_print_asm(node->left, stream);
-            fprintf(stream, "    out\n\n");
+            fprintf(stream, "    out\n");
             return;
 
         case TYPE_SCANF:
             fprintf(stream, "    in\n");
-            fprintf(stream, "    pop [%d]\n\n", (int) node->left->value);
+            fprintf(stream, "    pop [%d]\n", (int) node->left->value);
             return;
 
         case TYPE_FUNC:
             tree_print_asm(node->left, stream);
-            fprintf(stream, "    call :%s\n\n", node->name);
+            fprintf(stream, "    call :%s\n", node->name);
             fprintf(stream, "    push ax\n");
             return;
 
@@ -231,7 +232,7 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
             fprintf(stream, "    :%s\n", node->name);
             fprintf(stream, "        pop [%d]\n", (int) node->left->value);
             tree_print_asm(node->right, stream);
-            fprintf(stream, "        ret\n\n");
+            fprintf(stream, "        ret\n");
             fprintf(stream, "    :jmp_over_%s\n", node->name);
             return;
 
@@ -239,9 +240,29 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
             tree_print_asm(node->left, stream);
             fprintf(stream, "    push 0\n");
             fprintf(stream, "    je :if_%d\n", if_cnt);
-            tree_print_asm(node->right, stream);
-            fprintf(stream, "    :if_%d\n\n", if_cnt);
+
+            if (node->right->type == TYPE_AND && node->right->right->type == TYPE_ELSE)
+            {
+                tree_print_asm(node->right->left, stream);
+                fprintf(stream, "    :if_%d\n", if_cnt);
+                tree_print_asm(node->left, stream);
+                tree_print_asm(node->right->right, stream);
+            }
+            else
+            {
+                tree_print_asm(node->right, stream);
+                fprintf(stream, "    :if_%d\n", if_cnt);
+            }
+
             if_cnt++;
+            return;
+
+        case TYPE_ELSE:
+            fprintf(stream, "    push 0\n");
+            fprintf(stream, "    jne :else_%d\n", else_cnt);
+            tree_print_asm(node->left, stream);
+            fprintf(stream, "    :else_%d\n", else_cnt);
+            else_cnt++;
             return;
 
         case TYPE_WHILE:
@@ -253,7 +274,7 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
 
             tree_print_asm(node->right, stream);
             fprintf(stream, "    jmp :while_%d\n", while_cnt);
-            fprintf(stream, "    :while_%d\n\n", while_cnt + 1);
+            fprintf(stream, "    :while_%d\n", while_cnt + 1);
 
             while_cnt += 2;
             return;

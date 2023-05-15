@@ -14,6 +14,7 @@ tree_node_t* getT(expr_t* expr);
 tree_node_t* getP(expr_t* expr);
 tree_node_t* getA(expr_t* expr);
 tree_node_t* getIf(expr_t* expr);
+tree_node_t* getElse(expr_t* expr);
 tree_node_t* getPrintfScanf(expr_t* expr);
 tree_node_t* getDef(expr_t* expr);
 tree_node_t* getFuncCall(expr_t* expr);

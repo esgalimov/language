@@ -199,10 +199,68 @@ tree_node_t* getIf(expr_t* expr)
     cond->left = value;
     value->parent = cond;
 
-    cond->right = comp;
-    comp->parent = cond;
+    if (cond->type == TYPE_IF && expr->tokens[expr->pos]->type == TYPE_AND &&
+                                 expr->tokens[expr->pos + 1]->type == TYPE_ELSE)
+    {
+        tree_node_t* and_node = expr->tokens[expr->pos++];
+
+        tree_node_t* else_node = getElse(expr);
+
+        if (else_node == nullptr) return nullptr;
+
+        and_node->left = comp;
+        comp->parent = and_node;
+
+        and_node->right = else_node;
+        else_node->parent = and_node;
+
+        cond->right = and_node;
+        and_node->parent = cond;
+    }
+
+    else
+    {
+        cond->right = comp;
+        comp->parent = cond;
+    }
+
+    // сюда встроить проверку на элсе
+    // проверяем на ТАЙП_АНД и если там есть элсе то бахаем гетЭлсе и линкуем к ТАЙП_АНД
 
     return cond;
+}
+
+tree_node_t* getElse(expr_t* expr)
+{
+    tree_node_t* else_tok = expr->tokens[expr->pos];
+
+    if (else_tok->type != TYPE_ELSE)
+    {
+        SYNTAX_ERROR("expected TYPE_ELSE"); return nullptr;
+    }
+
+    expr->pos++;
+
+    if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
+    {
+        SYNTAX_ERROR("must be \"bashlau\" in start of else body"); return nullptr;
+    }
+
+    expr->pos++;
+    tree_node_t* comp = getComp(expr);
+
+    if (comp == nullptr) return nullptr;
+
+    if (expr->tokens[expr->pos]->type != TYPE_END)
+    {
+        SYNTAX_ERROR("must be \"tuktau\" in end of else body"); return nullptr;
+    }
+    expr->pos++;
+
+    else_tok->left = comp;
+    comp->parent = else_tok;
+
+    return else_tok;
 }
 
 tree_node_t* getFunc(expr_t* expr)

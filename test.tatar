@@ -1,0 +1,18 @@
+#Some tests
+
+bashlau
+    x = 0;
+    y = 12;
+    z = 47;
+
+    ukyrga(x);
+
+    egyar (x)
+        bashlau
+            yozyrga(y)
+        tuktau;
+    bylmasa
+        bashlau
+            yozyrga(z)
+        tuktau
+tuktau
