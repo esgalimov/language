@@ -28,4 +28,6 @@ int translate_asm(prog_tree_t* prog);
 
 void tree_print_asm(tree_node_t* node, FILE* stream);
 
+void pop_params_in_def(tree_node_t* node, FILE* stream);
+
 #endif

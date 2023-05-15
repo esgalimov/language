@@ -1,19 +1,12 @@
 #Some tests
 
 bashlau
-    x = 0;
-
-    esh one(x)
+    esh one(x; y; z)
         bashlau
-            bir 1
+            bir x + y + z + 5
         tuktau;
 
-    esh two(x)
-        bashlau
-            bir 2
-        tuktau;
+    z = one(1; 2; 5);
 
-    x = one(1) + two(2);
-
-    yozyrga(x)
+    yozyrga(z)
 tuktau

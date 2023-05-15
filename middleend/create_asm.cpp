@@ -230,9 +230,9 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
         case TYPE_DEF:
             fprintf(stream, "    jmp :jmp_over_%s\n", node->name);
             fprintf(stream, "    :%s\n", node->name);
-            fprintf(stream, "        pop [%d]\n", (int) node->left->value);
+            pop_params_in_def(node->left, stream);
             tree_print_asm(node->right, stream);
-            fprintf(stream, "        ret\n");
+            fprintf(stream, "    ret\n");
             fprintf(stream, "    :jmp_over_%s\n", node->name);
             return;
 
@@ -287,4 +287,15 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
 
         default: return;
     }
+}
+
+void pop_params_in_def(tree_node_t* node, FILE* stream)
+{
+    if (node == nullptr) return;
+
+    if (node->type == TYPE_VAR)
+        fprintf(stream, "        pop [%d]\n", (int) node->value);
+
+    pop_params_in_def(node->left, stream);
+    pop_params_in_def(node->right, stream);
 }

@@ -10,7 +10,10 @@
 tree_node_t* getG(expr_t* expr);
 tree_node_t* getN(expr_t* expr);
 tree_node_t* getE(expr_t* expr);
+tree_node_t* getEs(expr_t* expr);
 tree_node_t* getT(expr_t* expr);
+tree_node_t* getId(expr_t* expr);
+tree_node_t* getIds(expr_t* expr);
 tree_node_t* getP(expr_t* expr);
 tree_node_t* getA(expr_t* expr);
 tree_node_t* getIf(expr_t* expr);
@@ -21,8 +24,6 @@ tree_node_t* getFuncCall(expr_t* expr);
 tree_node_t* getFunc(expr_t* expr);
 tree_node_t* getComp(expr_t* expr);
 tree_node_t* getOp(expr_t* expr);
-//! @brief Get Func or variable (varibles are only one-letter)
-tree_node_t * getId(expr_t* expr);
 
 //! @brief Func to write error message to log file
 void error_message(expr_t* expr, const char* func, const char* message);

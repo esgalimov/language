@@ -44,6 +44,31 @@ tree_node_t* getE(expr_t* expr)
     return val1;
 }
 
+tree_node_t* getEs(expr_t* expr)
+{
+    tree_node_t* ex1 = getE(expr);
+
+    if (ex1 == nullptr) return nullptr;
+
+    while (expr->tokens[expr->pos]->type == TYPE_AND)
+    {
+        tree_node_t* connect = expr->tokens[expr->pos++];
+        tree_node_t* ex2 = getE(expr);
+
+        if (ex2 == nullptr) return nullptr;
+
+        connect->left = ex1;
+        ex1->parent = connect;
+
+        connect->right = ex2;
+        ex2->parent = connect;
+
+        ex1 = connect;
+    }
+
+    return ex1;
+}
+
 tree_node_t* getT(expr_t* expr)
 {
     tree_node_t* val1 = getP(expr);
@@ -120,6 +145,37 @@ tree_node_t* getId(expr_t* expr)
     {
         SYNTAX_ERROR("expected TYPE_ID, TYPE_VAR or TYPE_FUNC"); return nullptr;
     }
+}
+
+tree_node_t* getIds(expr_t* expr)
+{
+    tree_node_t* var1 = getId(expr);
+
+    if (var1 == nullptr) return nullptr;
+
+    expr->ids[(int) var1->value]->type = TYPE_VAR;
+    var1->type = TYPE_VAR;
+
+    while (expr->tokens[expr->pos]->type == TYPE_AND)
+    {
+        tree_node_t* connect = expr->tokens[expr->pos++];
+        tree_node_t* var2 = getId(expr);
+
+        if (var2 == nullptr) return nullptr;
+
+        expr->ids[(int) var2->value]->type = TYPE_VAR;
+        var2->type = TYPE_VAR;
+
+        connect->left = var1;
+        var1->parent = connect;
+
+        connect->right = var2;
+        var2->parent = connect;
+
+        var1 = connect;
+
+    }
+    return var1;
 }
 
 tree_node_t* getN(expr_t* expr)
@@ -223,9 +279,6 @@ tree_node_t* getIf(expr_t* expr)
         cond->right = comp;
         comp->parent = cond;
     }
-
-    // сюда встроить проверку на элсе
-    // проверяем на ТАЙП_АНД и если там есть элсе то бахаем гетЭлсе и линкуем к ТАЙП_АНД
 
     return cond;
 }
@@ -331,12 +384,9 @@ tree_node_t* getDef(expr_t* expr)
     }
     expr->pos++;
 
-    tree_node_t* id = getId(expr);
+    tree_node_t* id = getIds(expr);
 
     if (id == nullptr) return nullptr;
-
-    expr->ids[(int) id->value]->type = TYPE_VAR;
-    id->type = TYPE_VAR;
 
     if (expr->tokens[expr->pos]->type != TYPE_R_BR)
     {
@@ -403,7 +453,7 @@ tree_node_t* getFuncCall(expr_t* expr)
         SYNTAX_ERROR("expected \"(\" after func"); return nullptr;
     }
     expr->pos++;
-    tree_node_t* expression = getE(expr);
+    tree_node_t* expression = getEs(expr);
 
     if (expression == nullptr) return nullptr;
 
