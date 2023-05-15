@@ -2,7 +2,7 @@
 
 int read_ast_tree(void)
 {
-    FILE* stream = fopen("ast.tatar", "r");
+    FILE* stream = fopen("./system_files/ast.tatar", "r");
 
     if (stream == nullptr)
     {
@@ -29,6 +29,7 @@ int read_ast_tree(void)
 
     link_root(prog.tree, read_tree_preorder(&prog));
 
+    dump_cnt += 100;
     tree_dump(prog.tree);
 
     translate_asm(&prog);
@@ -65,7 +66,6 @@ tree_node_t* read_tree_preorder(prog_tree_t* prog)
             }
             case TYPE_FUNC:
             {
-                printf("I am in func\n");
                 prog->pos++;
                 char* name = (char*) calloc(NAME_MAX_LEN, sizeof(char));
 
@@ -137,8 +137,6 @@ tree_node_t* read_tree_preorder(prog_tree_t* prog)
 
 size_t find_var(prog_tree_t* prog, char* name)
 {
-    printf("%lu\n", prog->var_cnt);
-
     for (size_t i = 0; i < prog->var_cnt; i++)
     {
         if (!strcmp(prog->vars[i], name)) return i;
@@ -152,7 +150,7 @@ int translate_asm(prog_tree_t* prog)
 {
     ASSERT(prog);
 
-    FILE* asm_file = fopen("prog.asm", "w");
+    FILE* asm_file = fopen("./system_files/prog.asm", "w");
     if (asm_file == nullptr)
     {
         fprintf(log_file, "<pre>Can't open file prog.asm to make asm file</pre>\n");
@@ -228,10 +226,12 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
             return;
 
         case TYPE_DEF:
+            fprintf(stream, "    jmp :jmp_over_%s\n", node->name);
             fprintf(stream, "    :%s\n", node->name);
             fprintf(stream, "        pop [%d]\n", (int) node->left->value);
             tree_print_asm(node->right, stream);
             fprintf(stream, "        ret\n\n");
+            fprintf(stream, "    :jmp_over_%s\n", node->name);
             return;
 
         case TYPE_IF:

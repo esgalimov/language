@@ -7,7 +7,7 @@
 
 int make_ast_tree(const char* filename)
 {
-    FILE* fp = fopen("ast.tatar", "w");
+    FILE* fp = fopen("./system_files/ast.tatar", "w");
 
     if (fp == nullptr)
     {

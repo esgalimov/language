@@ -248,8 +248,8 @@ void write_code_to_file(token_t * toks, size_t n_cmd)
 {
     assert(toks != NULL);
 
-    FILE * fp = fopen("./prog.code", "w");
-    FILE * fp_bin = fopen("./prog.bin", "wb");
+    FILE * fp = fopen("./system_files/prog.code", "w");
+    FILE * fp_bin = fopen("./system_files/prog.bin", "wb");
 
     if (fp == NULL || fp_bin == NULL)
     {

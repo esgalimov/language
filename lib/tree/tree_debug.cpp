@@ -44,6 +44,20 @@ int close_graphviz_file(void)
         return 0;
     }
 
+    int open_log_file_append(void)
+    {
+        log_file = fopen("./frontend/logs/log.html", "a");
+
+        if (log_file == NULL)
+        {
+            printf("Can't open log file (tree_debug.cpp)\n");
+            return 1;
+        }
+
+        fprintf(log_file, "<html>\n");
+        return 0;
+    }
+
     int close_log_file(void)
     {
         if (log_file == NULL)
@@ -142,6 +156,8 @@ int tree_dump_(tree_t* tree, const char* func, const char* file, int line)
                 tree, tree->info.name, tree->info.func, tree->info.file, tree->info.line, tree->root);
         error_number_translate(tree);
         fprintf(log_file, "</pre>\n");
+
+        return tree->status;
     }
 
     system(graphviz_cmd);
@@ -195,11 +211,17 @@ void node_verify(tree_t * tree, const tree_node_t * node)
             tree->status |= NUM_NODE_HAS_RIGHT_CHILD;
     }
 
+    if (node->type == TYPE_VAR)
+    {
+        if (node->left != NULL)
+            tree->status |= VAR_NODE_HAS_LEFT_CHILD;
+
+        if (node->right != NULL)
+            tree->status |= VAR_NODE_HAS_RIGHT_CHILD;
+    }
+
     if (node == tree->root && tree->root->parent != NULL)
         tree->status |= ROOT_HAVE_PARENT;
-
-    if (node != tree->root && node->parent == NULL)
-        tree->status |= NOT_ROOT_HAVE_NO_PARENT;
 
     if (node->left != NULL && node->left == node->right)
         tree->status |= LEFT_RIGHT_SAME;
@@ -233,10 +255,16 @@ void error_number_translate(tree_t * tree)
             case 0:
                 break;
             case NUM_NODE_HAS_LEFT_CHILD:
-                fprintf(log_file, "Node with type num has left child\n");
+                fprintf(log_file, "Node TYPE_NUM has left child\n");
                 break;
             case NUM_NODE_HAS_RIGHT_CHILD:
-                fprintf(log_file, "Node with type num has right child\n");
+                fprintf(log_file, "Node TYPE_NUM has right child\n");
+                break;
+            case VAR_NODE_HAS_LEFT_CHILD:
+                fprintf(log_file, "Node TYPE_VAR has left child\n");
+                break;
+            case VAR_NODE_HAS_RIGHT_CHILD:
+                fprintf(log_file, "Node TYPE_VAR has right child\n");
                 break;
             case ROOT_HAVE_PARENT:
                 fprintf(log_file, "Tree root have parent\n");
@@ -263,12 +291,3 @@ void error_number_translate(tree_t * tree)
         i++;
     }
 }
-
-// int check_ptr_access(const void * ptr)
-// {
-//     int fd = open("./tmp/debug.text", O_WRONLY);
-//     int ret = (int) write(fd, ptr, 1);
-//
-//     printf("%d", ret);
-//     return ret;
-// }

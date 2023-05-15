@@ -1,11 +1,22 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-int main(void)
+int main(int argc, char** argv)
 {
-    system("./objects/front prog.tatar");
-    system("./objects/middle ast.tatat");
-    system("./objects/asm prog.asm");
-    system("./objects/cpu prog.bin");
+    if (argc <= 1)
+    {
+        printf("file name not given\n");
+        return 1;
+    }
+
+    char start_cmd[100] = "./objects/front";
+    snprintf(start_cmd + strlen(start_cmd), 30, " %s", argv[1]);
+
+    system(start_cmd);
+    system("./objects/middle");
+    system("./objects/asm ./system_files/prog.asm");
+    system("./objects/cpu ./system_files/prog.bin");
 
     return 0;
 }

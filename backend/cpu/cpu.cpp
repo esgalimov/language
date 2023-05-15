@@ -51,7 +51,7 @@ int run_cpu(FILE * stream)
 
         case OUT:
             stack_pop(&cpu.stk, &num1);
-            printf("OUT: %.lg\n", (double) num1 / ACCURACY);
+            printf("OUT: %lg\n", (double) num1 / ACCURACY);
             break;
 
         case JMP:
@@ -131,14 +131,13 @@ int run_cpu(FILE * stream)
             break;
 
         case CALL:
-            stack_push(&cpu.stk, (elem_t) (i + 1));
+            cpu.dx = (elem_t) (i + 1);
             i = (size_t) (cpu.cmd_buffer[i + 1] - 1);
 
             break;
 
         case RET:
-            stack_pop(&cpu.stk, &num1);
-            i = (size_t) num1;
+            i = (size_t) cpu.dx;
             break;
 
         case IN:
@@ -166,7 +165,6 @@ int run_cpu(FILE * stream)
                 {
                     printf("Out of RAM\n"); return 1;
                 }
-
                 stack_push(&cpu.stk, cpu.cpu_ram[(int) reg_val + cpu.cmd_buffer[i]]);
                 i++;
             }

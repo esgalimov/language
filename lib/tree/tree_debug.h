@@ -42,19 +42,21 @@ enum STATUS
     STATUS_OK                = 0 << 0,
     NUM_NODE_HAS_LEFT_CHILD  = 1 << 0,
     NUM_NODE_HAS_RIGHT_CHILD = 1 << 1,
-    NODE_CREATE_ERROR        = 1 << 2,
-    NODE_LINK_ERROR          = 1 << 3,
-    MODE_LINK_ERROR          = 1 << 4,
-    LINK_NULL_ROOT           = 1 << 5,
-    ROOT_HAVE_PARENT         = 1 << 6,
-    WRONG_PARENT             = 1 << 7,
-    LEFT_RIGHT_SAME          = 1 << 8,
-    NOT_ROOT_HAVE_NO_PARENT  = 1 << 9,
-    CHILD_ITSELF             = 1 << 10,
-    PARENT_ITSELF            = 1 << 11,
+    VAR_NODE_HAS_LEFT_CHILD  = 1 << 2,
+    VAR_NODE_HAS_RIGHT_CHILD = 1 << 3,
+    NODE_CREATE_ERROR        = 1 << 4,
+    NODE_LINK_ERROR          = 1 << 5,
+    MODE_LINK_ERROR          = 1 << 6,
+    LINK_NULL_ROOT           = 1 << 7,
+    ROOT_HAVE_PARENT         = 1 << 8,
+    WRONG_PARENT             = 1 << 9,
+    LEFT_RIGHT_SAME          = 1 << 10,
+    NOT_ROOT_HAVE_NO_PARENT  = 1 << 11,
+    CHILD_ITSELF             = 1 << 12,
+    PARENT_ITSELF            = 1 << 13,
 };
 
-const int ERRORS_COUNT = 12;
+const int ERRORS_COUNT = 14;
 
 //! @brief File to generate graphviz picture
 extern FILE * graphviz_file;
@@ -74,6 +76,7 @@ int close_graphviz_file(void);
 
 //! @brief Func to open log_file and write some html tags to start logging
 int open_log_file(void);
+int open_log_file_append(void);
 
 //! @brief Func to close log_file
 //! write "</html>" before closing to finish making log file

@@ -1,14 +1,21 @@
+#Factorial
+
 bashlau
-    x = 0;
-    y = 1;
-    z = 2;
-    t = x + y + z;
 
-    tugyaryak (t)
+    esh fact(x)
         bashlau
-            t = t - 1;
-            yozyrga(t)
-        tuktau
+            ans = 1;
+            i = 1;
+            yozyrga(ans);
 
+            tugyaryak (i - x)
+                bashlau
+                    i = i + 1;
+                    ans = ans * i;
+                    yozyrga(ans)
+                tuktau
+        tuktau;
+
+    fact(6)
 
 tuktau

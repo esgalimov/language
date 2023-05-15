@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    if (open_log_file()) return 1;
+    if (open_log_file_append()) return 1;
 
     read_ast_tree();
     close_log_file();

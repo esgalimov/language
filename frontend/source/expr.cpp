@@ -27,7 +27,8 @@ expr_t* expr_ctor(const char* filename)
     expr->program = (text_t*) calloc(1, sizeof(text_t));
     text_ctor(expr->program, fp);
 
-    create_tokens(expr);
+    if (create_tokens(expr))
+        return nullptr;
 
     tree_t* tree = (tree_t*) calloc(1, sizeof(tree_t));
     tree_ctor(tree);
@@ -71,13 +72,16 @@ int create_tokens(expr_t* expr)
     for (expr->line = 0; expr->line < expr->program->str_cnt; expr->line++)
     {
         size_t len_str = strlen(expr->program->strings[expr->line]);
-        //printf("%s\n", expr->program->strings[expr->line]);
 
         for (expr->pos = 0; expr->pos < len_str; expr->pos++)
         {
-            //printf("line: %lu pos: %lu ch: %d - %c\n", expr->line, expr->pos, CURR_CH, CURR_CH);
-
             if (isblank(CURR_CH) || CURR_CH == '\0' || CURR_CH == '\n') continue;
+
+            if (CURR_CH == '#')
+            {
+                expr->pos = len_str;
+                continue;
+            }
 
             switch (CURR_CH)
             {
@@ -97,6 +101,12 @@ int create_tokens(expr_t* expr)
                         break;
                     }
                     char* name = read_name(expr);
+
+                    if (strlen(name) == 0)
+                    {
+                        fprintf(log_file, "undefind symbol(s) at line %lu\n", expr->line);
+                        return 1;
+                    }
 
                     if      (!strcasecmp(name, "esh"))       NEW_WORD_TOKEN(TYPE_DEF);
                     else if (!strcasecmp(name, "bir"))       NEW_WORD_TOKEN(TYPE_RET);
@@ -209,8 +219,6 @@ int tokens_dump(expr_t* expr)
 
     open_graphviz_file();
     graphviz_init(expr->tree);
-
-    printf("%lu", expr->toks_cnt);
 
     for (size_t i = 0; i < expr->toks_cnt; i++)
         add_nodes(expr->tokens[i]);
