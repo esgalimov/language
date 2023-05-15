@@ -6,7 +6,12 @@ bashlau
             bir x + y + z + 5
         tuktau;
 
-    z = one(1; 2; 5);
+    esh two(s)
+        bashlau
+            bir s - one(1; 2; 5)
+        tuktau;
+
+    z = two(1);
 
     yozyrga(z)
 tuktau

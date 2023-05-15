@@ -294,7 +294,7 @@ void pop_params_in_def(tree_node_t* node, FILE* stream)
     if (node == nullptr) return;
 
     if (node->type == TYPE_VAR)
-        fprintf(stream, "        pop [%d]\n", (int) node->value);
+        fprintf(stream, "    pop [%d]\n", (int) node->value);
 
     pop_params_in_def(node->left, stream);
     pop_params_in_def(node->right, stream);

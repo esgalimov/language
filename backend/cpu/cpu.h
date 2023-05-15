@@ -47,6 +47,7 @@ typedef struct
 typedef struct
 {
     stack  stk;
+    stack  stk_ret;
     elem_t*  cmd_buffer;
     elem_t   ax;
     elem_t   bx;

@@ -10,9 +10,6 @@ int run_cpu(FILE * stream)
     double num = NAN;
     elem_t num1 = 0, num2 = 0;
 
-    //double d_num1 = NAN, d_num2 = NAN;
-
-
     for (size_t i = 0; i < n_cmd; i++)
     {
         switch (cpu.cmd_buffer[i])
@@ -131,13 +128,16 @@ int run_cpu(FILE * stream)
             break;
 
         case CALL:
-            cpu.dx = (elem_t) (i + 1);
+            stack_push(&cpu.stk_ret, (elem_t) i + 1);
+            //cpu.dx = (elem_t) (i + 1);
             i = (size_t) (cpu.cmd_buffer[i + 1] - 1);
 
             break;
 
         case RET:
-            i = (size_t) cpu.dx;
+            stack_pop(&cpu.stk_ret, &num1);
+            i = (size_t) num1;
+            //i = (size_t) cpu.dx;
             break;
 
         case IN:
@@ -251,7 +251,8 @@ size_t cpu_ctor(cpu_t* cpu, FILE* stream)
     ASSERT(cpu != NULL);
     ASSERT(stream != NULL);
 
-    stack_ctor(&cpu->stk, 5);
+    stack_ctor(&cpu->stk,     MIN_CAPACITY);
+    stack_ctor(&cpu->stk_ret, MIN_CAPACITY);
 
     fseek(stream, 0L, SEEK_END);
     size_t filesize = (size_t) ftell(stream);
@@ -270,6 +271,8 @@ size_t cpu_ctor(cpu_t* cpu, FILE* stream)
 void cpu_dtor(cpu_t * cpu)
 {
     stack_dtor(&cpu->stk);
+    stack_dtor(&cpu->stk_ret);
+
     free(cpu->cmd_buffer);
     free(cpu->cpu_ram);
 
