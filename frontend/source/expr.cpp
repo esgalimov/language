@@ -83,6 +83,12 @@ int create_tokens(expr_t* expr)
                 continue;
             }
 
+            if (expr->pos >= TOKS_MAX_CNT)
+            {
+                fprintf(log_file, "<pre>There are max tokens!</pre>\n");
+                return 1;
+            }
+
             switch (CURR_CH)
             {
                 case '+': NEW_CHAR_TOKEN(TYPE_ADD);    break;
@@ -158,7 +164,8 @@ char* read_name(expr_t* expr)
     char * name = (char *) calloc(NAME_MAX_LEN, sizeof(char));
     int i = 0;
 
-    while ((('a' <= CURR_CH && CURR_CH <= 'z') || ('A' <= CURR_CH && CURR_CH <= 'Z')) && i < NAME_MAX_LEN)
+    while ((('a' <= CURR_CH && CURR_CH <= 'z') || ('A' <= CURR_CH && CURR_CH <= 'Z') ||
+                    CURR_CH == '_' || isdigit(CURR_CH)) && i < NAME_MAX_LEN)
         name[i++] = expr->program->strings[expr->line][expr->pos++];
 
     expr->pos--;

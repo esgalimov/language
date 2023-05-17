@@ -9,7 +9,7 @@
 
 const int NAME_MAX_LEN = 32;
 const int IDS_MAX_CNT  = 32;
-const int TOKS_MAX_CNT = 128;
+const int TOKS_MAX_CNT = 1024;
 const int NO_ID        = -1;
 const size_t POISON = 0xDEADBEEF;
 

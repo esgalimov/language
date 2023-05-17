@@ -91,7 +91,7 @@ tree_node_t* read_tree_preorder(prog_tree_t* prog)
             {
                 prog->pos++;
                 char* name = (char*) calloc(NAME_MAX_LEN, sizeof(char));
-                sscanf(prog->buffer + prog->pos, "%[a-zA-Z]%n", name, &cnt);
+                sscanf(prog->buffer + prog->pos, "%[_0-9A-Za-z]%n", name, &cnt);
                 prog->pos += (size_t) cnt + 1;
 
                 tree_node_t* var = create_node(TYPE_VAR, 0, 0);
@@ -107,7 +107,7 @@ tree_node_t* read_tree_preorder(prog_tree_t* prog)
             {
                 prog->pos++;
                 char* name = (char*) calloc(NAME_MAX_LEN, sizeof(char));
-                sscanf(prog->buffer + prog->pos, "%[a-zA-Z]%n", name, &cnt);
+                sscanf(prog->buffer + prog->pos, "%[_0-9A-Za-z]%n", name, &cnt);
                 prog->pos += (size_t) cnt;
 
                 tree_node_t* child1  = read_tree_preorder(prog);
@@ -231,7 +231,7 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
             return;
 
         case TYPE_FUNC:
-            tree_print_asm(node->left, stream);
+            push_params_in_func(node->left, stream);
             fprintf(stream, "    call :%s\n", node->name);
             fprintf(stream, "    push ax\n");
             return;
@@ -253,17 +253,15 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
             if (node->right->type == TYPE_AND && node->right->right->type == TYPE_ELSE)
             {
                 tree_print_asm(node->right->left, stream);
-                fprintf(stream, "    :if_%d\n", if_cnt);
+                fprintf(stream, "    :if_%d\n", if_cnt++);
                 tree_print_asm(node->left, stream);
                 tree_print_asm(node->right->right, stream);
             }
             else
             {
                 tree_print_asm(node->right, stream);
-                fprintf(stream, "    :if_%d\n", if_cnt);
+                fprintf(stream, "    :if_%d\n", if_cnt++);
             }
-
-            if_cnt++;
             return;
 
         case TYPE_ELSE:
@@ -307,4 +305,27 @@ void pop_params_in_def(tree_node_t* node, FILE* stream)
 
     pop_params_in_def(node->left, stream);
     pop_params_in_def(node->right, stream);
+}
+
+void push_params_in_func(tree_node_t* node, FILE* stream)
+{
+    if (node == nullptr) return;
+
+    switch (node->type)
+    {
+        case TYPE_AND:
+            push_params_in_func(node->right, stream);
+            push_params_in_func(node->left,  stream);
+            break;
+
+        case TYPE_NUM:
+            fprintf(stream, "    push %lg\n", node->value);
+            break;
+
+        case TYPE_VAR:
+            fprintf(stream, "    push [%d]\n", (int) node->value);
+            break;
+
+        default: return;
+    }
 }

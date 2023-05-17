@@ -140,6 +140,7 @@ int run_cpu(FILE * stream)
 
         case IN:
             scanf("%lf", &num);
+            ASSERT(isfinite(num));
             stack_push(&cpu.stk, (elem_t) (num * ACCURACY));
             break;
 

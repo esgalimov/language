@@ -1,11 +1,66 @@
-#Some tests
+#Square equation solution
 
 bashlau
-    esh one()
+    #consts for return
+    no_roots  = 0;
+    one_root  = 1;
+    two_roots = 2;
+    all_nums  = -1;
+
+    #vars for roots
+    x1 = 0;
+    x2 = 0;
+
+
+    esh solvingLin(k_b; k_c)
         bashlau
-            x = 0;
-            yozyrga(x)
+            egyar (k_b)
+                bashlau
+                    x1 = k_c / k_b;
+                    bir one_root
+                tuktau;
+            bylmasa
+                bashlau
+                    egyar (k_c)
+                        bashlau
+                            bir no_roots
+                        tuktau;
+                    bylmasa
+                        bashlau
+                            bir all_nums
+                        tuktau
+                tuktau
         tuktau;
 
-    one()
+    esh solvingSq(ko_a; ko_b; ko_c)
+        bashlau
+            x1 = ko_a;
+            x2 = ko_b;
+            bir two_roots
+        tuktau;
+
+    a = 0;
+    b = 0;
+    c = 0;
+
+    ukyrga(a);
+    ukyrga(b);
+    ukyrga(c);
+
+    yozyrga(a);
+    yozyrga(b);
+    yozyrga(c);
+
+    egyar (a)
+        bashlau
+            solvingSq(a; b; c);
+            yozyrga(x1);
+            yozyrga(x2)
+        tuktau;
+    bylmasa
+        bashlau
+            lin_answer = solvingLin(b; c);
+            yozyrga(x1)
+        tuktau
+
 tuktau
