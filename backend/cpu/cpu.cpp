@@ -33,6 +33,11 @@ int run_cpu(FILE * stream)
         case DIV:
             stack_pop(&cpu.stk, &num1);
             stack_pop(&cpu.stk, &num2);
+            if (num1 == 0)
+            {
+                printf("division by zero\n");
+                return 1;
+            }
             stack_push(&cpu.stk, (elem_t) (((double) num2 / (double) num1) * ACCURACY));
             break;
 
@@ -145,12 +150,12 @@ int run_cpu(FILE * stream)
             break;
 
         case PUSH_REG:
-            stack_push(&cpu.stk, *get_reg_ptr(&cpu, ++i) * ACCURACY);
+            stack_push(&cpu.stk, *get_reg_ptr(&cpu, ++i));
             break;
 
         case POP_REG:
             stack_pop(&cpu.stk, &num1);
-            *get_reg_ptr(&cpu, ++i) = num1 / ACCURACY;
+            *get_reg_ptr(&cpu, ++i) = num1;
             break;
 
         case PUSH_RAM:

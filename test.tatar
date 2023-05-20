@@ -11,6 +11,19 @@ bashlau
     x1 = 0;
     x2 = 0;
 
+    esh Sqrt(num)
+        bashlau
+            xn = 1;
+            i = 0;
+
+            tugyaryak (i - 20)
+                bashlau
+                    xn = 0.5 * (xn + (num / xn));
+                    i = i + 1
+                tuktau;
+            bir xn
+        tuktau;
+
 
     esh solvingLin(k_b; k_c)
         bashlau
@@ -34,8 +47,33 @@ bashlau
 
     esh solvingSq(ko_a; ko_b; ko_c)
         bashlau
-            x1 = ko_a;
-            x2 = ko_b;
+            D = ko_b * ko_b - 4 * ko_a * ko_c;
+
+            egyar (D)
+                bashlau
+                    check = D - Sqrt(D) * Sqrt(D);
+
+                    egyar (check)
+                        bashlau
+                            bir no_roots
+                        tuktau;
+
+                    bylmasa
+                        bashlau
+                            x1 = (-ko_b + Sqrt(D)) / (2 * ko_a);
+                            x2 = (-ko_b - Sqrt(D)) / (2 * ko_a);
+
+                            bir two_roots
+                        tuktau
+
+                tuktau;
+
+            bylmasa
+                bashlau
+                    x1 = -ko_b / (2 * ko_a);
+                    bir one_root
+                tuktau;
+
             bir two_roots
         tuktau;
 
@@ -47,13 +85,9 @@ bashlau
     ukyrga(b);
     ukyrga(c);
 
-    yozyrga(a);
-    yozyrga(b);
-    yozyrga(c);
-
     egyar (a)
         bashlau
-            solvingSq(a; b; c);
+            sqanswer = solvingSq(a; b; c);
             yozyrga(x1);
             yozyrga(x2)
         tuktau;

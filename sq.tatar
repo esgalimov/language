@@ -1,0 +1,21 @@
+#Sqrt
+
+bashlau
+    esh Sq(num)
+        bashlau
+            num = num;
+            xn = 1;
+            i = 0;
+
+            tugyaryak (i - 10)
+                bashlau
+                    xn = 0.5 * (xn + (num / xn));
+                    i = i + 1
+                tuktau;
+            bir xn
+        tuktau;
+
+    ans = Sq(12321);
+    yozyrga(ans)
+
+tuktau
