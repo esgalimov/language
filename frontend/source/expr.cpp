@@ -19,6 +19,8 @@ expr_t* expr_ctor(const char* filename)
 
     expr_t* expr = (expr_t*) calloc(1, sizeof(expr_t));
 
+    ASSERT(expr);
+
     expr->pos = 0;
     expr->line = 0;
     expr->id_cnt = 0;
@@ -37,7 +39,7 @@ expr_t* expr_ctor(const char* filename)
 
     tokens_dump(expr);
 
-    link_root(expr->tree, getG(expr));
+    link_root(expr->tree, getGeneral(expr));
 
     tree_dump(expr->tree);
 
@@ -91,14 +93,14 @@ int create_tokens(expr_t* expr)
 
             switch (CURR_CH)
             {
-                case '+': NEW_CHAR_TOKEN(TYPE_ADD);    break;
-                case '-': NEW_CHAR_TOKEN(TYPE_SUB);    break;
-                case '*': NEW_CHAR_TOKEN(TYPE_MUL);    break;
-                case '/': NEW_CHAR_TOKEN(TYPE_DIV);    break;
-                case '(': NEW_CHAR_TOKEN(TYPE_L_BR);   break;
-                case ')': NEW_CHAR_TOKEN(TYPE_R_BR);   break;
-                case ';': NEW_CHAR_TOKEN(TYPE_AND);    break;
-                case '=': NEW_CHAR_TOKEN(TYPE_ASSIG);  break;
+                case CH_ADD: NEW_CHAR_TOKEN(TYPE_ADD);    break;
+                case CH_SUB: NEW_CHAR_TOKEN(TYPE_SUB);    break;
+                case CH_MUL: NEW_CHAR_TOKEN(TYPE_MUL);    break;
+                case CH_DIV: NEW_CHAR_TOKEN(TYPE_DIV);    break;
+                case CH_LBR: NEW_CHAR_TOKEN(TYPE_L_BR);   break;
+                case CH_RBR: NEW_CHAR_TOKEN(TYPE_R_BR);   break;
+                case CH_SEM: NEW_CHAR_TOKEN(TYPE_AND);    break;
+                case CH_ASG: NEW_CHAR_TOKEN(TYPE_ASSIG);  break;
                 default:
                 {
                     if ('0' <= CURR_CH && CURR_CH <= '9')
@@ -114,15 +116,22 @@ int create_tokens(expr_t* expr)
                         return 1;
                     }
 
-                    if      (!strcasecmp(name, "esh"))       NEW_WORD_TOKEN(TYPE_DEF);
-                    else if (!strcasecmp(name, "bir"))       NEW_WORD_TOKEN(TYPE_RET);
-                    else if (!strcasecmp(name, "tugyaryak")) NEW_WORD_TOKEN(TYPE_WHILE);
-                    else if (!strcasecmp(name, "egyar"))     NEW_WORD_TOKEN(TYPE_IF);
-                    else if (!strcasecmp(name, "bylmasa"))   NEW_WORD_TOKEN(TYPE_ELSE);
-                    else if (!strcasecmp(name, "yozyrga"))   NEW_WORD_TOKEN(TYPE_PRINTF);
-                    else if (!strcasecmp(name, "ukyrga"))    NEW_WORD_TOKEN(TYPE_SCANF);
-                    else if (!strcasecmp(name, "bashlau"))   NEW_WORD_TOKEN(TYPE_BEGIN);
-                    else if (!strcasecmp(name, "tuktau"))    NEW_WORD_TOKEN(TYPE_END);
+                    if      (!strcasecmp(name, STR_DEF))    NEW_WORD_TOKEN(TYPE_DEF);
+                    else if (!strcasecmp(name, STR_RET))    NEW_WORD_TOKEN(TYPE_RET);
+                    else if (!strcasecmp(name, STR_WHILE))  NEW_WORD_TOKEN(TYPE_WHILE);
+                    else if (!strcasecmp(name, STR_IF))     NEW_WORD_TOKEN(TYPE_IF);
+                    else if (!strcasecmp(name, STR_ELSE))   NEW_WORD_TOKEN(TYPE_ELSE);
+                    else if (!strcasecmp(name, STR_PRINTF)) NEW_WORD_TOKEN(TYPE_PRINTF);
+                    else if (!strcasecmp(name, STR_SCANF))  NEW_WORD_TOKEN(TYPE_SCANF);
+                    else if (!strcasecmp(name, STR_BEGIN))  NEW_WORD_TOKEN(TYPE_BEGIN);
+                    else if (!strcasecmp(name, STR_END))    NEW_WORD_TOKEN(TYPE_END);
+
+                    else if (!strcasecmp(name, STR_EQ))     NEW_WORD_TOKEN(TYPE_EQ);
+                    else if (!strcasecmp(name, STR_NEQ))    NEW_WORD_TOKEN(TYPE_NEQ);
+                    else if (!strcasecmp(name, STR_GE))     NEW_WORD_TOKEN(TYPE_GE);
+                    else if (!strcasecmp(name, STR_G))      NEW_WORD_TOKEN(TYPE_G);
+                    else if (!strcasecmp(name, STR_LE))     NEW_WORD_TOKEN(TYPE_LE);
+                    else if (!strcasecmp(name, STR_L))      NEW_WORD_TOKEN(TYPE_L);
 
                     else
                     {
@@ -165,7 +174,8 @@ char* read_name(expr_t* expr)
     int i = 0;
 
     while ((('a' <= CURR_CH && CURR_CH <= 'z') || ('A' <= CURR_CH && CURR_CH <= 'Z') ||
-                    CURR_CH == '_' || isdigit(CURR_CH)) && i < NAME_MAX_LEN)
+                    CURR_CH == '_' || isdigit(CURR_CH) || ('<' <= CURR_CH && CURR_CH <= '>')) &&
+                    i < NAME_MAX_LEN)
         name[i++] = expr->program->strings[expr->line][expr->pos++];
 
     expr->pos--;

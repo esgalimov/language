@@ -1,0 +1,10 @@
+#Test logical funcs
+
+bashlau
+    x = 3 >= 2;
+    egyar (4 + 5 < 7 * (8 + 2))
+        bashlau
+            ukyrga(x);
+            yozyrga(x)
+        tuktau
+tuktau

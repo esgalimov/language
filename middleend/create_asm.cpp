@@ -185,6 +185,7 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
     static int    if_cnt = 0;
     static int while_cnt = 0;
     static int  else_cnt = 0;
+    static int logic_cnt = 0;
 
     if (node == nullptr) return;
 
@@ -219,6 +220,34 @@ void tree_print_asm(tree_node_t* node, FILE* stream)
                 case TYPE_MUL: fprintf(stream, "    mul\n"); return;
                 case TYPE_DIV: fprintf(stream, "    div\n"); return;
             }
+
+        case TYPE_EQ: case TYPE_NEQ: case TYPE_GE:
+        case TYPE_G:  case TYPE_LE:  case TYPE_L:
+            tree_print_asm(node->left, stream);
+            tree_print_asm(node->right, stream);
+
+            switch (node->type)
+            {
+                case TYPE_EQ:
+                    fprintf(stream, "    jne :logic_jmp_%d\n", logic_cnt++);  break;
+                case TYPE_NEQ:
+                    fprintf(stream, "    je  :logic_jmp_%d\n", logic_cnt++);  break;
+                case TYPE_GE:
+                    fprintf(stream, "    jb  :logic_jmp_%d\n", logic_cnt++);  break;
+                case TYPE_G:
+                    fprintf(stream, "    jbe  :logic_jmp_%d\n", logic_cnt++); break;
+                case TYPE_LE:
+                    fprintf(stream, "    ja  :logic_jmp_%d\n", logic_cnt++);  break;
+                case TYPE_L:
+                    fprintf(stream, "    jae :logic_jmp_%d\n", logic_cnt++);  break;
+            }
+
+            fprintf(stream, "    push 1\n");
+            fprintf(stream, "    jmp :logic_jmp_%d\n", logic_cnt);
+            fprintf(stream, "    :logic_jmp_%d\n    push 0\n", logic_cnt - 1);
+            fprintf(stream, "    :logic_jmp_%d\n", logic_cnt++);
+
+            return;
 
         case TYPE_PRINTF:
             tree_print_asm(node->left, stream);

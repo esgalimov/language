@@ -16,29 +16,36 @@ typedef double elem_t;
 //! @brief Types of node
 enum node_type
 {
-    TYPE_NUM    = 0, //
-    TYPE_ADD    = 1, //
-    TYPE_SUB    = 2, //
-    TYPE_MUL    = 3, //
-    TYPE_DIV    = 4, //
-    TYPE_ASSIG =  5, //
-    TYPE_ID    =  6,
-    TYPE_VAR    = 7, //
+    TYPE_NUM,
+    TYPE_ADD,
+    TYPE_SUB,
+    TYPE_MUL,
+    TYPE_DIV,
+    TYPE_ASSIG,
+    TYPE_ID,
+    TYPE_VAR,
 
-    TYPE_DEF    = 8, //
-    TYPE_FUNC   = 9, //
-    TYPE_RET    = 10, /**/
-    TYPE_WHILE  = 11, //
-    TYPE_IF     = 12, //
-    TYPE_ELSE   = 13, /**/
-    TYPE_PRINTF = 14, //
-    TYPE_SCANF  = 15, //
+    TYPE_EQ,
+    TYPE_NEQ,
+    TYPE_GE,
+    TYPE_G,
+    TYPE_LE,
+    TYPE_L,
 
-    TYPE_BEGIN =  16,
-    TYPE_END   =  17,
-    TYPE_L_BR  =  18,
-    TYPE_R_BR  =  19,
-    TYPE_AND   =  20, //
+    TYPE_DEF,
+    TYPE_FUNC,
+    TYPE_RET,
+    TYPE_WHILE,
+    TYPE_IF,
+    TYPE_ELSE,
+    TYPE_PRINTF,
+    TYPE_SCANF,
+
+    TYPE_BEGIN,
+    TYPE_END,
+    TYPE_L_BR,
+    TYPE_R_BR,
+    TYPE_AND,
 };
 
 //! @brief Link modes

@@ -13,6 +13,32 @@ const int TOKS_MAX_CNT = 1024;
 const int NO_ID        = -1;
 const size_t POISON    = 0xDEADBEEF;
 
+#define CH_ADD '+'
+#define CH_SUB '-'
+#define CH_MUL '*'
+#define CH_DIV '/'
+#define CH_LBR '('
+#define CH_RBR ')'
+#define CH_SEM ';'
+#define CH_ASG '='
+
+#define STR_DEF    "esh"
+#define STR_RET    "bir"
+#define STR_WHILE  "tugyaryak"
+#define STR_IF     "egyar"
+#define STR_ELSE   "bylmasa"
+#define STR_PRINTF "yozyrga"
+#define STR_SCANF  "ukyrga"
+#define STR_BEGIN  "bashlau"
+#define STR_END    "tuktau"
+
+#define STR_EQ  "<>"
+#define STR_NEQ "><"
+#define STR_GE  ">="
+#define STR_G   ">"
+#define STR_LE  "<="
+#define STR_L   "<"
+
 
 //! @brief id_t
 typedef struct

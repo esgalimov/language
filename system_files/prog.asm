@@ -4,48 +4,37 @@
 
 ;VARS TABLE:
     ;var x - [0]
-    ;var ans - [1]
-    ;var i - [2]
-    ;var d - [3]
 
 
 
-    jmp :jmp_over_fact
-    :fact
-    pop [0]
+    push 3
+    push 2
+    jb  :logic_jmp_0
     push 1
-    pop [1]
-    push 1
-    pop [2]
-    push [1]
-    out
-    :while_0
-    push [2]
-    push [0]
-    sub
+    jmp :logic_jmp_1
+    :logic_jmp_0
     push 0
-    je :while_1
-    push [2]
-    push 1
+    :logic_jmp_1
+    pop [0]
+    push 4
+    push 5
     add
-    pop [2]
-    push [1]
-    push [2]
+    push 7
+    push 8
+    push 2
+    add
     mul
-    pop [1]
-    push [1]
+    jae :logic_jmp_2
+    push 1
+    jmp :logic_jmp_3
+    :logic_jmp_2
+    push 0
+    :logic_jmp_3
+    push 0
+    je :if_0
+    in
+    pop [0]
+    push [0]
     out
-    jmp :while_0
-    :while_1
-    push [1]
-    pop ax
-    ret
-    ret
-    :jmp_over_fact
-    push 6
-    call :fact
-    push ax
-    pop [3]
-    push [3]
-    out
+    :if_0
     hlt

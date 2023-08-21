@@ -1,9 +1,9 @@
 int stack_ctor_(stack *, size_t, var_info) at cpu_funcs.cpp(21):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 8
-    data [0x106c01f00]
+    data [0x104301f30]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -18,11 +18,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 int stack_ctor_(stack *, size_t, var_info) at cpu_funcs.cpp(21):
-Stack 0x16b4ba6f8 (OK) "&cpu->stk_ret" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(259):
+Stack 0x16ddae718 (OK) "&cpu->stk_ret" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(259):
 {
     size     = 0
     capacity = 8
-    data [0x106c01ed0]
+    data [0x104301f00]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -37,11 +37,11 @@ Stack 0x16b4ba6f8 (OK) "&cpu->stk_ret" at size_t cpu_ctor(cpu_t *, FILE *) at cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 8
-    data [0x106c01f00]
+    data [0x104301f30]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -56,13 +56,13 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 8
-    data [0x106c01f00]
+    data [0x104301f30]
       {
-      *[i] = 600
+      *[i] = 300
        [i] = 0 (POISON)
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -75,13 +75,13 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6f8 (OK) "&cpu->stk_ret" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(259):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
-    size     = 0
+    size     = 1
     capacity = 8
-    data [0x106c01ed0]
+    data [0x104301f30]
       {
-       [i] = 0 (POISON)
+      *[i] = 300
        [i] = 0 (POISON)
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -94,356 +94,14 @@ Stack 0x16b4ba6f8 (OK) "&cpu->stk_ret" at size_t cpu_ctor(cpu_t *, FILE *) at cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6f8 (OK) "&cpu->stk_ret" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(259):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01ed0]
-      {
-      *[i] = 52
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01f00]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 8
-    data [0x106c01f00]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 8
-    data [0x106c01f00]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01f00]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01f00]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 8
-    data [0x106c01f00]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 8
-    data [0x106c01f00]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01f00]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01f00]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 8
-    data [0x106c01f00]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 8
-    data [0x106c01f00]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01f00]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01f00]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 8
-    data [0x106c01f00]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 8
-    data [0x106c01f00]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01f00]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01f00]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 2
     capacity = 8
-    data [0x106c01f00]
+    data [0x104301f30]
       {
-      *[i] = 100
-      *[i] = 600
+      *[i] = 300
+      *[i] = 200
        [i] = 0 (POISON)
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -455,14 +113,14 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 2
     capacity = 8
-    data [0x106c01f00]
+    data [0x104301f30]
       {
-      *[i] = 100
-      *[i] = 600
+      *[i] = 300
+      *[i] = 200
        [i] = 0 (POISON)
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -474,13 +132,13 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_resize(stack *, size_t) at cpu_funcs.cpp(118):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 8
-    data [0x106c01f00]
+    data [0x104301f30]
       {
-      *[i] = 100
+      *[i] = 300
        [i] = 0 (POISON)
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -493,1001 +151,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_resize(stack *, size_t) at cpu_funcs.cpp(127):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -500
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -500
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -400
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -400
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
       *[i] = 300
        [i] = 0 (POISON)
@@ -1498,341 +166,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-      *[i] = 300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-      *[i] = 300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 300
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 300
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
       *[i] = 300
        [i] = 0 (POISON)
@@ -1843,11 +181,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
       *[i] = 300
        [i] = 0 (POISON)
@@ -1858,11 +196,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -1873,11 +211,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -1888,221 +226,41 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = -300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -300
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -300
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 300
       *[i] = 100
        [i] = 0 (POISON)
        [i] = 0 (POISON)
+       [i] = 0 (POISON)
       }
 }
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
-    size     = 2
+    size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = 300
       *[i] = 100
        [i] = 0 (POISON)
        [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 300
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
        [i] = 0 (POISON)
       }
 }
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2113,11 +271,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2128,11 +286,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
       *[i] = 400
        [i] = 0 (POISON)
@@ -2142,12 +300,12 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 }
 
 
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
       *[i] = 400
        [i] = 0 (POISON)
@@ -2157,75 +315,15 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 }
 
 
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 2
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = 600
       *[i] = 400
+      *[i] = 500
        [i] = 0 (POISON)
        [i] = 0 (POISON)
       }
@@ -2233,14 +331,14 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 2
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = 600
       *[i] = 400
+      *[i] = 500
        [i] = 0 (POISON)
        [i] = 0 (POISON)
       }
@@ -2248,191 +346,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 2400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 2400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 2400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 2400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
       *[i] = 400
        [i] = 0 (POISON)
@@ -2442,12 +360,12 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 }
 
 
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
       *[i] = 400
        [i] = 0 (POISON)
@@ -2457,30 +375,270 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 }
 
 
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 0
+    capacity = 4
+    data [0x104400750]
+      {
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 0
+    capacity = 4
+    data [0x104400750]
+      {
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 1
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 1
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 2
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = 400
-      *[i] = 600
+      *[i] = 900
+      *[i] = 700
        [i] = 0 (POISON)
        [i] = 0 (POISON)
       }
 }
 
 
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 2
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = 400
-      *[i] = 600
+      *[i] = 900
+      *[i] = 700
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 3
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+      *[i] = 800
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 3
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+      *[i] = 800
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 4
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+      *[i] = 800
+      *[i] = 200
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 4
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+      *[i] = 800
+      *[i] = 200
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 3
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+      *[i] = 800
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 3
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+      *[i] = 800
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 2
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 2
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 3
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+      *[i] = 1000
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 3
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+      *[i] = 1000
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 2
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 2
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 700
        [i] = 0 (POISON)
        [i] = 0 (POISON)
       }
@@ -2488,13 +646,73 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = 400
+      *[i] = 900
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 1
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 2
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 7000
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 2
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
+      *[i] = 7000
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 1
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 900
        [i] = 0 (POISON)
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2503,13 +721,13 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = 400
+      *[i] = 900
        [i] = 0 (POISON)
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2518,11 +736,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2533,11 +751,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2548,191 +766,131 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = -200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -200
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -200
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -200
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 400
       *[i] = 100
        [i] = 0 (POISON)
        [i] = 0 (POISON)
+       [i] = 0 (POISON)
       }
 }
 
 
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
-    size     = 2
+    size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = 400
       *[i] = 100
        [i] = 0 (POISON)
        [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 2
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 100
+      *[i] = 0
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 2
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 100
+      *[i] = 0
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
       }
 }
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
+      {
+      *[i] = 100
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 1
+    capacity = 4
+    data [0x104400750]
+      {
+      *[i] = 100
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 0
+    capacity = 4
+    data [0x104400750]
+      {
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 0
+    capacity = 4
+    data [0x104400750]
+      {
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+       [i] = 0 (POISON)
+      }
+}
+
+
+void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+{
+    size     = 1
+    capacity = 4
+    data [0x104400750]
       {
       *[i] = 400
        [i] = 0 (POISON)
@@ -2743,11 +901,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
       *[i] = 400
        [i] = 0 (POISON)
@@ -2758,11 +916,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2773,11 +931,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2788,13 +946,13 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = 500
+      *[i] = 400
        [i] = 0 (POISON)
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2803,13 +961,13 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 1
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
-      *[i] = 500
+      *[i] = 400
        [i] = 0 (POISON)
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2818,11 +976,11 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 
 
 void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
+Stack 0x16ddae6e0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
 {
     size     = 0
     capacity = 4
-    data [0x106d00750]
+    data [0x104400750]
       {
        [i] = 0 (POISON)
        [i] = 0 (POISON)
@@ -2832,1363 +990,5 @@ Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cp
 }
 
 
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 2400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 2400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 2400
-      *[i] = 500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 2400
-      *[i] = 500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 2400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 2400
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 12000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 12000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 12000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 12000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -100
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -100
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = -100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-      *[i] = 100
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 500
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 12000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 12000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 12000
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 12000
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 12000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 12000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 72000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 72000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 72000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 72000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 600
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 0
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 2
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 0
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 0
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 72000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 72000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6f8 (OK) "&cpu->stk_ret" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(259):
-{
-    size     = 1
-    capacity = 8
-    data [0x106c01ed0]
-      {
-      *[i] = 52
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6f8 (OK) "&cpu->stk_ret" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(259):
-{
-    size     = 0
-    capacity = 8
-    data [0x106c01ed0]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 72000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 72000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(78):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_push(stack *, elem_t) at cpu_funcs.cpp(86):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 72000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(93):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 1
-    capacity = 4
-    data [0x106d00750]
-      {
-      *[i] = 72000
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-void stack_pop(stack *, elem_t *) at cpu_funcs.cpp(109):
-Stack 0x16b4ba6c0 (OK) "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258):
-{
-    size     = 0
-    capacity = 4
-    data [0x106d00750]
-      {
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-       [i] = 0 (POISON)
-      }
-}
-
-
-Stack 0x16b4ba6c0 "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258): DESTRUCTED
-Stack 0x16b4ba6f8 "&cpu->stk_ret" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(259): DESTRUCTED
+Stack 0x16ddae6e0 "&cpu->stk" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(258): DESTRUCTED
+Stack 0x16ddae718 "&cpu->stk_ret" at size_t cpu_ctor(cpu_t *, FILE *) at cpu.cpp(259): DESTRUCTED

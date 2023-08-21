@@ -7,15 +7,16 @@
 
 
 //! @brief Get funcs
-tree_node_t* getG(expr_t* expr);           // General
-tree_node_t* getN(expr_t* expr);           // Number
-tree_node_t* getE(expr_t* expr);           // Expression
-tree_node_t* getEs(expr_t* expr);          // Expressions
-tree_node_t* getT(expr_t* expr);           // * or /
+tree_node_t* getGeneral(expr_t* expr);     // General
+tree_node_t* getNumber(expr_t* expr);      // Number
+tree_node_t* getAddSub(expr_t* expr);       // + or -
+tree_node_t* getMathExpr(expr_t* expr);    // Expression
+tree_node_t* getMathExprS(expr_t* expr);   // Expressions
+tree_node_t* getMulDiv(expr_t* expr);      // * or /
 tree_node_t* getId(expr_t* expr);          // Id
 tree_node_t* getIds(expr_t* expr);         // Id; Id; ...
-tree_node_t* getP(expr_t* expr);           // (...)
-tree_node_t* getA(expr_t* expr);           // Assigment
+tree_node_t* getBrackets(expr_t* expr);    // (...)
+tree_node_t* getAssig(expr_t* expr);       // Assigment
 tree_node_t* getIf(expr_t* expr);          // If of while
 tree_node_t* getElse(expr_t* expr);        // Else
 tree_node_t* getPrintfScanf(expr_t* expr); // Printf or Scanf

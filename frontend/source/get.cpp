@@ -3,13 +3,13 @@
 #include "../include/dsl.h"
 #include "../include/get.h"
 
-tree_node_t* getG(expr_t * expr)
+tree_node_t* getGeneral(expr_t * expr)
 {
     expr->pos = 0;
 
     if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
     {
-        SYNTAX_ERROR("prog must start with \"bashlau\""); return nullptr;
+        SYNTAX_ERROR("prog must start with TYPE_BEGIN"); return nullptr;
     }
 
     expr->pos++;
@@ -17,19 +17,19 @@ tree_node_t* getG(expr_t * expr)
 
     if (comp != nullptr && expr->tokens[expr->pos]->type != TYPE_END)
     {
-        SYNTAX_ERROR("prog must end with \"tuktau\""); return nullptr;
+        SYNTAX_ERROR("prog must end with TYPE_END"); return nullptr;
     }
 
     return comp;
 }
 
-tree_node_t* getE(expr_t* expr)
+tree_node_t* getMathExpr(expr_t* expr)
 {
-    tree_node_t* val1 = getT(expr);
-    while (expr->tokens[expr->pos]->type == TYPE_ADD || expr->tokens[expr->pos]->type == TYPE_SUB)
+    tree_node_t* val1 = getAddSub(expr);
+    while (TYPE_EQ <= expr->tokens[expr->pos]->type && expr->tokens[expr->pos]->type <= TYPE_L)
     {
         tree_node_t* oper = expr->tokens[expr->pos++];
-        tree_node_t * val2 = getT(expr);
+        tree_node_t * val2 = getAddSub(expr);
 
         if (val1 == nullptr || val2 == nullptr) return nullptr;
 
@@ -44,16 +44,37 @@ tree_node_t* getE(expr_t* expr)
     return val1;
 }
 
-tree_node_t* getEs(expr_t* expr)
+tree_node_t* getAddSub(expr_t* expr)
 {
-    tree_node_t* ex1 = getE(expr);
+    tree_node_t* val1 = getMulDiv(expr);
+    while (expr->tokens[expr->pos]->type == TYPE_ADD || expr->tokens[expr->pos]->type == TYPE_SUB)
+    {
+        tree_node_t* oper = expr->tokens[expr->pos++];
+        tree_node_t * val2 = getMulDiv(expr);
+
+        if (val1 == nullptr || val2 == nullptr) return nullptr;
+
+        oper->left = val1;
+        val1->parent = oper;
+
+        oper->right = val2;
+        val2->parent = oper;
+
+        val1 = oper;
+    }
+    return val1;
+}
+
+tree_node_t* getMathExprS(expr_t* expr)
+{
+    tree_node_t* ex1 = getMathExpr(expr);
 
     if (ex1 == nullptr) return nullptr;
 
     while (expr->tokens[expr->pos]->type == TYPE_AND)
     {
         tree_node_t* connect = expr->tokens[expr->pos++];
-        tree_node_t* ex2 = getE(expr);
+        tree_node_t* ex2 = getMathExpr(expr);
 
         if (ex2 == nullptr) return nullptr;
 
@@ -69,13 +90,13 @@ tree_node_t* getEs(expr_t* expr)
     return ex1;
 }
 
-tree_node_t* getT(expr_t* expr)
+tree_node_t* getMulDiv(expr_t* expr)
 {
-    tree_node_t* val1 = getP(expr);
+    tree_node_t* val1 = getBrackets(expr);
     while (expr->tokens[expr->pos]->type == TYPE_MUL || expr->tokens[expr->pos]->type == TYPE_DIV)
     {
         tree_node_t* oper = expr->tokens[expr->pos++];
-        tree_node_t* val2 = getP(expr);
+        tree_node_t* val2 = getBrackets(expr);
 
         if (oper->type == TYPE_DIV && val2->type == TYPE_NUM && is_equal(val2->value, 0))
         {
@@ -95,12 +116,12 @@ tree_node_t* getT(expr_t* expr)
     return val1;
 }
 
-tree_node_t* getP(expr_t* expr)
+tree_node_t* getBrackets(expr_t* expr)
 {
     if (expr->tokens[expr->pos]->type == TYPE_L_BR)
     {
         expr->pos++;
-        tree_node_t* val = getE(expr);
+        tree_node_t* val = getMathExpr(expr);
         if (expr->tokens[expr->pos]->type != TYPE_R_BR)
         {
             SYNTAX_ERROR("expected \")\""); return nullptr;
@@ -109,7 +130,7 @@ tree_node_t* getP(expr_t* expr)
         return val;
     }
     else if (expr->tokens[expr->pos]->type == TYPE_NUM || expr->tokens[expr->pos]->type == TYPE_SUB)
-        return getN(expr);
+        return getNumber(expr);
     else
     {
         tree_node_t* id = getId(expr);
@@ -182,7 +203,7 @@ tree_node_t* getIds(expr_t* expr)
     return var1;
 }
 
-tree_node_t* getN(expr_t* expr)
+tree_node_t* getNumber(expr_t* expr)
 {
     if (expr->tokens[expr->pos]->type == TYPE_SUB)
         expr->tokens[expr->pos++]->value *= -1;
@@ -190,7 +211,7 @@ tree_node_t* getN(expr_t* expr)
     return expr->tokens[expr->pos++];
 }
 
-tree_node_t* getA(expr_t* expr)
+tree_node_t* getAssig(expr_t* expr)
 {
     if (expr->tokens[expr->pos]->type != TYPE_ID)
     {
@@ -204,7 +225,7 @@ tree_node_t* getA(expr_t* expr)
     }
 
     tree_node_t* assig = expr->tokens[expr->pos++];
-    tree_node_t* value = getE(expr);
+    tree_node_t* value = getMathExpr(expr);
 
     if (value == nullptr) return nullptr;
 
@@ -230,7 +251,7 @@ tree_node_t* getIf(expr_t* expr)
     }
 
     expr->pos++;
-    tree_node_t* value = getE(expr);
+    tree_node_t* value = getMathExpr(expr);
 
     if (value == nullptr) return nullptr;
 
@@ -242,7 +263,7 @@ tree_node_t* getIf(expr_t* expr)
 
     if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
     {
-        SYNTAX_ERROR("must be \"bashlau\" in start of if body"); return nullptr;
+        SYNTAX_ERROR("must be TYPE_BEGIN in start of if body"); return nullptr;
     }
 
     expr->pos++;
@@ -252,7 +273,7 @@ tree_node_t* getIf(expr_t* expr)
 
     if (expr->tokens[expr->pos]->type != TYPE_END)
     {
-        SYNTAX_ERROR("must be \"tuktau\" in end of if body"); return nullptr;
+        SYNTAX_ERROR("must be TYPE_END in end of if body"); return nullptr;
     }
     expr->pos++;
 
@@ -300,7 +321,7 @@ tree_node_t* getElse(expr_t* expr)
 
     if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
     {
-        SYNTAX_ERROR("must be \"bashlau\" in start of else body"); return nullptr;
+        SYNTAX_ERROR("must be TYPE_BEGIN in start of else body"); return nullptr;
     }
 
     expr->pos++;
@@ -310,7 +331,7 @@ tree_node_t* getElse(expr_t* expr)
 
     if (expr->tokens[expr->pos]->type != TYPE_END)
     {
-        SYNTAX_ERROR("must be \"tuktau\" in end of else body"); return nullptr;
+        SYNTAX_ERROR("must be TYPE_END in end of else body"); return nullptr;
     }
     expr->pos++;
 
@@ -367,7 +388,7 @@ tree_node_t* getPrintfScanf(expr_t* expr)
     }
     if (expr->tokens[expr->pos]->type != TYPE_R_BR)
     {
-        SYNTAX_ERROR("must be \")\" aftre printf or scanf"); return nullptr;
+        SYNTAX_ERROR("must be \")\" after printf or scanf"); return nullptr;
     }
     expr->pos++;
 
@@ -397,7 +418,7 @@ tree_node_t* getDef(expr_t* expr)
     expr->pos++;
     if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
     {
-        SYNTAX_ERROR("must be \"bashlau\" in start of if body"); return nullptr;
+        SYNTAX_ERROR("must be TYPE_START in start of if body"); return nullptr;
     }
     expr->pos++;
 
@@ -407,7 +428,7 @@ tree_node_t* getDef(expr_t* expr)
 
     if (expr->tokens[expr->pos]->type != TYPE_END)
     {
-        SYNTAX_ERROR("must be \"tuktau\" in end of if body"); return nullptr;
+        SYNTAX_ERROR("must be TYPE_END in end of if body"); return nullptr;
     }
     expr->pos++;
 
@@ -434,7 +455,7 @@ tree_node_t* getReturn(expr_t* expr)
 
     expr->pos++;
 
-    tree_node_t* ret_value = getE(expr);
+    tree_node_t* ret_value = getMathExpr(expr);
 
     if (ret_value == nullptr) return nullptr;
 
@@ -459,7 +480,7 @@ tree_node_t* getFuncCall(expr_t* expr)
         SYNTAX_ERROR("expected \"(\" after func"); return nullptr;
     }
     expr->pos++;
-    tree_node_t* expression = getEs(expr);
+    tree_node_t* expression = getMathExprS(expr);
 
     if (expr->tokens[expr->pos]->type != TYPE_R_BR)
     {
@@ -493,7 +514,7 @@ tree_node_t* getOp(expr_t* expr)
     if (expr->tokens[expr->pos]->type == TYPE_RET)
         return getReturn(expr);
 
-    return getA(expr);
+    return getAssig(expr);
 }
 
 tree_node_t* getComp(expr_t* expr)
