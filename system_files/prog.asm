@@ -8,8 +8,6 @@
 
 
 
-    push 3
-    pop [0+dx]
     jmp :jmp_over_fact
     :fact
     pop [0+dx]
@@ -63,9 +61,7 @@
     :else_0
     ret
     :jmp_over_fact
-    push 7
-    push 1
-    sub
+    push 6
 
     push dx
     push 2

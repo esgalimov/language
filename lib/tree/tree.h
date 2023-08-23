@@ -21,16 +21,16 @@ enum node_type
     TYPE_SUB,
     TYPE_MUL,
     TYPE_DIV,
-    TYPE_ASSIG,
-    TYPE_ID,
-    TYPE_VAR,
-
     TYPE_EQ,
     TYPE_NEQ,
     TYPE_GE,
     TYPE_G,
     TYPE_LE,
     TYPE_L,
+
+    TYPE_ASSIG,
+    TYPE_ID,
+    TYPE_VAR,
 
     TYPE_DEF,
     TYPE_FUNC,

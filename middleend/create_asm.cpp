@@ -1,4 +1,6 @@
 #include "create_asm.h"
+#include "simplify.h"
+
 
 int read_ast_tree(void)
 {
@@ -29,6 +31,10 @@ int read_ast_tree(void)
     link_root(prog.tree, read_tree_preorder(&prog));
 
     dump_cnt += 100;
+    tree_dump(prog.tree);
+
+    tree_simplify(&prog, &prog.tree->root);
+
     tree_dump(prog.tree);
 
     translate_asm(&prog);

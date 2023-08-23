@@ -1,16 +1,6 @@
 #Square equation solution
 
 bashlau
-    #consts for return
-    no_roots  = 0;
-    one_root  = 1;
-    two_roots = 2;
-    all_nums  = -1;
-
-    #vars for roots
-    x1 = 0;
-    x2 = 0;
-
     esh Sqrt(num)
         bashlau
             xn = 1;

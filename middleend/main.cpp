@@ -1,4 +1,6 @@
 #include "create_asm.h"
+#include "simplify.h"
+
 
 int main(void)
 {

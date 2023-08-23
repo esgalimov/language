@@ -4,6 +4,7 @@
 #include "../lib/tree/tree.h"
 #include "../lib/tree/tree_debug.h"
 
+
 const int NAME_MAX_LEN = 32;
 const int IDS_MAX_CNT  = 32;
 
@@ -12,13 +13,14 @@ const int IDS_MAX_CNT  = 32;
 
 typedef struct
 {
-    tree_t*     tree;
+    tree_t* tree;
 
-    char**      vars;
-    size_t      var_cnt;
+    char**  vars;
+    size_t  var_cnt;
 
-    char*       buffer;
-    size_t      pos;
+    char*   buffer;
+    size_t  pos;
+    int     simplify;
 } prog_tree_t;
 
 tree_node_t* read_tree_preorder(prog_tree_t* prog);

@@ -3,7 +3,7 @@
 #include "../include/dsl.h"
 #include "../include/get.h"
 
-tree_node_t* getGeneral(expr_t * expr)
+tree_node_t* getGeneral(expr_t* expr)
 {
     expr->pos = 0;
 
@@ -525,6 +525,12 @@ tree_node_t* getOp(expr_t* expr)
 tree_node_t* getComp(expr_t* expr)
 {
     tree_node_t* op1 = getOp(expr);
+
+//     printf("\npos: %lu, cnt: %lu\n", expr->pos, expr->toks_cnt);
+//
+//     if (expr->pos >= expr->toks_cnt - 1) return op1;
+//
+//     printf("\n%p\n%d\n\n\n", expr->tokens[expr->pos], expr->tokens[expr->pos]->type);
 
     while (expr->tokens[expr->pos]->type == TYPE_AND)
     {

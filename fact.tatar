@@ -1,7 +1,6 @@
 #Test logical funcs
 
 bashlau
-    x = 3;
     esh fact(x)
         bashlau
             yozyrga(x);
@@ -15,6 +14,6 @@ bashlau
                 tuktau
         tuktau;
 
-    ans = fact(7 - 1);
+    ans = fact(7 - 1 * 1 - 0);
     yozyrga(ans)
 tuktau
