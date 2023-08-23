@@ -98,6 +98,8 @@ tree_node_t* getMulDiv(expr_t* expr)
         tree_node_t* oper = expr->tokens[expr->pos++];
         tree_node_t* val2 = getBrackets(expr);
 
+        if (val2 == nullptr) return nullptr;
+
         if (oper->type == TYPE_DIV && val2->type == TYPE_NUM && is_equal(val2->value, 0))
         {
             SYNTAX_ERROR("division by zero"); return nullptr;
@@ -403,6 +405,11 @@ tree_node_t* getDef(expr_t* expr)
     expr->pos++;
     tree_node_t* func = getId(expr);
 
+    if (func == nullptr) return nullptr;
+
+    func->type = TYPE_DEF;
+    expr->ids[(int) func->value]->type = TYPE_FUNC;
+
     if (expr->tokens[expr->pos]->type != TYPE_L_BR)
     {
         SYNTAX_ERROR("must be \"(\" aftre printf or scanf"); return nullptr;
@@ -441,8 +448,6 @@ tree_node_t* getDef(expr_t* expr)
 
     func->right = comp;
     comp->parent = func;
-
-    expr->ids[(int) func->value]->type = TYPE_FUNC;
 
     return func;
 }

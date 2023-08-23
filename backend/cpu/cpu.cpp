@@ -161,43 +161,64 @@ int run_cpu(FILE * stream)
         case PUSH_RAM:
         {
             i++;
+            printf("It is push_ram\n");
+
             if (AX <= cpu.cmd_buffer[i + 1] && cpu.cmd_buffer[i + 1] <= DX)
             {
-                elem_t reg_val = *(get_reg_ptr(&cpu, i + 1));
+                elem_t reg_val = *(get_reg_ptr(&cpu, i + 1)) / ACCURACY;
+
+
 
                 if ((int) reg_val + cpu.cmd_buffer[i] > RAM_SIZE)
                 {
                     printf("Out of RAM\n"); return 1;
                 }
                 stack_push(&cpu.stk, cpu.cpu_ram[(int) reg_val + cpu.cmd_buffer[i]]);
+                printf("index in ram = %d\n", (int) reg_val + cpu.cmd_buffer[i]);
                 i++;
             }
             else
             {
                 stack_push(&cpu.stk, cpu.cpu_ram[cpu.cmd_buffer[i]]);
+                printf("index in ram = %d\n", cpu.cmd_buffer[i]);
             }
+            for (int x = 0; x < 20; x++)
+                printf("%5d", cpu.cpu_ram[x]);
+            printf("\n");
+
             break;
         }
 
         case POP_RAM:
         {
             i++;
+            printf("It is pop_ram\n");
+
             if (AX <= cpu.cmd_buffer[i + 1] && cpu.cmd_buffer[i + 1] <= DX)
             {
-                elem_t reg_val = *(get_reg_ptr(&cpu, i + 1));
+                elem_t reg_val = *(get_reg_ptr(&cpu, i + 1)) / ACCURACY;
 
                 if ((int) reg_val + cpu.cmd_buffer[i] > RAM_SIZE)
                 {
-                    printf("Out of RAM\n"); return 1;
+                    printf("Out of RAM: want to get index = %d\n", (int) reg_val + cpu.cmd_buffer[i]);
+                        return 1;
                 }
 
                 stack_pop(&cpu.stk, &cpu.cpu_ram[(int) reg_val + cpu.cmd_buffer[i]]);
+
+                printf("index in ram = %d\n", (int) reg_val + cpu.cmd_buffer[i]);
                 i++;
             }
             else
             {
                 stack_pop(&cpu.stk, &cpu.cpu_ram[cpu.cmd_buffer[i]]);
+                printf("index in ram = %d\n", cpu.cmd_buffer[i]);
             }
+
+            for (int x = 0; x < 20; x++)
+                printf("%5d", cpu.cpu_ram[x]);
+            printf("\n");
+
             break;
         }
 
