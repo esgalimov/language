@@ -102,7 +102,7 @@ enum commands
 
 const int MIN_CAPACITY = 8;
 const int ACCURACY = 100;
-const int RAM_SIZE = 256;
+const int RAM_SIZE = 2048;
 
 extern FILE* log_file;
 

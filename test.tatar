@@ -1,90 +1,131 @@
 #Square equation solution
 
-bashlau
-    esh Sqrt(num)
-        bashlau
-            xn = 1;
-            i = 0;
+# Vars for roots
+x1 = 0;
+x2 = 0;
 
-            tugyaryak (i - 20)
-                bashlau
-                    xn = 0.5 * (xn + (num / xn));
-                    i = i + 1
-                tuktau;
-            bir xn
-        tuktau;
+# Consts for number of roots
+all_nums  = -1;
+no_roots  =  0;
+one_root  =  1;
+two_roots =  2;
 
 
-    esh solvingLin(k_b; k_c)
-        bashlau
-            egyar (k_b)
-                bashlau
-                    x1 = k_c / k_b;
-                    bir one_root
-                tuktau;
-            bylmasa
-                bashlau
-                    egyar (k_c)
-                        bashlau
-                            bir no_roots
-                        tuktau;
-                    bylmasa
-                        bashlau
-                            bir all_nums
-                        tuktau
-                tuktau
-        tuktau;
+#Func to count square root with using Babylonian method
+esh Sqrt(num)
+    bashlau
+        xn = 1;
+        i = 0;
 
-    esh solvingSq(ko_a; ko_b; ko_c)
-        bashlau
-            D = ko_b * ko_b - 4 * ko_a * ko_c;
+        tugyaryak (i - 20)
+            bashlau
+                xn = 0.5 * (xn + (num / xn));
+                i = i + 1
+            tuktau;
+        bir xn
+    tuktau;
 
-            egyar (D)
-                bashlau
-                    check = D - Sqrt(D) * Sqrt(D);
+esh SolveLinear(b; c)
+    bashlau
+        egyar (b <> 0)
+            bashlau
+                egyar (c <> 0)
+                    bashlau
+                        bir all_nums
+                    tuktau;
+                bylmasa
+                    bashlau
+                        bir no_roots
+                    tuktau
+            tuktau;
+        bylmasa
+            bashlau
+                x1 = -1 * c / b;
+                bir one_root
+            tuktau
+    tuktau;
 
-                    egyar (check)
-                        bashlau
-                            bir no_roots
-                        tuktau;
+esh SolveSquare(a; b; c)
+    bashlau
+        D = b * b - 4 * a * c;
 
-                    bylmasa
-                        bashlau
-                            x1 = (-ko_b + Sqrt(D)) / (2 * ko_a);
-                            x2 = (-ko_b - Sqrt(D)) / (2 * ko_a);
+        egyar (D < 0)
+            bashlau
+                bir no_roots
+            tuktau;
 
-                            bir two_roots
-                        tuktau
+        bylmasa
+            bashlau
+                egyar (D <> 0)
+                    bashlau
+                        x1 = -1 * b / 2 * a;
+                        bir one_root
+                    tuktau;
 
-                tuktau;
+                bylmasa
+                    bashlau
+                        x1 = (-1 * b + Sqrt(D)) / (2 * a);
+                        x2 = (-1 * b - Sqrt(D)) / (2 * a);
+                        bir two_roots
+                    tuktau
+            tuktau
+    tuktau;
 
-            bylmasa
-                bashlau
-                    x1 = -ko_b / (2 * ko_a);
-                    bir one_root
-                tuktau;
 
-            bir two_roots
-        tuktau;
+#Start
 
-    a = 0;
-    b = 0;
-    c = 0;
+a = 0;
+b = 0;
+c = 0;
 
-    ukyrga(a);
-    ukyrga(b);
-    ukyrga(c);
+roots = 0;
 
-    egyar (a)
-        bashlau
-            sqanswer = solvingSq(a; b; c);
-            yozyrga(x1);
-            yozyrga(x2)
-        tuktau;
-    bylmasa
-        bashlau
-            lin_answer = solvingLin(b; c);
-            yozyrga(x1)
-        tuktau
+ukyrga(a);
+ukyrga(b);
+ukyrga(c);
 
-tuktau
+
+egyar (a <> 0)
+    bashlau
+        roots = SolveLinear(b; c);
+
+        egyar (roots <> all_nums)
+            bashlau
+                yozyrga(buten_sannar)
+            tuktau;
+        bylmasa
+            bashlau
+                egyar (roots <> no_roots)
+                    bashlau
+                        yozyrga(tomyrlar_uk)
+                    tuktau;
+                bylmasa
+                    bashlau
+                        yozyrga(x1)
+                    tuktau
+            tuktau
+    tuktau;
+
+bylmasa
+    bashlau
+        roots = SolveSquare(a; b; c);
+
+        egyar (roots <> no_roots)
+            bashlau
+                yozyrga(tomyrlar_uk)
+            tuktau;
+
+        bylmasa
+            bashlau
+                egyar (roots <> one_root)
+                    bashlau
+                        yozyrga(x1)
+                    tuktau;
+
+                bylmasa
+                    bashlau
+                        yozyrga(x1);
+                        yozyrga(x2)
+                    tuktau
+            tuktau
+    tuktau

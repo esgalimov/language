@@ -133,6 +133,9 @@ int create_tokens(expr_t* expr)
                     else if (!strcasecmp(name, STR_LE))     NEW_WORD_TOKEN(TYPE_LE);
                     else if (!strcasecmp(name, STR_L))      NEW_WORD_TOKEN(TYPE_L);
 
+                    else if (!strcasecmp(name, STR_ALLNUMS)) NEW_WORD_TOKEN(TYPE_ALL);
+                    else if (!strcasecmp(name, STR_NOROOTS)) NEW_WORD_TOKEN(TYPE_NO);
+
                     else
                     {
                         int id = find_id(expr, name);
@@ -163,6 +166,8 @@ int create_tokens(expr_t* expr)
             }
         }
     }
+
+    expr->tokens[expr->toks_cnt] = create_node(TYPE_END, expr->line, expr->pos);
     return 0;
 }
 

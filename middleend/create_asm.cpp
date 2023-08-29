@@ -14,8 +14,9 @@ int read_ast_tree(void)
 
     prog_tree_t prog = {};
 
-    prog.vars  = (char**) calloc(IDS_MAX_CNT, sizeof(char*));
+    prog.vars  = (var_t*) calloc(IDS_MAX_CNT, sizeof(var_t));
     prog.var_cnt = 0;
+    prog.part = GLOBAL;
 
     prog.tree = (tree_t*) calloc(1, sizeof(tree_t));
 
@@ -110,12 +111,14 @@ tree_node_t* read_tree_preorder(prog_tree_t* prog)
             }
             case TYPE_DEF:
             {
+                prog->part = LOCAL;
                 prog->pos++;
+
                 char* name = (char*) calloc(NAME_MAX_LEN, sizeof(char));
                 sscanf(prog->buffer + prog->pos, "%[_0-9A-Za-z]%n", name, &cnt);
                 prog->pos += (size_t) cnt;
 
-                tree_node_t* child1  = read_tree_preorder(prog);
+                tree_node_t* child1 = read_tree_preorder(prog);
                 tree_node_t* child2 = read_tree_preorder(prog);
 
                 tree_node_t* def = create_node(TYPE_DEF, 0, 0);
@@ -131,6 +134,8 @@ tree_node_t* read_tree_preorder(prog_tree_t* prog)
                     def->right = child2;
                 }
                 prog->pos++;
+
+                prog->part = GLOBAL;
 
                 return def;
             }
@@ -153,9 +158,12 @@ size_t find_var(prog_tree_t* prog, char* name)
 {
     for (size_t i = 0; i < prog->var_cnt; i++)
     {
-        if (!strcmp(prog->vars[i], name)) return i;
+        if (!strcmp(prog->vars[i].name, name) && (prog->vars[i].global == GLOBAL ||
+                   (prog->vars[i].global == LOCAL && prog->part == LOCAL)))
+            return i;
     }
-    prog->vars[prog->var_cnt] = name;
+    prog->vars[prog->var_cnt].name   = name;
+    prog->vars[prog->var_cnt].global = prog->part;
 
     return prog->var_cnt++;
 }
@@ -173,7 +181,11 @@ int translate_asm(prog_tree_t* prog)
     fprintf(asm_file, ";Created by Emil Galimov\n;2023\n;Tatar programming language version 1.0\n\n;VARS TABLE:\n");
     for (size_t i = 0; i < prog->var_cnt; i++)
     {
-        fprintf(asm_file, "    ;var %s - [%lu]\n", prog->vars[i], i);
+        fprintf(asm_file, "    ;var %s - [%lu]", prog->vars[i].name, i);
+        if (prog->vars[i].global == GLOBAL)
+            fprintf(asm_file, " gl\n");
+        else
+            fprintf(asm_file, " loc\n");
     }
     fprintf(asm_file, "\n\n\n");
 
@@ -189,7 +201,6 @@ void tree_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
 {
     static int if_cnt = 0,
             while_cnt = 0,
-             else_cnt = 0,
             logic_cnt = 0;
 
     if (node == nullptr) return;
@@ -206,12 +217,15 @@ void tree_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
             return;
 
         case TYPE_VAR:
-            fprintf(stream, "    push [%d+dx]\n", (int) node->value);
+            fprintf(stream, "    push");
+            var_print_asm(node, prog, stream);
+
             return;
 
         case TYPE_ASSIG:
             tree_print_asm_r();
-            fprintf(stream, "    pop [%d+dx]\n", (int) node->left->value);
+            fprintf(stream, "    pop");
+            var_print_asm(node->left, prog, stream);
             return;
 
         case TYPE_ADD: case TYPE_SUB: case TYPE_MUL: case TYPE_DIV:
@@ -261,7 +275,9 @@ void tree_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
 
         case TYPE_SCANF:
             fprintf(stream, "    in\n");
-            fprintf(stream, "    pop [%d+dx]\n", (int) node->left->value);
+            fprintf(stream, "    pop");
+            var_print_asm(node->left, prog, stream);
+
             return;
 
         case TYPE_FUNC:
@@ -279,41 +295,38 @@ void tree_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
 
         case TYPE_DEF:
             fprintf(stream, "    jmp :jmp_over_%s\n", node->name);
-            fprintf(stream, "    :%s\n", node->name);
+            fprintf(stream, ":%s\n", node->name);
 
-            pop_params_in_def(node->left, stream);
+            pop_params_in_def(node->left, prog, stream);
             tree_print_asm_r();
 
             fprintf(stream, "    ret\n");
-            fprintf(stream, "    :jmp_over_%s\n", node->name);
+            fprintf(stream, ":jmp_over_%s\n", node->name);
             return;
 
         case TYPE_IF:
+        {
+            int if_cnt_saved = ++if_cnt;
+
             tree_print_asm_l();
             fprintf(stream, "    push 0\n");
-            fprintf(stream, "    je :if_%d\n", if_cnt);
+            fprintf(stream, "    je :false_%d\n", if_cnt_saved);
 
             if (node->right->type == TYPE_AND && node->right->right->type == TYPE_ELSE)
             {
                 tree_print_asm(node->right->left, prog, stream);
-                fprintf(stream, "    :if_%d\n", if_cnt++);
-                tree_print_asm_l();
-                tree_print_asm(node->right->right, prog, stream);
+                fprintf(stream, "    jmp :done_%d\n", if_cnt_saved);
+                fprintf(stream, ":false_%d\n", if_cnt_saved);
+                tree_print_asm(node->right->right->left, prog, stream);
+                fprintf(stream, ":done_%d\n", if_cnt_saved);
             }
             else
             {
                 tree_print_asm_r();
-                fprintf(stream, "    :if_%d\n", if_cnt++);
+                fprintf(stream, "    :false_%d\n", if_cnt_saved);
             }
             return;
-
-        case TYPE_ELSE:
-            fprintf(stream, "    push 0\n");
-            fprintf(stream, "    jne :else_%d\n", else_cnt);
-            tree_print_asm_l();
-            fprintf(stream, "    :else_%d\n", else_cnt);
-            else_cnt++;
-            return;
+        }
 
         case TYPE_WHILE:
             fprintf(stream, "    :while_%d\n", while_cnt);
@@ -335,20 +348,32 @@ void tree_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
             fprintf(stream, "    ret\n");
             return;
 
+        case TYPE_ALL:
+            fprintf(stream, "    allnum\n");
+            return;
+
+        case TYPE_NO:
+            fprintf(stream, "    noroots\n");
+            return;
+
         default: return;
     }
 }
 
-void pop_params_in_def(tree_node_t* node, FILE* stream)
+void pop_params_in_def(tree_node_t* node, prog_tree_t* prog, FILE* stream)
 {
     if (node == nullptr) return;
 
     if (node->type == TYPE_VAR)
-        fprintf(stream, "    pop [%d+dx]\n", (int) node->value);
+    {
+        fprintf(stream, "    pop");
+        var_print_asm(node, prog, stream);
+    }
 
-    pop_params_in_def(node->left, stream);
-    pop_params_in_def(node->right, stream);
+    pop_params_in_def(node->left,  prog, stream);
+    pop_params_in_def(node->right, prog, stream);
 }
+
 
 void push_params_in_func(tree_node_t* node, prog_tree_t* prog, FILE* stream)
 {
@@ -366,7 +391,8 @@ void push_params_in_func(tree_node_t* node, prog_tree_t* prog, FILE* stream)
             break;
 
         case TYPE_VAR:
-            fprintf(stream, "    push [%d+dx]\n", (int) node->value);
+            fprintf(stream, "    push");
+            var_print_asm(node, prog, stream);
             break;
 
         default:
@@ -388,4 +414,14 @@ int func_params_cnt(tree_node_t* node)
     if (node->type == TYPE_VAR) return 1;
 
     else return 0;
+}
+
+void var_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
+{
+    int i_var = (int) node->value;
+
+    if (prog->vars[i_var].global == LOCAL)
+        fprintf(stream, " [%d+dx]\n", i_var);
+    else
+        fprintf(stream, " [%d]\n", i_var);
 }

@@ -32,6 +32,9 @@ const size_t POISON    = 0xDEADBEEF;
 #define STR_BEGIN  "bashlau"
 #define STR_END    "tuktau"
 
+#define STR_ALLNUMS  "buten_sannar"
+#define STR_NOROOTS "tomyrlar_uk"
+
 #define STR_EQ  "<>"
 #define STR_NEQ "><"
 #define STR_GE  ">="

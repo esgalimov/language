@@ -7,20 +7,7 @@ tree_node_t* getGeneral(expr_t* expr)
 {
     expr->pos = 0;
 
-    if (expr->tokens[expr->pos]->type != TYPE_BEGIN)
-    {
-        SYNTAX_ERROR("prog must start with TYPE_BEGIN"); return nullptr;
-    }
-
-    expr->pos++;
-    tree_node_t* comp = getComp(expr);
-
-    if (comp != nullptr && expr->tokens[expr->pos]->type != TYPE_END)
-    {
-        SYNTAX_ERROR("prog must end with TYPE_END"); return nullptr;
-    }
-
-    return comp;
+    return getComp(expr);
 }
 
 tree_node_t* getMathExpr(expr_t* expr)
@@ -158,8 +145,8 @@ tree_node_t* getBrackets(expr_t* expr)
 
 tree_node_t* getId(expr_t* expr)
 {
-    if (expr->tokens[expr->pos]->type == TYPE_ID  ||
-        expr->tokens[expr->pos]->type == TYPE_VAR ||
+    if (expr->tokens[expr->pos]->type == TYPE_ID   ||
+        expr->tokens[expr->pos]->type == TYPE_VAR  ||
         expr->tokens[expr->pos]->type == TYPE_FUNC)
     {
         return expr->tokens[expr->pos++];
@@ -208,7 +195,7 @@ tree_node_t* getIds(expr_t* expr)
 tree_node_t* getNumber(expr_t* expr)
 {
     if (expr->tokens[expr->pos]->type == TYPE_SUB)
-        expr->tokens[expr->pos++]->value *= -1;
+        expr->tokens[++expr->pos]->value *= -1;
 
     return expr->tokens[expr->pos++];
 }
@@ -365,6 +352,16 @@ tree_node_t* getFunc(expr_t* expr)
     }
 }
 
+tree_node_t* getAllnumsNoroots(expr_t* expr)
+{
+    if (expr->tokens[expr->pos]->type == TYPE_ALL ||
+        expr->tokens[expr->pos]->type == TYPE_NO)
+    {
+        return expr->tokens[expr->pos++];
+    }
+    return nullptr;
+}
+
 tree_node_t* getPrintfScanf(expr_t* expr)
 {
     tree_node_t* tok = expr->tokens[expr->pos];
@@ -376,17 +373,24 @@ tree_node_t* getPrintfScanf(expr_t* expr)
     }
     expr->pos++;
 
-    tree_node_t* id = getId(expr);
+    tree_node_t* id = nullptr;
+
+    if (expr->tokens[expr->pos]->type == TYPE_ALL || expr->tokens[expr->pos]->type == TYPE_NO)
+        id = getAllnumsNoroots(expr);
+
+    else
+        id  = getId(expr);
 
     if (id == nullptr) return nullptr;
 
-    if (expr->ids[(int) id->value]->type == TYPE_VAR)
+    if (id->type != TYPE_ALL && id->type != TYPE_NO &&
+        expr->ids[(int) id->value]->type == TYPE_VAR)
     {
         id->type = TYPE_VAR;
     }
-    else
+    else if (id->type != TYPE_ALL && id->type != TYPE_NO)
     {
-        SYNTAX_ERROR("expected existing var in yozyrga/ukyrga"); return nullptr;
+        SYNTAX_ERROR("expected existing var or TYPE_ALL or TYPE_NO in TYPE_PRINTF/TYPE_SCANF"); return nullptr;
     }
     if (expr->tokens[expr->pos]->type != TYPE_R_BR)
     {
@@ -525,12 +529,6 @@ tree_node_t* getOp(expr_t* expr)
 tree_node_t* getComp(expr_t* expr)
 {
     tree_node_t* op1 = getOp(expr);
-
-//     printf("\npos: %lu, cnt: %lu\n", expr->pos, expr->toks_cnt);
-//
-//     if (expr->pos >= expr->toks_cnt - 1) return op1;
-//
-//     printf("\n%p\n%d\n\n\n", expr->tokens[expr->pos], expr->tokens[expr->pos]->type);
 
     while (expr->tokens[expr->pos]->type == TYPE_AND)
     {

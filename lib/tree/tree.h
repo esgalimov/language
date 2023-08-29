@@ -46,6 +46,9 @@ enum node_type
     TYPE_L_BR,
     TYPE_R_BR,
     TYPE_AND,
+
+    TYPE_ALL,
+    TYPE_NO,
 };
 
 //! @brief Link modes

@@ -1,6 +1,6 @@
 #Test logical funcs
 
-bashlau
+
     esh fact(x)
         bashlau
             yozyrga(x);
@@ -16,4 +16,4 @@ bashlau
 
     ans = fact(7 - 1 * 1 - 0);
     yozyrga(ans)
-tuktau
+
