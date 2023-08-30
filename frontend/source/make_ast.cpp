@@ -7,11 +7,11 @@
 
 int make_ast_tree(const char* filename)
 {
-    FILE* fp = fopen("./system_files/ast.tatar", "w");
+    FILE* fp = fopen("./system_files/prog.ast", "w");
 
     if (fp == nullptr)
     {
-        fprintf(log_file, "<pre>Can't open file ast.tatar for tree print</pre>\n");
+        fprintf(log_file, "<pre>Can't open file prog.ast for tree print</pre>\n");
         return 1;
     }
 

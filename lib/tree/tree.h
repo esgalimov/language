@@ -140,7 +140,9 @@ tree_node_t* create_node(node_type type, size_t line, size_t pos, elem_t value =
 //! @return 0 - Ok, 1 - else
 int link_node(tree_node_t* parent, tree_node_t* child, link_mode mode);
 
-//! @brief Copy subtree...
+//! @brief Copy subtree
+//! @param [in] node - ptr to root of subtree
+//! @return root of subtree copy
 tree_node_t* copy_subtree(tree_node_t* node);
 
 #endif

@@ -148,7 +148,6 @@ int create_tokens(expr_t* expr)
                         else if (expr->id_cnt <= IDS_MAX_CNT - 1)
                         {
                             expr->ids[expr->id_cnt] = (id_item_t*) calloc(1, sizeof(id_item_t));
-                            expr->ids[expr->id_cnt]->value = NAN;
                             expr->ids[expr->id_cnt]->name = name;
                             expr->ids[expr->id_cnt]->type = TYPE_ID;
 

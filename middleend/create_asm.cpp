@@ -4,11 +4,11 @@
 
 int read_ast_tree(void)
 {
-    FILE* stream = fopen("./system_files/ast.tatar", "r");
+    FILE* stream = fopen("./system_files/prog.ast", "r");
 
     if (stream == nullptr)
     {
-        fprintf(log_file, "<pre>Can't open file ast.tatar for tree print</pre>\n");
+        fprintf(log_file, "<pre>Can't open file prog.ast for tree print</pre>\n");
         return 1;
     }
 
@@ -345,7 +345,7 @@ void tree_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
         case TYPE_RET:
             tree_print_asm_l();
             fprintf(stream, "    pop ax\n");
-            fprintf(stream, "    ret\n");
+            fprintf(stream, "    ret\n\n");
             return;
 
         case TYPE_ALL:
@@ -402,18 +402,6 @@ void push_params_in_func(tree_node_t* node, prog_tree_t* prog, FILE* stream)
 
             else return;
     }
-}
-
-int func_params_cnt(tree_node_t* node)
-{
-    if (node == nullptr) return 0;
-
-    if (node->type == TYPE_AND)
-        return func_params_cnt(node->left) + func_params_cnt(node->right);
-
-    if (node->type == TYPE_VAR) return 1;
-
-    else return 0;
 }
 
 void var_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)

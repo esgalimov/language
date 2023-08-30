@@ -1,19 +1,20 @@
-#Test logical funcs
+#Recursive factorial
 
+esh fact(x)
+    bashlau
+        egyar (x <= 1)
+            bashlau
+                bir 1
+            tuktau;
+        bylmasa
+            bashlau
+                bir x * fact(x - 1)
+            tuktau
+    tuktau;
 
-    esh fact(x)
-        bashlau
-            yozyrga(x);
-            egyar (x <= 1)
-                bashlau
-                    bir 1
-                tuktau;
-            bylmasa
-                bashlau
-                    bir x * fact(x - 1)
-                tuktau
-        tuktau;
+x = 0;
 
-    ans = fact(7 - 1 * 1 - 0);
-    yozyrga(ans)
+ukyrga(x);
+ans = fact(x);
+yozyrga(ans)
 

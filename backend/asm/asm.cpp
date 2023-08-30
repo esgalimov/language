@@ -1,6 +1,6 @@
 #include "asm.h"
 
-void run_comp(FILE * stream)
+void run_comp(FILE* stream)
 {
     asm_t asem = {};
     asm_ctor(&asem, stream);

@@ -65,6 +65,7 @@
     push [7+dx]
     pop ax
     ret
+
     ret
 :jmp_over_Sqrt
     jmp :jmp_over_SolveLinear
@@ -94,11 +95,13 @@
     push [2]
     pop ax
     ret
+
     jmp :done_2
 :false_2
     push [3]
     pop ax
     ret
+
 :done_2
     jmp :done_1
 :false_1
@@ -111,6 +114,7 @@
     push [4]
     pop ax
     ret
+
 :done_1
     ret
 :jmp_over_SolveLinear
@@ -142,6 +146,7 @@
     push [3]
     pop ax
     ret
+
     jmp :done_3
 :false_3
     push [12+dx]
@@ -165,6 +170,7 @@
     push [4]
     pop ax
     ret
+
     jmp :done_4
 :false_4
     push -1
@@ -218,6 +224,7 @@
     push [5]
     pop ax
     ret
+
 :done_4
 :done_3
     ret

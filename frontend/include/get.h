@@ -6,7 +6,9 @@
 #include "expr.h"
 
 
-//! @brief Get funcs
+//! @brief Get funcs for recursive descent
+//! @param [out] expr - ptr to main struct in frontend
+//! @return node of syntax tree if Ok, nullptr - else
 tree_node_t* getGeneral(expr_t* expr);        // General
 tree_node_t* getNumber(expr_t* expr);         // Number
 tree_node_t* getAddSub(expr_t* expr);         // + or -
@@ -28,10 +30,17 @@ tree_node_t* getComp(expr_t* expr);           // operator; operator; ....
 tree_node_t* getOp(expr_t* expr);             // func, if, def, printf, scanf, while and other operators
 
 //! @brief Func to write error message to log file
+//! @param [out] expr - ptr to main struct in frontend
+//! @param [in]  func - func name where is mistake
+//! @param [in]  message - message to print
 void error_message(expr_t* expr, const char* func, const char* message);
 
 //! @brief Compare two nums with using EPS
+//! @param [in] num1 - first number
+//! @param [in] num2 - second number
+//! @return 1 - equal, 0 - else
 int is_equal(double num1, double num2);
+//! @brief const using in func is_equal
 const double EPS = 0.000001;
 
 #endif

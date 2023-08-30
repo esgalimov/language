@@ -3,6 +3,7 @@
 
 #define LOG_MODE
 
+//! @brief My assert with more info
 #ifdef LOG_MODE
     #define ASSERT(condition)                                                               \
         if (!(condition))                                                                   \
@@ -17,6 +18,7 @@
     #define tree_dump(tree)
 #endif
 
+//! @brief Colors of nodes in dump
 #define BLUE       "#87CEEB"
 #define D_BLUE     "#0000CD"
 #define L_BLUE     "#AFEEEE"
@@ -32,6 +34,7 @@
 #define ORANGE     "#FFE4C4"
 #define TURQ       "#E1FCF9"
 
+//! @brief String of .dot file to include node
 #define PRINT_NODE(NAME, COLOR) fprintf(graphviz_file, "    node_%p[shape = Mrecord, label = \"{{%p} | {parent =  %p} | {%s} | {%s} | {line = %lu} | {pos = %lu} | {%p | %p}}\",\n\
                                         style=\"filled\", fillcolor=\"%s\"];\n", node, node, node->parent, NAME, node->name, node->line+1, node->pos+1, node->left, node->right, COLOR)
 
@@ -119,6 +122,7 @@ void node_verify(tree_t * tree, const tree_node_t * node);
 void error_number_translate(tree_t * tree);
 
 //! @brief Dump subtree (part of tree from particular node)
+//! @param [in] node - ptr to node
 int subtree_dump(const tree_node_t* node);
 
 

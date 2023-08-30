@@ -6,13 +6,22 @@
 #include "../../lib/text_funcs/text_funcs.h"
 #include "dsl.h"
 
-
+//! @brief Max len of func or var
 const int NAME_MAX_LEN = 32;
+
+//! @brief Max amount of ids
 const int IDS_MAX_CNT  = 32;
+
+//! @brief Max amount of tokens
 const int TOKS_MAX_CNT = 1024;
+
+//! @brief Const for return if there is no id
 const int NO_ID        = -1;
+
+//! @brief Poison
 const size_t POISON    = 0xDEADBEEF;
 
+//! @brief syntax of language
 #define CH_ADD '+'
 #define CH_SUB '-'
 #define CH_MUL '*'
@@ -43,15 +52,16 @@ const size_t POISON    = 0xDEADBEEF;
 #define STR_L   "<"
 
 
-//! @brief id_t
+//! @brief Table of names (can be func or var)
+//! @var name - name of var/func
+//! @var type - type of id
 typedef struct
 {
-    char * name;
-    elem_t value;
+    char*  name;
     node_type type;
 } id_item_t;
 
-//! @brief Struct to read expression
+//! @brief Struct to read programm text and make tokens (main struct in frontend)
 //! @var program  - ptr to text of program maked with text funcs lib
 //! @var pos      - pos in line (when start recursive descent use as pos in tokens)
 //! @var line     - line where read
