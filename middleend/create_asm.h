@@ -3,6 +3,7 @@
 
 #include "../lib/tree/tree.h"
 #include "../lib/tree/tree_debug.h"
+#include "../lib/text_funcs/text_funcs.h"
 
 
 //! @brief Max len of name in AST
@@ -97,4 +98,8 @@ void pop_params_in_def(tree_node_t* node, prog_tree_t* prog, FILE* stream);
 //! @param [out] stream - ptr to asm file
 void push_params_in_func(tree_node_t* node, prog_tree_t* prog, FILE* stream);
 
+//! @brief Change asm to get main and func parts
+//! @param [out] stream - ptr to asm file
+//! @param [in] prog - ptr to prog func
+void asm_change(FILE* stream, prog_tree_t* prog);
 #endif

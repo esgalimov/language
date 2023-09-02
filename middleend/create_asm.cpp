@@ -1,5 +1,6 @@
 #include "create_asm.h"
 #include "simplify.h"
+#include "../lib/text_funcs/text_funcs.h"
 
 
 int read_ast_tree(void)
@@ -178,21 +179,19 @@ int translate_asm(prog_tree_t* prog)
         fprintf(log_file, "<pre>Can't open file prog.asm to make asm file</pre>\n");
         return 1;
     }
-    fprintf(asm_file, ";Created by Emil Galimov\n;2023\n;Tatar programming language version 1.0\n\n;VARS TABLE:\n");
-    for (size_t i = 0; i < prog->var_cnt; i++)
-    {
-        fprintf(asm_file, "    ;var %s - [%lu]", prog->vars[i].name, i);
-        if (prog->vars[i].global == GLOBAL)
-            fprintf(asm_file, " gl\n");
-        else
-            fprintf(asm_file, " loc\n");
-    }
-    fprintf(asm_file, "\n\n\n");
 
     tree_print_asm(prog->tree->root, prog, asm_file);
 
-    fprintf(asm_file, "    hlt\n");
     fclose(asm_file);
+
+    asm_file = fopen("./system_files/prog.asm", "r");
+    if (asm_file == nullptr)
+    {
+        fprintf(log_file, "<pre>Can't open file prog.asm to make asm file</pre>\n");
+        return 1;
+    }
+
+    asm_change(asm_file, prog);
 
     return 0;
 }
@@ -294,14 +293,16 @@ void tree_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
             return;
 
         case TYPE_DEF:
-            fprintf(stream, "    jmp :jmp_over_%s\n", node->name);
+            fprintf(stream, "*\n");
+
             fprintf(stream, ":%s\n", node->name);
 
             pop_params_in_def(node->left, prog, stream);
             tree_print_asm_r();
 
-            fprintf(stream, "    ret\n");
-            fprintf(stream, ":jmp_over_%s\n", node->name);
+            fprintf(stream, "    ret\n\n");
+
+            fprintf(stream, "*\n");
             return;
 
         case TYPE_IF:
@@ -316,9 +317,9 @@ void tree_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
             {
                 tree_print_asm(node->right->left, prog, stream);
                 fprintf(stream, "    jmp :done_%d\n", if_cnt_saved);
-                fprintf(stream, ":false_%d\n", if_cnt_saved);
+                fprintf(stream, "    :false_%d\n", if_cnt_saved);
                 tree_print_asm(node->right->right->left, prog, stream);
-                fprintf(stream, ":done_%d\n", if_cnt_saved);
+                fprintf(stream, "    :done_%d\n", if_cnt_saved);
             }
             else
             {
@@ -345,7 +346,7 @@ void tree_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
         case TYPE_RET:
             tree_print_asm_l();
             fprintf(stream, "    pop ax\n");
-            fprintf(stream, "    ret\n\n");
+            fprintf(stream, "    ret\n");
             return;
 
         case TYPE_ALL:
@@ -412,4 +413,58 @@ void var_print_asm(tree_node_t* node, prog_tree_t* prog, FILE* stream)
         fprintf(stream, " [%d+dx]\n", i_var);
     else
         fprintf(stream, " [%d]\n", i_var);
+}
+
+void asm_change(FILE* stream, prog_tree_t* prog)
+{
+    text_t asm_text = {};
+
+    text_ctor(&asm_text, stream);
+
+    stream = fopen("./system_files/prog.asm", "w");
+    if (stream == nullptr)
+    {
+        fprintf(log_file, "<pre>Can't open file prog.asm to make asm file</pre>\n");
+        return;
+    }
+
+    fprintf(stream, ";Created by Emil Galimov\n;2023\n;Tatar programming language version 1.0\n\n;VARS TABLE:\n");
+    for (size_t i = 0; i < prog->var_cnt; i++)
+    {
+        fprintf(stream, "    ;var %s - [%lu]", prog->vars[i].name, i);
+        if (prog->vars[i].global == GLOBAL)
+            fprintf(stream, " gl\n");
+        else
+            fprintf(stream, " loc\n");
+    }
+    fprintf(stream, "\n\n\n");
+
+    char** main_part = (char**) calloc(asm_text.str_cnt, sizeof(char*));
+    int i_main = 0;
+
+    char in_def = -1;
+
+    fprintf(stream, "    jmp :main\n");
+
+    for (size_t i = 0; i < asm_text.str_cnt; i++)
+    {
+        if (asm_text.strings[i][0] == '*') { in_def *= -1; continue; }
+
+        if (in_def == -1)
+            main_part[i_main++] = asm_text.strings[i];
+
+        else
+            fprintf(stream, "%s\n", asm_text.strings[i]);
+
+    }
+
+    fprintf(stream, ":main\n");
+    for (int i = 0; i < i_main; i++)
+        fprintf(stream, "%s\n", main_part[i]);
+
+    fprintf(stream, "    hlt\n");
+
+    fclose(stream);
+
+    text_dtor(&asm_text);
 }

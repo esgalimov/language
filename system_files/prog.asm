@@ -23,19 +23,7 @@
 
 
 
-    push 0
-    pop [0]
-    push 0
-    pop [1]
-    push -1
-    pop [2]
-    push 0
-    pop [3]
-    push 1
-    pop [4]
-    push 2
-    pop [5]
-    jmp :jmp_over_Sqrt
+    jmp :main
 :Sqrt
     pop [6+dx]
     push 1
@@ -65,10 +53,8 @@
     push [7+dx]
     pop ax
     ret
-
     ret
-:jmp_over_Sqrt
-    jmp :jmp_over_SolveLinear
+
 :SolveLinear
     pop [9+dx]
     pop [10+dx]
@@ -95,16 +81,14 @@
     push [2]
     pop ax
     ret
-
     jmp :done_2
-:false_2
+    :false_2
     push [3]
     pop ax
     ret
-
-:done_2
+    :done_2
     jmp :done_1
-:false_1
+    :false_1
     push -1
     push [10+dx]
     mul
@@ -114,11 +98,9 @@
     push [4]
     pop ax
     ret
-
-:done_1
+    :done_1
     ret
-:jmp_over_SolveLinear
-    jmp :jmp_over_SolveSquare
+
 :SolveSquare
     pop [11+dx]
     pop [9+dx]
@@ -146,9 +128,8 @@
     push [3]
     pop ax
     ret
-
     jmp :done_3
-:false_3
+    :false_3
     push [12+dx]
     push 0
     jne :logic_jmp_6
@@ -170,9 +151,8 @@
     push [4]
     pop ax
     ret
-
     jmp :done_4
-:false_4
+    :false_4
     push -1
     push [9+dx]
     mul
@@ -224,11 +204,23 @@
     push [5]
     pop ax
     ret
-
-:done_4
-:done_3
+    :done_4
+    :done_3
     ret
-:jmp_over_SolveSquare
+
+:main
+    push 0
+    pop [0]
+    push 0
+    pop [1]
+    push -1
+    pop [2]
+    push 0
+    pop [3]
+    push 1
+    pop [4]
+    push 2
+    pop [5]
     push 0
     pop [13]
     push 0
@@ -283,7 +275,7 @@
     allnum
     out
     jmp :done_6
-:false_6
+    :false_6
     push [16]
     push [3]
     jne :logic_jmp_12
@@ -297,13 +289,13 @@
     noroots
     out
     jmp :done_7
-:false_7
+    :false_7
     push [0]
     out
-:done_7
-:done_6
+    :done_7
+    :done_6
     jmp :done_5
-:false_5
+    :false_5
     push [15]
     push [14]
     push [13]
@@ -335,7 +327,7 @@
     noroots
     out
     jmp :done_8
-:false_8
+    :false_8
     push [16]
     push [4]
     jne :logic_jmp_16
@@ -349,12 +341,13 @@
     push [0]
     out
     jmp :done_9
-:false_9
+    :false_9
     push [0]
     out
     push [1]
     out
-:done_9
-:done_8
-:done_5
+    :done_9
+    :done_8
+    :done_5
+
     hlt
